@@ -9,7 +9,7 @@ export const cardListReducer = (state ={cards: []}, action) =>{
         case CARD_LIST_SUCCESS:
             return{
                 loading:false,
-                cards:[ action.payload]
+                cards:[action.payload]
             }
         case CARD_LIST_FAIL:
             return{

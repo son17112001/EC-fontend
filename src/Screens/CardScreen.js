@@ -21,7 +21,6 @@ function CardScreen() {
     
   return (
     
-  
     <>
       <Container className ="my-6">
         <Row className="card-item">

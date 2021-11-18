@@ -1,19 +1,22 @@
 import React from "react";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Link,
-  Row,
-  Col,Image
-} from "react-bootstrap";
+import { useDispatch, useSelector } from 'react-redux'
+import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
+import { logout } from "../actions/userActions";
 function NavbarComponent() {
+
+  const dispatch = useDispatch()
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
+
   return (
     <>
       <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand href="#home"> <Image className="nav-logo" src="/logo.png" /> </Navbar.Brand>
+          <Navbar.Brand href="/"> <Image className="nav-logo" src="/logo.png" /> </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -28,7 +31,7 @@ function NavbarComponent() {
                   CÁ NHÂN
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">
-                  DỊCH VỤ THẺ 
+                  DỊCH VỤ THẺ
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
@@ -36,12 +39,19 @@ function NavbarComponent() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
+
             <Nav>
-              <Nav.Link href="#deets">LOGIN</Nav.Link>
-              <Nav.Link eventKey={2} href="#memes">
-                Dank memes
-              </Nav.Link>
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id='username'>
+                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <Nav.Link href="/login">LOGIN</Nav.Link>
+              )}
+
             </Nav>
+
           </Navbar.Collapse>
         </Container>
       </Navbar>
