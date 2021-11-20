@@ -3,7 +3,6 @@ import { Row, Col } from "react-bootstrap";
 
 import { Container, Navbar, Nav, NavDropdown, Link } from "react-bootstrap";
 import Header from "../components/Header";
-
 function HomeScreen() {
 
 
