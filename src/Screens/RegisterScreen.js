@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,7 +11,7 @@ const RegisterScreen = () => {
 
     const dispatch = useDispatch()
     const userRegister = useSelector(state => state.userRegister)
-    const { loading, error, receive } = userRegister
+    const { loading, errorRes, successRes } = userRegister
 
     const [name, setName] = useState('')
     const [birth, setBirth] = useState('')
@@ -25,13 +25,13 @@ const RegisterScreen = () => {
     const [homeAddress, setHomeAddress] = useState('')
     const [title, setTitle] = useState('')
     const [workAddress, setWorkAddress] = useState('')
-    const [salary, setSalary] = useState(0)
+    const [salary, setSalary] = useState()
     const job = { title, workAddress, salary }
 
     const submitHandler = (e) => {
         e.preventDefault() //dispatch register
         dispatch(register(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job))
-        console.log(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job)
+        //console.log(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job)
     }
 
     const setGender = () => {
@@ -119,12 +119,13 @@ const RegisterScreen = () => {
                     <Button style={{ backgroundColor: 'palevioletred', width: '100%' }} variant="primary" type="submit">Submit</Button>
                 </Form.Group>
 
-                <Form.Group as={Col} controlId="salary">
+                <Form.Group as={Col} controlId="login">
                     Have an Account ?&#160;<Link to={'/login'}> LOGIN</Link>
                 </Form.Group>
             </Row>
-            {receive && <Message variant='success'>{receive.message}</Message>}
-            {error && <Message variant='danger'>{error}</Message>}
+            {successRes && <Message variant='success'>{successRes.message}</Message>}
+            {errorRes && <Message variant='danger'>
+                {errorRes.messages.message}, {errorRes.messages.errors.map(e => e.msg).join(', ')}</Message>}
             {loading && <Loader />}
         </Form>
     </FormContainer>)
