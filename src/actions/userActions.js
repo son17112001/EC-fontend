@@ -15,7 +15,7 @@ import {
 } from "../constants/userConstants"
 import axios from 'axios'
 
-const URL = 'http://localhost:8081'
+const URL = `http://localhost:${process.env.REACT_APP_PORT}`
 
 export const login = (email, password) => async (dispatch) => {
     try {
