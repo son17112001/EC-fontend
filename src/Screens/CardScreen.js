@@ -27,6 +27,7 @@ function CardScreen() {
   const mang1 = [1, 2, 4, 4];
 
   return (
+    
     <>
       <Container className="my-6">
         {loading && <Loading />}
