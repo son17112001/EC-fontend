@@ -58,7 +58,7 @@ const LoginScreen = () => {
                         <Button type='submit' >Sign In</Button>
                     </Col>
                     <Col>
-                        <Link to={'/register'}>New Customer ?&#160;</Link>
+                        <Link to={'/register'}>New customer sign up here ?&#160;</Link>
                     </Col>
                 </Row>
 
