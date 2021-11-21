@@ -38,7 +38,7 @@ function NavbarComponent() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link className="nav-item" href=""> CÁ NHÂN </Nav.Link>
+              <Nav.Link className="nav-item" href="/profile"> CÁ NHÂN </Nav.Link>
               <Nav.Link className="nav-item" href=""> ĐIỀU KHOẢN </Nav.Link>
               <Nav.Link className="nav-item" href="">KHUYẾN MÃI</Nav.Link>
               <Nav.Link className="nav-item" href="/card">DỊCH VỤ THẺ</Nav.Link>

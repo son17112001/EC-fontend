@@ -9,12 +9,19 @@ const reducer= combineReducers({
 =======
 import {cardListReducer} from "./reducers/cardReducers"
 import { userLoginReducer,userRegisterReducer } from "./reducers/userReducers"
+import { userLoginReducer,userRegisterReducer,userProfileReducer ,userUpdateProfileReducer, userGetPaymentReducer} from "./reducers/userReducers"
 
 
 const reducer= combineReducers({
     cardList : cardListReducer,
     userLogin :userLoginReducer,
     userRegister: userRegisterReducer,
+<<<<<<< HEAD
+>>>>>>> Login/Regis
+=======
+    userProfile: userProfileReducer,
+    userUpdateProfile: userUpdateProfileReducer,
+    userGetPayment: userGetPaymentReducer
 >>>>>>> Login/Regis
 
 })

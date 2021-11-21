@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-import { Container, Navbar, Nav, NavDropdown, Link } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Header from "../components/Header";
 function HomeScreen() {
 

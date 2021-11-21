@@ -2,6 +2,10 @@ import {
     USER_DETAILS_FAIL,
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
+    USER_GET_PAYMENT_FAIL,
+    USER_GET_PAYMENT_REQUEST,
+    USER_GET_PAYMENT_RESET,
+    USER_GET_PAYMENT_SUCCESS,
     USER_LOGIN_FAIL, 
     USER_LOGIN_REQUEST, 
     USER_LOGIN_SUCCESS, 
@@ -27,14 +31,14 @@ export const userLoginReducer = (state = {}, action) => {
 export const userRegisterReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_REGISTER_REQUEST: return {loading: true}
-        case USER_REGISTER_SUCCESS: return {loading: false, receive: action.payload} //, userInfo: action.payload
-        case USER_REGISTER_FAIL: return {loading: false, error: action.payload}
+        case USER_REGISTER_SUCCESS: return {loading: false, successRes: action.payload} //, userInfo: action.payload
+        case USER_REGISTER_FAIL: return {loading: false, errorRes: action.payload}
         default: return state
     }
 }
 
 
-export const userDetailsReducer = (state = {user: {}}, action) => {
+export const userProfileReducer = (state = {user: {}}, action) => {
     switch (action.type) {
         case USER_DETAILS_REQUEST: return {...state,loading: true}
         case USER_DETAILS_SUCCESS: return {loading: false, user: action.payload}
@@ -48,6 +52,16 @@ export const userUpdateProfileReducer = (state = {}, action) => {
         case USER_UPDATE_PROFILE_REQUEST: return {loading: true}
         case USER_UPDATE_PROFILE_SUCCESS: return {loading: false, success: true, userInfo: action.payload}
         case USER_UPDATE_PROFILE_FAIL: return {loading: false, error: action.payload}
+        default: return state
+    }
+}
+
+export const userGetPaymentReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_GET_PAYMENT_REQUEST: return {loading: true}
+        case USER_GET_PAYMENT_SUCCESS: return {loading: false, info: action.payload}
+        case USER_GET_PAYMENT_FAIL: return {loading: false, error: action.payload}
+        case USER_GET_PAYMENT_RESET: return {}
         default: return state
     }
 }

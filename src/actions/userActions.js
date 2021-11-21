@@ -2,6 +2,10 @@ import {
     USER_DETAILS_FAIL,
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
+    USER_GET_PAYMENT_FAIL,
+    USER_GET_PAYMENT_REQUEST,
+    USER_GET_PAYMENT_RESET,
+    USER_GET_PAYMENT_SUCCESS,
     USER_LOGIN_FAIL,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -83,13 +87,12 @@ export const register = (
         } catch (error) {
             dispatch({
                 type: USER_REGISTER_FAIL,
-                payload: error.response && error.response.data.message
-                    ? error.response.data.message : error.message
+                payload: { status: error.response.status, messages: error.response.data }
             })
         }
     }
 
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserProfile = () => async (dispatch, getState) => {
     try {
         dispatch({
             type: USER_DETAILS_REQUEST
@@ -104,7 +107,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(`/api/users/${id}`, config)
+        const { data } = await axios.get(`${URL}/v1/user/profile`, config)
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -148,6 +151,41 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_PROFILE_FAIL,
             payload: error.response && error.response.data.message
                 ? error.response.data.message : error.message
+        })
+    }
+}
+
+
+export const getPayment = (amountNumber) => async (dispatch, getState) => {    
+    try {
+        dispatch({
+            type: USER_GET_PAYMENT_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const totalAmount = {
+            amount: amountNumber
+        }
+
+        const { data } = await axios.post(`${URL}/v1/user/charge`, totalAmount, config)
+        
+        window.open(data.url, '_blank')
+        dispatch({
+            type: USER_GET_PAYMENT_SUCCESS,
+            payload: data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type: USER_GET_PAYMENT_FAIL,
+            payload: error.response
         })
     }
 }
