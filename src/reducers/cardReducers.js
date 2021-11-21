@@ -9,11 +9,10 @@ export const cardListReducer = (state ={cards: {}}, action) =>{
         case CARD_LIST_SUCCESS:
             return{
                 loading:false,
-<<<<<<< HEAD:src/reducers/cardReducer.js
+
                 cards: action.payload,
-=======
-                cards:[action.payload]
->>>>>>> Login/Regis:src/reducers/cardReducers.js
+
+
             }
         case CARD_LIST_FAIL:
             return{
