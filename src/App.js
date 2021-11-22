@@ -7,6 +7,7 @@ import CardScreen from "./Screens/CardScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
+import SubChargeScreen from "./Screens/SubChargeScreen";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/profile" element={<ProfileScreen />} />
+          <Route path="/user/charge/submit" element={<SubChargeScreen />} />
         </Routes>
       </main>
       <Footer />

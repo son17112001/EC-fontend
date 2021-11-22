@@ -4,7 +4,6 @@ import {
     USER_DETAILS_SUCCESS,
     USER_GET_PAYMENT_FAIL,
     USER_GET_PAYMENT_REQUEST,
-    USER_GET_PAYMENT_RESET,
     USER_GET_PAYMENT_SUCCESS,
     USER_LOGIN_FAIL, 
     USER_LOGIN_REQUEST, 
@@ -13,6 +12,9 @@ import {
     USER_REGISTER_FAIL, 
     USER_REGISTER_REQUEST, 
     USER_REGISTER_SUCCESS, 
+    USER_SUB_PAYMENT_FAIL, 
+    USER_SUB_PAYMENT_REQUEST, 
+    USER_SUB_PAYMENT_SUCCESS, 
     USER_UPDATE_PROFILE_FAIL, 
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS} from "../constants/userConstants"
@@ -50,8 +52,8 @@ export const userProfileReducer = (state = {user: {}}, action) => {
 export const userUpdateProfileReducer = (state = {}, action) => {
     switch (action.type) {
         case USER_UPDATE_PROFILE_REQUEST: return {loading: true}
-        case USER_UPDATE_PROFILE_SUCCESS: return {loading: false, success: true, userInfo: action.payload}
-        case USER_UPDATE_PROFILE_FAIL: return {loading: false, error: action.payload}
+        case USER_UPDATE_PROFILE_SUCCESS: return {loading: false, successRes: action.payload}
+        case USER_UPDATE_PROFILE_FAIL: return {loading: false, errorRes: action.payload}
         default: return state
     }
 }
@@ -61,7 +63,15 @@ export const userGetPaymentReducer = (state = {}, action) => {
         case USER_GET_PAYMENT_REQUEST: return {loading: true}
         case USER_GET_PAYMENT_SUCCESS: return {loading: false, info: action.payload}
         case USER_GET_PAYMENT_FAIL: return {loading: false, error: action.payload}
-        case USER_GET_PAYMENT_RESET: return {}
+        default: return state
+    }
+}
+
+export const userSubPaymentReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_SUB_PAYMENT_REQUEST: return {loading: true}
+        case USER_SUB_PAYMENT_SUCCESS: return {loading: false, successRes: action.payload}
+        case USER_SUB_PAYMENT_FAIL: return {loading: false, errorRes: action.payload}
         default: return state
     }
 }

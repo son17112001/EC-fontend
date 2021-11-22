@@ -13,6 +13,9 @@ import {
     USER_REGISTER_FAIL,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
+    USER_SUB_PAYMENT_FAIL,
+    USER_SUB_PAYMENT_REQUEST,
+    USER_SUB_PAYMENT_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS
@@ -139,7 +142,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(`/api/users/profile`, user, config)
+        const { data } = await axios.put(`${URL}/v1/user/profile`, user, config)
 
         dispatch({
             type: USER_UPDATE_PROFILE_SUCCESS,
@@ -149,8 +152,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: USER_UPDATE_PROFILE_FAIL,
-            payload: error.response && error.response.data.message
-                ? error.response.data.message : error.message
+            payload: { status: error.response.status, messages: error.response.data }
         })
     }
 }
@@ -175,17 +177,49 @@ export const getPayment = (amountNumber) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(`${URL}/v1/user/charge`, totalAmount, config)
-        
-        window.open(data.url, '_blank')
+    
         dispatch({
             type: USER_GET_PAYMENT_SUCCESS,
+            payload: data
+        })
+        window.open(data.url, '_parent')
+        
+    } catch (error) {
+        dispatch({
+            type: USER_GET_PAYMENT_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+
+export const submitPayment = (paymentId,PayerID) => async (dispatch, getState) => {    
+    try {
+        dispatch({
+            type: USER_SUB_PAYMENT_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const body = {
+            paymentId ,PayerID
+        }
+        const { data } = await axios.post(`${URL}/v1/user/charge/submit`, body, config)
+
+        dispatch({
+            type: USER_SUB_PAYMENT_SUCCESS,
             payload: data
         })
         
     } catch (error) {
         dispatch({
-            type: USER_GET_PAYMENT_FAIL,
-            payload: error.response
+            type: USER_SUB_PAYMENT_FAIL,
+            payload: error.response.data
         })
     }
 }
