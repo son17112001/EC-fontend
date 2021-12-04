@@ -2,11 +2,12 @@ import thunk from "redux-thunk";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { cardListReducer } from "./reducers/cardReducers";
+import { cardListReducer ,cardDetailReducer} from "./reducers/cardReducers";
 import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   cardList: cardListReducer,
+  cardDetail:cardDetailReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
 });
