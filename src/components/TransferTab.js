@@ -9,7 +9,7 @@ import Message from '../components/Message'
 const TransferTab = () => {
 
     const dispatch = useDispatch()
-    const [amountNumber, setAmountNumber] = useState(5)
+    const [amountNumber, setAmountNumber] = useState(50000)
 
 
     const userWithDraw = useSelector(state => state.userWithDraw)
@@ -28,8 +28,8 @@ const TransferTab = () => {
         <Form onSubmit={e => transferHandler(e)}>
             <h2>Chuyển Khoản</h2>
             <Form.Group as={Col} controlId="amount">
-                <Form.Label style={{ color: 'gold' }}  >Nhập số dư xử lý giao dịch (mệnh giá: VNĐ)</Form.Label>
-                <Form.Control required type="number" value={amountNumber} onChange={e => setAmountNumber(e.target.value)}
+                <Form.Label style={{ color: 'gold' }}  >Nhập số dư (50,000 ~ 5,000,000 VNĐ / 1 lần)</Form.Label>
+                <Form.Control required type="number" min='50000' max='5000000' value={amountNumber} onChange={e => setAmountNumber(e.target.value)}
                 />
             </Form.Group>
 

@@ -64,7 +64,7 @@ const WithDrawConfirmScreen = () => {
                 <Row>
                     <Form.Group controlId='emailPayPal'>
                         <Form.Label>PayPal Email</Form.Label>
-                        <Form.Control type='text' placeholder='email PayPal' required disable={true}
+                        <Form.Control disabled type='text' placeholder='email PayPal' required disable={true}
                             value={emailPayPal} onChange={e => setEmailPayPal(e.target.value)}>
                         </Form.Control>
                     </Form.Group>
@@ -73,14 +73,14 @@ const WithDrawConfirmScreen = () => {
                 <Row>
                     <Form.Group as={Col} controlId='amount'>
                         <Form.Label>Amount</Form.Label>
-                        <Form.Control type='number' placeholder='amount' required disable={true}
+                        <Form.Control disabled type='number' placeholder='amount' required disable={true}
                             value={amount} onChange={e => setAmount(e.target.value)}>
                         </Form.Control>
                     </Form.Group>
 
                     <Form.Group as={Col} controlId='currency'>
                         <Form.Label>Currency</Form.Label>
-                        <Form.Control type='text' placeholder='currency' required disable={true}
+                        <Form.Control disabled type='text' placeholder='currency' required disable={true}
                             value={currency} onChange={e => setCurrency(e.target.value)}>
                         </Form.Control>
                     </Form.Group>

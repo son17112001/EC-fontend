@@ -41,8 +41,8 @@ const DrawTab = () => {
         <Form onSubmit={e => drawHandler(e)}>
             <h2>Rút Tiền</h2>
             <Form.Group as={Col} controlId="amount">
-                <Form.Label style={{ color: 'gold' }}  >Nhập số dư xử lý giao dịch (mệnh giá: Dollar)</Form.Label>
-                <Form.Control required type="number" value={amountNumber} onChange={e => setAmountNumber(e.target.value)}
+                <Form.Label style={{ color: 'gold' }}  >Nhập số dư xử lý giao dịch ($5 ~ $500 / 1 lần)</Form.Label>
+                <Form.Control required type="number" min='5' max='500' value={amountNumber} onChange={e => setAmountNumber(e.target.value)}
                 />
             </Form.Group>
 

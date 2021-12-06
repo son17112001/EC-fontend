@@ -37,8 +37,8 @@ const ChargeTab = () => {
         <Form id='charge' onSubmit={e => submitHandler(e)} >
             <h2>Nạp Tiền</h2>
             <Form.Group as={Col} controlId="fullname">
-                <Form.Label style={{ color: 'gold' }}  >Nhập số dư xử lý giao dịch (mệnh giá: Dollar)</Form.Label>
-                <Form.Control required type="number" value={amountNumber} onChange={e => setAmountNumber(e.target.value)}
+                <Form.Label style={{ color: 'gold' }}  >Nhập số dư xử lý giao dịch (Tối thiểu $5)</Form.Label>
+                <Form.Control required type="number" min='5' value={amountNumber} onChange={e => setAmountNumber(e.target.value)}
                 />
             </Form.Group>
 
