@@ -12,147 +12,286 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate,useParams,useLocation} from "react-router-dom";
 import {detailCard} from "../actions/cardAction"
+import $ from "jquery";
 function CardDetail() {
   const cardUrl = useParams().cardUrl;
   const cardType= useParams().cardType;
   
+  $(document).ready(function(){
+    $('.counter-value').each(function(){
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        },{
+            duration: 3500,
+            easing: 'swing',
+            step: function (now){
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
+});
 
   const dispatch= useDispatch()
   useEffect(() => {
     dispatch(detailCard(cardType,cardUrl))
   }, []);
   const {loading, card} =useSelector(state=>state.cardDetail)
-  return (
-    <>     
-   
-        <Row>
-          <Col md={6}>
-               <Image src={card.image} style={{width:"100%"}} alt={card.cardName} fluid/>
-          </Col>
-          <Col>
-          <ListGroup variant='flush'>
-                 <ListGroupItem>
-                   <h2>{card.cardName}</h2>
-                 </ListGroupItem>
-                 <ListGroupItem>
-                   <h3>This reviews</h3>
-                 </ListGroupItem>
-                 <ListGroupItem>
-                   Description:{card.description}
-                 </ListGroupItem>
-          </ListGroup>
-          </Col>
-          <Col md={3}>
-            <Card>
-               <ListGroup>
-                 <ListGroupItem>
-                   <Row>
-                     <Col><strong>Price:</strong>
-                     </Col>
-                     <Col><strong>${card.name}</strong></Col>
-                   </Row>
-                 </ListGroupItem>
-               </ListGroup>
-            </Card>
-          </Col>
-        </Row>
-                <div class="container">
+  var isIssuing='Không';
+  var maxPay=`${card.maxPay}`;
+  console.log(card.maxPay);
+ 
+  if(card.isIssuing){
+    isIssuing='Có';
+  }else{
+    isIssuing='Không';
+  }
+  
+
+  function intDebitScreen(){
+        return(
+            <>
+        <div class="container">
+
+        <div class="card-body">
            
-                <div class="card-body">
-                    <h3 class="card-title">Rounded Chair</h3>
-                    <h6 class="card-subtitle">globe type chair for rest</h6>
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-6">
-                            <div class="white-box text-center">
-                              <img src={card.image} class="img-responsive"/></div>
-                        </div>
-                        <div class="col-lg-7 col-md-7 col-sm-6">
-                            <h4 class="box-title mt-5">Card description</h4>
-                            <p>{card.description}</p>
-                            
-                     
-                            
-                         
-                            <h3 class="box-title mt-5">Key Highlights</h3>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
-                                <li><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-                                <li><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful collectibles</li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h3 class="box-title mt-5">General Info</h3>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-product">
-                                    <tbody>
-                                        <tr>
-                                            <td width="390">Brand</td>
-                                            <td>Stellar</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Delivery Condition</td>
-                                            <td>Knock Down</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Seat Lock Included</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Type</td>
-                                            <td>Office Chair</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Style</td>
-                                            <td>Contemporary&amp;Modern</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Wheels Included</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Upholstery Included</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Upholstery Type</td>
-                                            <td>Cushion</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Head Support</td>
-                                            <td>No</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Suitable For</td>
-                                            <td>Study&amp;Home Office</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Adjustable Height</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Model Number</td>
-                                            <td>F01020701-00HT744A06</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Armrest Included</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Care Instructions</td>
-                                            <td>Handle With Care,Keep In Dry Place,Do Not Apply Any Chemical For Cleaning.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Finish Type</td>
-                                            <td>Matte</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6">
+                    <div class="white-box text-center">
+                      <img src={card.image} class="img-responsive"/></div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <h4 class="box-title mt-5">Thông tin thẻ</h4>
+                    <p>{card.description}</p>
+                    
+             
+                    
+                 
+                    <h3 class="box-title mt-5">Thông tin chính</h3>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-check text-success"></i>Tên thẻ: {card.cardName}</li>
+                        <li><i class="fa fa-check text-success"></i>Hạng thẻ: {card.cardRank}</li>
+                        <li><i class="fa fa-check text-success"></i>Nhà phát hành: {card.publisher}</li>
+                        
+                    </ul>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="box-title mt-5">General Info</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-product">
+                            <tbody>
+                               <tr>
+                                    <td>Loại thẻ</td>
+                                    <td>{isIssuing}</td>
+                                </tr>
+                                <tr>
+                                    <td width="390">Được phát hành</td>
+                                    <td> {isIssuing}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hạng thẻ</td>
+                                    <td>{card.cardRank}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hạn mức chuyển tiền</td>
+                                    <td>{maxPay} VND</td>
+                                </tr>
+                                <tr>
+                                    <td>Phí làm lại thẻ</td>
+                                    <td>{card.issueFee}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phí hằng năm</td>
+                                    <td>{card.yearlyFee}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phí chuyển tiền</td>
+                                    <td>{card.exCurrency}</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    </>
+    )
+                
        
+  }
+  function intCreditScreen(){
+      return(
+        <div class="container">
+           
+        <div class="card-body">
+           
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6">
+                    <div class="white-box text-center">
+                      <img src={card.image} class="img-responsive"/></div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <h4 class="box-title mt-5">Thông tin thẻ</h4>
+                    <p>{card.description}</p>
+                    
+             
+                    
+                 
+                    <h3 class="box-title mt-5">Thông tin chính</h3>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-check text-success"></i>Tên thẻ: {card.cardName}</li>
+                        <li><i class="fa fa-check text-success"></i>Hạng thẻ: {card.cardRank}</li>
+                        <li><i class="fa fa-check text-success"></i>Nhà phát hành: {card.publisher}</li>
+                        
+                    </ul>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="box-title mt-5">General Info</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-product">
+                            <tbody>
+                               <tr>
+                                    <td>Loại thẻ</td>
+                                    <td>{card.cardType}</td>
+                                </tr>
+                                <tr>
+                                    <td width="390">Được phát hành</td>
+                                    <td> {isIssuing}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hạng thẻ</td>
+                                    <td>{card.cardRank}</td>
+                                </tr>
+                                <tr>
+                                    <td>Điều kiện mở thẻ</td>
+                                    <td>{card.condition}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày sao kê</td>
+                                    <td>{card.statmentDay}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hạn mức tín dụng</td>
+                                    <td>{card.creditLine} VND</td>
+                                </tr>
+                                <tr>
+                                    <td>Thời gian trả</td>
+                                    <td>{card.payWithin} VND</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày tháng sau ngày đến hạn bắt đầu tính</td>
+                                    <td>{card.interestRate} VND</td>
+                                </tr>
+                                <tr>
+                                    <td>Phí làm lại thẻ</td>
+                                    <td>{card.issueFee}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phí hằng năm</td>
+                                    <td>{card.yearlyFee}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phí chuyển tiền</td>
+                                    <td>{card.exCurrency}</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      )
+  }
+  function domDebitScreen(){
+    return(
+      <div class="container">
+         
+      <div class="card-body">
+         
+          <div class="row">
+              <div class="col-lg-5 col-md-5 col-sm-6">
+                  <div class="white-box text-center">
+                    <img src={card.image} class="img-responsive"/></div>
+              </div>
+              <div class="col-lg-7 col-md-7 col-sm-6">
+                  <h4 class="box-title mt-5">Thông tin thẻ</h4>
+                  <p>{card.description}</p>
+                  
+           
+                  
+               
+                  <h3 class="box-title mt-5">Thông tin chính</h3>
+                  <ul class="list-unstyled">
+                      <li><i class="fa fa-check text-success"></i>Tên thẻ: {card.cardName}</li>
+                      <li><i class="fa fa-check text-success"></i>Hạng thẻ: {card.cardRank}</li>
+                      <li><i class="fa fa-check text-success"></i>Nhà phát hành: {card.publisher}</li>
+                      
+                  </ul>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                  <h3 class="box-title mt-5">General Info</h3>
+                  <div class="table-responsive">
+                      <table class="table table-striped table-product">
+                          <tbody>
+                             <tr>
+                                  <td>Loại thẻ</td>
+                                  <td>{card.cardType}</td>
+                              </tr>
+                              <tr>
+                                  <td width="390">Được phát hành</td>
+                                  <td> {isIssuing}</td>
+                              </tr>
+                              <tr>
+                                  <td>Hạng thẻ</td>
+                                  <td>{card.cardRank}</td>
+                              </tr>
+                              <tr>
+                                  <td>Nhà phát hành</td>
+                                  <td>{card.publisher}</td>
+                              </tr>
+                              <tr>
+                                  <td>Hạn mức tín dụng</td>
+                                  <td>{card.creditLine} VND</td>
+                              </tr>
+                              <tr>
+                                  <td>Thời gian trả</td>
+                                  <td>{card.payWithin} VND</td>
+                              </tr>
+                              <tr>
+                                  <td>Ngày tháng sau ngày đến hạn bắt đầu tính</td>
+                                  <td>{card.interestRate} VND</td>
+                              </tr>
+                              <tr>
+                                  <td>Phí làm lại thẻ</td>
+                                  <td>{card.issueFee}</td>
+                              </tr>
+                              <tr>
+                                  <td>Phí hằng năm</td>
+                                  <td>{card.yearlyFee}</td>
+                              </tr>
+                              <tr>
+                                  <td>Phí chuyển tiền</td>
+                                  <td>{card.exCurrency}</td>
+                              </tr>
+                              
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    )
+}
+  return (
+    <>     
+        {card.cardType==='intDebits' && intDebitScreen() }
+        {card.cardType==='intCredits' && intCreditScreen() }
+        {card.cardType==='domDebits' && domDebitScreen() }
     </>
   );
 }

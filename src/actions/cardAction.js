@@ -7,11 +7,11 @@ import {CARD_DETAIL_FAIL,CARD_DETAIL_SUCCESS,CARD_DETAIL_REQUEST} from '../const
 
 import axios from "axios";
 
+
 export const listCard = () => async (dispatch) => {
   try {
     dispatch({ type: CARD_LIST_REQUEST });
-    const { data } = await axios.get(`${process.env.REACT_APP_HOST}/v1/card-type/cards`);
-
+    const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_HOST}/v1/card-type/cards`);
     dispatch({
       type: CARD_LIST_SUCCESS,
       payload: data,
@@ -31,9 +31,7 @@ export const listCard = () => async (dispatch) => {
 export const detailCard = (cardType,cardUrl) => async (dispatch) => {
   try {
     dispatch({ type: CARD_DETAIL_REQUEST });
-    const { data } = await axios.get(`${process.env.REACT_APP_HOST}/v1/card-type/${cardType}/${cardUrl}`);
-
-    console.log(data);
+    const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_HOST}/v1/card-type/${cardType}/${cardUrl}`);
     dispatch({
       type: CARD_DETAIL_SUCCESS,
       payload: data,

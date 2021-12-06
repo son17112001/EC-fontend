@@ -94,7 +94,7 @@ p {
 
 .card {
   width: 480px;
-  height: 440px;
+  height: 480px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background: #fff;
   transition: all 0.5s ease;
@@ -339,6 +339,55 @@ footer .quick-links {
 
 /* ----------------------------------CARD_COMPONENT--START--------------------------------------- */
 
+.counter{
+  color: #fff;
+  background: linear-gradient(to right bottom, #FFD81B, #f9b12a);
+  font-family: 'Dosis', sans-serif;
+  text-align: center;
+  width: 180px;
+  height: 180px;
+  padding: 40px 20px 20px;
+  margin: 0 auto;
+  border-radius: 10px 10px 100px 100px;
+  box-shadow: 0 0 15px -5px rgba(0,0,0,0.3);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.counter:after{
+  content: '';
+  background-color: #f9b12a;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+.counter .counter-value{
+  font-size: 55px;
+  font-weight: 600;
+  line-height: 40px;
+  margin: 0 0 15px;
+  display: block;
+}
+.counter h3{
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 20px;
+}
+.counter.green{ background: linear-gradient(to right bottom, #a9dd23, #52C242); }
+.counter.green:after{ background: #52C242; }
+.counter.cgreen{ background: linear-gradient(to right bottom, #01AD9F, #008888); }
+.counter.cgreen:after{ background: #008888; }
+.counter.blue{ background: linear-gradient(to right bottom, #00C5EF, #0092f4); }
+.counter.blue:after{ background: #0092f4; }
+@media screen and (max-width:990px){
+  .counter{ margin-bottom: 40px; }
+}
 /* ----------------------------------CARD_COMPONET--END--------------------------------------- */
 
 

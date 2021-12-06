@@ -17,7 +17,7 @@ function Card({card,cardType}) {
                </div>
              </div>
              <div className="content">
-               <p className="h-1 mt-4">{card.name}</p>
+               <p className="h-1 mt-4">{card.cardName}</p>
                <p className="text-muted mt-3">
                  {card.description}
                </p>

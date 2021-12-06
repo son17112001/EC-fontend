@@ -33,7 +33,7 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(`${URL}/v1/user/login`, { email, password }, config)
+        const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_PORT}/v1/user/login`, { email, password }, config)
 
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -72,7 +72,7 @@ export const register = (
                 }
             }
 
-            const { data } = await axios.post(`${URL}/v1/user/register`,
+            const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_PORT}/v1/user/register`,
                 {
                     name, birth, isMale,
                     personalIdNumber, phoneNumber,
@@ -107,7 +107,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(`${URL}/v1/user/profile`, config)
+        const { data } = await axios.get(`http://localhost:${process.env.REACT_APP_PORT}/v1/user/profile`, config)
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -174,7 +174,7 @@ export const getPayment = (amountNumber) => async (dispatch, getState) => {
             amount: amountNumber
         }
 
-        const { data } = await axios.post(`${URL}/v1/user/charge`, totalAmount, config)
+        const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_PORT}/v1/user/charge`, totalAmount, config)
         
         window.open(data.url, '_blank')
         dispatch({

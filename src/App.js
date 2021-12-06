@@ -20,12 +20,15 @@ function App() {
           <Route path="/card/domDebits" element={<DomDebitScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
+          <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
           
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/profile" element={<ProfileScreen />} />
         </Routes>
+
       </main>
+      
       <Footer />
     </BrowserRouter>
   );
