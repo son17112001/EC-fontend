@@ -9,6 +9,7 @@ import CardDetail from "./components/CardDetail";
 import IntCreditScreen from "./Screens/intCreditScreen";
 import IntDebitScreen from "./Screens/intDebitScreen";
 import DomDebitScreen from "./Screens/domDebitScreen";
+import ForgotScreen from "./Screens/ForgotScreen";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,8 @@ function App() {
           <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
           
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/login/forgot" element={< ForgotScreen/>} />
+
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/profile" element={<ProfileScreen />} />
         </Routes>

@@ -33,7 +33,7 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_PORT}/v1/user/login`, { email, password }, config)
+        const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_HOST}/v1/user/login`, { email, password }, config)
 
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -72,7 +72,7 @@ export const register = (
                 }
             }
 
-            const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_PORT}/v1/user/register`,
+            const { data } = await axios.post(`http://localhost:${process.env.REACT_APP_HOST}/v1/user/register`,
                 {
                     name, birth, isMale,
                     personalIdNumber, phoneNumber,

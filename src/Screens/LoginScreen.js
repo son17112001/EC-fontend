@@ -52,8 +52,11 @@ const LoginScreen = () => {
                     value={password} onChange={e => setPassword(e.target.value)}>
                     </Form.Control>
                 </Form.Group>
-
+              
                 <Row className="py-4">
+                <Link to="/login/forgot">
+                <p style={{color:"red",fontSize:"12px"}}>Forgot password ?</p>
+                </Link>
                     <Col>
                         <Button type='submit' >Sign In</Button>
                     </Col>
