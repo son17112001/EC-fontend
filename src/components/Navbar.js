@@ -21,9 +21,9 @@ function NavbarComponent() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link className="nav-item" href="/profile"> CÁ NHÂN </Nav.Link>
-              <Nav.Link className="nav-item" href=""> ĐIỀU KHOẢN </Nav.Link>
-              <Nav.Link className="nav-item" href="">KHUYẾN MÃI</Nav.Link>
-              <Nav.Link className="nav-item" href="">TIN TỨC</Nav.Link>
+              <Nav.Link className="nav-item" href="/#"> ĐIỀU KHOẢN </Nav.Link>
+              <Nav.Link className="nav-item" href="/history">LỊCH SỬ</Nav.Link>
+              <Nav.Link className="nav-item" href="/#">TIN TỨC</Nav.Link>
 
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">DỊCH VỤ THẺ</NavDropdown.Item>
@@ -47,7 +47,11 @@ function NavbarComponent() {
                   <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <Nav.Link href="/login">LOGIN</Nav.Link>
+                <Nav>
+                  <Nav.Link href="/login">LOGIN</Nav.Link>
+                  <Nav.Link href="/register">SIGN UP</Nav.Link>
+                </Nav>
+
               )}
 
             </Nav>

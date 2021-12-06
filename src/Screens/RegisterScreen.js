@@ -31,7 +31,6 @@ const RegisterScreen = () => {
     const submitHandler = (e) => {
         e.preventDefault() //dispatch register
         dispatch(register(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job))
-        //console.log(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job)
     }
 
    console.log(isMale)

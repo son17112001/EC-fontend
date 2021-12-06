@@ -22,7 +22,7 @@ function HomeScreen() {
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="/card/intCredit.jpg" alt />
+               <img className src="/card/intCredit.jpg" alt='intcredit' />
                <div className="date">
                  <span className="month">Credit</span>
                </div>
@@ -48,7 +48,7 @@ function HomeScreen() {
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="/card/intDebit.jpg" alt />
+               <img className src="/card/intDebit.jpg" alt='intdebit' />
                <div className="date">
                  <span className="month">Debit</span>
                </div>
@@ -75,7 +75,7 @@ function HomeScreen() {
            <div className="card border-0 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="/card/domDebit.png" alt />
+               <img className src="/card/domDebit.png" alt='domdebit' />
                <div className="date">
                  <span className="month">Debit</span>
                </div>

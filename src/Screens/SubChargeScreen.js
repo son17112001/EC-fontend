@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Button, Row, Col, Alert } from 'react-bootstrap'
+import { Container, Row, Col, Alert } from 'react-bootstrap'
 import { useLocation } from 'react-router'
 import { useNavigate } from 'react-router-dom'
-import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { submitPayment } from '../actions/userActions'
 import { ArrowBarRight } from 'react-bootstrap-icons'
@@ -14,6 +13,9 @@ const SubChargeScreen = () => {
     const navigate = useNavigate()
     const curURL = useLocation().search;
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     const paymentId = new URLSearchParams(curURL).get('paymentId');
     const token = new URLSearchParams(curURL).get('token');
     const PayerID = new URLSearchParams(curURL).get('PayerID');
@@ -21,8 +23,8 @@ const SubChargeScreen = () => {
     const userSubPayment = useSelector(state => state.userSubPayment)
     const { loading, errorRes, successRes } = userSubPayment
     useEffect(() => {
-        if (!paymentId && !token && !PayerID) {
-            navigate('/')
+        if (!userInfo || !paymentId || !token || !PayerID) {
+            navigate('/login')
         }
         else {
             dispatch(submitPayment(paymentId, PayerID))
@@ -32,7 +34,8 @@ const SubChargeScreen = () => {
                 }, 10000);
             }
         }
-    }, [navigate, paymentId, token, PayerID])
+        // eslint-disable-next-line
+    }, [dispatch, navigate, userInfo, paymentId, token, PayerID])
 
     return (
         <Container style={{ marginTop: 110 }}>
@@ -42,7 +45,7 @@ const SubChargeScreen = () => {
                         <Alert.Link href="/">Trở lại trang cá nhân trong 10 giây </Alert.Link></Alert>
                     )}
                     {errorRes && <Alert className='justify-content-center' variant='danger'>{errorRes.message}&#160;&#160;&#160;
-                        <Alert.Link href="/">Go back to homepage</Alert.Link></Alert>}
+                        <Alert.Link href="/">Go back to homepage <ArrowBarRight /></Alert.Link></Alert>}
                     {loading && <Loader />}
                 </Col>
             </Row>
