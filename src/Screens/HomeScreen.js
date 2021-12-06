@@ -14,7 +14,7 @@ function HomeScreen() {
         <Row className="mt-4">  <Col><h2>Dịch vụ thẻ </h2> </Col> 
         <Col > <button type="button" class="btn btn-primary fa-pull-right">Xem thêm chi tiết </button></Col> 
         </Row>
-         
+    
        <Row>  
          <div className="container card-info">
          

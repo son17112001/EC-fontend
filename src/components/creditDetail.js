@@ -36,6 +36,8 @@ function CreditDetail() {
   return (
     <>     
    
+                        
+
                 <div class="container">
            
                 <div class="card-body">

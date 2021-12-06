@@ -1,15 +1,20 @@
-import thunk from "redux-thunk";
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-
-import { cardListReducer ,cardDetailReducer} from "./reducers/cardReducers";
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import thunk from "redux-thunk"
+import { createStore, combineReducers, applyMiddleware } from "redux"
+import { composeWithDevTools } from "redux-devtools-extension"
+import { cardListReducer, cardDetailReducer } from "./reducers/cardReducers"
+import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, userWithDrawReducer } from "./reducers/userReducers"
 
 const reducer = combineReducers({
   cardList: cardListReducer,
-  cardDetail:cardDetailReducer,
+  cardDetail: cardDetailReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userProfile: userProfileReducer,
+  userUpdatePass: userUpdatePassReducer,
+  userGetPayment: userGetPaymentReducer,
+  userSubPayment: userSubPaymentReducer,
+  userWithDraw: userWithDrawReducer,
+
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

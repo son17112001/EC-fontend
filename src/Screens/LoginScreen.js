@@ -13,20 +13,19 @@ const LoginScreen = () => {
 
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
-    const { loading, error, userInfo } = userLogin
+    const { loading, error, userInfo, messages } = userLogin
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const location = useLocation()
     const navigate = useNavigate()
-    const redirect = location.search ? location.search.split('=')[1]: '/'
-
+    const redirect = location.search ? location.search.split('=')[1] : '/'
     useEffect(() => {
-        if(userInfo) {
+        if (userInfo) {
             navigate(redirect)
         }
-    },[navigate,userInfo,redirect])
+    }, [navigate, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault() //dispatch login
@@ -37,19 +36,20 @@ const LoginScreen = () => {
         <FormContainer>
             <h1 style={{ color: 'lightyellow', textAlign: 'center', marginBottom: 30 }}>LOGIN</h1>
             {error && <Message variant='danger'>{error}</Message>}
+            {messages && <Message variant='danger'>Tài khoản hết hạn đăng nhập, vui lòng đăng nhập lại</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='accNumber'>
                     <Form.Label>Account Number</Form.Label>
                     <Form.Control type='accNumber' placeholder='Enter Account Number'
-                    value={email} onChange={e => setEmail(e.target.value)}>
+                        value={email} onChange={e => setEmail(e.target.value)}>
                     </Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='password'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' placeholder='Enter password'
-                    value={password} onChange={e => setPassword(e.target.value)}>
+                        value={password} onChange={e => setPassword(e.target.value)}>
                     </Form.Control>
                 </Form.Group>
               

@@ -1,5 +1,4 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
 
 const Footer = () => {
   return (
@@ -12,22 +11,22 @@ const Footer = () => {
                 <span className="footer-title">Product</span>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   Product 1
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   Product 2
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   Plans &amp; Prices
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   Frequently asked questions
                 </a>
               </li>
@@ -39,17 +38,17 @@ const Footer = () => {
                 <span className="footer-title">Company</span>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   About us
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   Job postings
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   News and articles
                 </a>
               </li>
@@ -67,19 +66,19 @@ const Footer = () => {
                 </span>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   <i className="fas fa-comments" />
                   Live chat
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   <i className="fas fa-envelope" />
                   Contact us
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/#">
                   <i className="fas fa-star" />
                   Give feedback
                 </a>
@@ -99,17 +98,17 @@ const Footer = () => {
           <div className="col-md-4 box">
             <ul className="list-inline social-buttons">
               <li className="list-inline-item">
-                <a href="#">
+                <a href="/#">
                   <i className="fab fa-twitter" />
                 </a>
               </li>
               <li className="list-inline-item">
-                <a href="#">
+                <a href="/#">
                   <i className="fab fa-facebook-f" />
                 </a>
               </li>
               <li className="list-inline-item">
-                <a href="#">
+                <a href="/#">
                   <i className="fab fa-linkedin-in" />
                 </a>
               </li>
@@ -118,10 +117,10 @@ const Footer = () => {
           <div className="col-md-4 box">
             <ul className="list-inline quick-links">
               <li className="list-inline-item">
-                <a href="#">Privacy Policy</a>
+                <a href="/#">Privacy Policy</a>
               </li>
               <li className="list-inline-item">
-                <a href="#">Terms of Use</a>
+                <a href="/#">Terms of Use</a>
               </li>
             </ul>
           </div>

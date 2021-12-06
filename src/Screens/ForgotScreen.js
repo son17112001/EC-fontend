@@ -27,7 +27,7 @@ const ForgotScreen = () => {
 
     const submitHandler = (e) => {
         e.preventDefault() //dispatch login
-     
+        
     }
 
     return (

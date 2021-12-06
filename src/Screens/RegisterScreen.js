@@ -15,7 +15,7 @@ const RegisterScreen = () => {
 
     const [name, setName] = useState('')
     const [birth, setBirth] = useState('')
-    const [isMale, setIsMale] = useState(false)
+    const [isMale, setIsMale] = useState(true)
     const [number, setNumber] = useState('')
     const [issueDate, setIssueDate] = useState('')
     const [issuePlace, setIssuePlace] = useState('')
@@ -31,12 +31,9 @@ const RegisterScreen = () => {
     const submitHandler = (e) => {
         e.preventDefault() //dispatch register
         dispatch(register(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job))
-        //console.log(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job)
     }
 
-    const setGender = () => {
-        setIsMale(x => !x)
-    }
+   console.log(isMale)
     return (<FormContainer>
         <h1 style={{ color: 'lightyellow', textAlign: 'center', marginBottom: 30 }}>Sign Up</h1>
         <Form style={{ color: 'deepskyblue' }} onSubmit={submitHandler}>
@@ -53,10 +50,14 @@ const RegisterScreen = () => {
                         value={birth} onChange={e => setBirth(e.target.value)} />
                 </Form.Group>
 
-                <Form.Group as={Col} id="gender">
+                <Form.Group as={Col} id="gender" >
                     <Form.Label >Gender</Form.Label>
-                    <Form.Check style={{ color: 'springgreen' }} type="checkbox" label="is Male ?"
-                        value={isMale} onChange={setGender} />
+                    <div style={{ display: 'flex',justifyContent: 'space-around' }}>
+                        <Form.Check style={{ color: 'springgreen' }} type="radio" label="Nam" checked={isMale === true}
+                             onChange={() => setIsMale(true)} />
+                        <Form.Check style={{ color: 'springgreen' }} type="radio" label="Nữ" checked={isMale === false}
+                            onChange={() => setIsMale(false)} />
+                    </div>
                 </Form.Group>
             </Row>
 
