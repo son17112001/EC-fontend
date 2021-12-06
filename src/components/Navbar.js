@@ -1,7 +1,10 @@
 import React from "react";
+import {Link} from "react-router-dom"
+
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
 import { logout } from "../actions/userActions";
+
 function NavbarComponent() {
 
   const dispatch = useDispatch()
@@ -16,28 +19,33 @@ function NavbarComponent() {
     <>
       <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container>
-          <Navbar.Brand href="/"> <Image className="nav-logo" src="/logo.png" /> </Navbar.Brand>
+
+          <Link to="/"> 
+          <Navbar.Brand href="#home"> <Image className="nav-logo" src="/logo.png" alt="bank-logo" /> </Navbar.Brand></Link>
+
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link className="nav-item" href="/profile"> CÁ NHÂN </Nav.Link>
               <Nav.Link className="nav-item" href="/#"> ĐIỀU KHOẢN </Nav.Link>
               <Nav.Link className="nav-item" href="/history">LỊCH SỬ</Nav.Link>
-              <Nav.Link className="nav-item" href="/#">TIN TỨC</Nav.Link>
+              <Nav.Link className="nav-item" href="/card">DỊCH VỤ THẺ</Nav.Link>
 
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">DỊCH VỤ THẺ</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
+                <NavDropdown.Item href="">DỊCH VỤ THẺ</NavDropdown.Item>
+                <NavDropdown.Item href="">
                   CÁ NHÂN
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  DỊCH VỤ THẺ
+
+                <NavDropdown.Item href="">
+                  DỊCH VỤ THẺ 
+
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
+                <NavDropdown.Item href="">
                   ĐIỀU KHOẢN
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> 
             </Nav>
 
             <Nav>
@@ -53,6 +61,7 @@ function NavbarComponent() {
                 </Nav>
 
               )}
+
 
             </Nav>
 

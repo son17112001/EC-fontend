@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 
 import { Container } from "react-bootstrap";
 import Header from "../components/Header";
-
+import { Link } from "react-router-dom";
 function HomeScreen() {
 
 
@@ -14,7 +14,7 @@ function HomeScreen() {
         <Row className="mt-4">  <Col><h2>Dịch vụ thẻ </h2> </Col> 
         <Col > <button type="button" class="btn btn-primary fa-pull-right">Xem thêm chi tiết </button></Col> 
         </Row>
-         
+    
        <Row>  
          <div className="container card-info">
          
@@ -22,7 +22,7 @@ function HomeScreen() {
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="/card/intCredit.jpg" alt='intcredit' />
+               <img className src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FintCredits%2Fthe-lts-internaional-credit-mastercard-gold.png?alt=media" alt />
                <div className="date">
                  <span className="month">Credit</span>
                </div>
@@ -33,10 +33,11 @@ function HomeScreen() {
                  Freeship cả năm, 365 ngày hoàn tiền
                </p>
                <div className="d-flex align-items-center justify-content-between mt-3 pb-3">
+                 <Link to={`/card/intCredits`}>
                  <div className="btn btn-primary">
                    Xem thêm
                    <span className="fas fa-arrow-right" />
-                 </div>
+                 </div></Link>
                  <div className="d-flex align-items-center justify-content-center foot">
                    <p className="ps-3 icon text-muted">
                      <span className="fas fa-comment-alt pe-1" />5
@@ -48,7 +49,7 @@ function HomeScreen() {
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="/card/intDebit.jpg" alt='intdebit' />
+               <img className src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FintDebits%2Fthe-lts-internaional-Debit-mastercard-standard.png?alt=media" alt />
                <div className="date">
                  <span className="month">Debit</span>
                </div>
@@ -60,10 +61,11 @@ function HomeScreen() {
                  các giao dịch nội địa với mạng lưới ATM rộng lớn
                </p>
                <div className="d-flex align-items-center justify-content-between mt-3 pb-3">
+                  <Link to={`/card/intDebits`}>
                  <div className="btn btn-primary">
                    Xem thêm
                    <span className="fas fa-arrow-right" />
-                 </div>
+                 </div></Link>
                  <div className="d-flex align-items-center justify-content-center foot">
                    <p className="ps-3 icon text-muted">
                      <span className="fas fa-comment-alt pe-1" />2
@@ -75,7 +77,7 @@ function HomeScreen() {
            <div className="card border-0 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="/card/domDebit.png" alt='domdebit' />
+               <img className src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FdomDebits%2Fthe-lts-domestic-Debit-Napas-standard.png?alt=media" alt />
                <div className="date">
                  <span className="month">Debit</span>
                </div>
@@ -88,10 +90,11 @@ function HomeScreen() {
                  thành tâm điểm
                </p>
                <div className="d-flex align-items-center justify-content-between mt-3 pb-3">
+               <Link to={`/card/domDebits`}>
                  <div className="btn btn-primary">
                    Xem thêm
                    <span className="fas fa-arrow-right" />
-                 </div>
+                 </div></Link>
                  <div className="d-flex align-items-center justify-content-center foot">
                    <p className="ps-3 icon text-muted">
                      <span className="fas fa-comment-alt pe-1" />3
@@ -106,5 +109,4 @@ function HomeScreen() {
     </>
   );
 }
-
 export default HomeScreen;

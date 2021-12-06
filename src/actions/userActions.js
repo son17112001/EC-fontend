@@ -1,8 +1,7 @@
 import { USER_CONSTANTS } from "../constants/userConstants"
-
+import feEnv from "../config/envfile"
 import axios from 'axios'
 
-const URL = 'http://localhost:8081'
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -16,7 +15,7 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(`${URL}/v1/user/login`, { email, password }, config)
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/login`, { email, password }, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_LOGIN_SUCCESS,
@@ -46,7 +45,7 @@ export const logout = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.post(`${URL}/v1/user/logout`, {}, config)
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/logout`, {}, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_LOGOUT,
@@ -77,7 +76,7 @@ export const register = (
                 }
             }
 
-            const { data } = await axios.post(`${URL}/v1/user/register`,
+            const { data } = await axios.post(`${feEnv.HOST}/v1/user/register`,
                 {
                     name, birth, isMale,
                     personalIdNumber, phoneNumber,
@@ -112,7 +111,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get(`${URL}/v1/user/profile`, config)
+        const { data } = await axios.get(`${feEnv.HOST}/v1/user/profile`, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_DETAILS_SUCCESS,
@@ -149,7 +148,7 @@ export const userUpPass = (curPass, newPass, ConNewPass) => async (dispatch, get
             confirmNewPassword: ConNewPass
         }
 
-        const { data } = await axios.put(`${URL}/v1/user/profile`, body, config)
+        const { data } = await axios.put(`${feEnv.HOST}/v1/user/profile`, body, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_UPDATE_PASS_SUCCESS,
@@ -183,8 +182,8 @@ export const getPayment = (amountNumber) => async (dispatch, getState) => {
             amount: amountNumber
         }
 
-        const { data } = await axios.post(`${URL}/v1/user/charge`, totalAmount, config)
-
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/charge`, totalAmount, config)
+        
         dispatch({
             type: USER_CONSTANTS.USER_GET_PAYMENT_SUCCESS,
             payload: data
@@ -216,7 +215,7 @@ export const submitPayment = (paymentId, PayerID) => async (dispatch, getState) 
         const body = {
             paymentId, PayerID
         }
-        const { data } = await axios.post(`${URL}/v1/user/charge/submit`, body, config)
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/charge/submit`, body, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_SUB_PAYMENT_SUCCESS,
@@ -264,7 +263,7 @@ export const init_DT_Service = (amountNumber, services, perInfo) => async (dispa
             }
         }
 
-        const { data } = await axios.post(`${URL}/v1/user/${services}`, body, config)
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/${services}`, body, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_WITHDRAW_SUCCESS,
@@ -296,7 +295,7 @@ export const verify_DT_Service = (servicesToken, services, type) => async (dispa
         const body = {
             token: servicesToken,
         }
-        const { data } = await axios.post(`${URL}/v1/user/${services}/${type}`, body, config)
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/${services}/${type}`, body, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_WITHDRAW_SUCCESS,
