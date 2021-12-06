@@ -100,6 +100,37 @@ export const register = (
         }
     }
 
+    export const forgotPassword = (email) => async (dispatch) => {
+        try {
+            dispatch({
+                type: USER_CONSTANTS.USER_FORGOT_REQUEST
+            })
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+
+            const { data } = await axios.post(`${feEnv.HOST}/v1/user/forgot-password`,
+
+                {
+                   email
+                }, config)
+
+            dispatch({
+                type: USER_CONSTANTS.USER_FORGOT_SUCCESS,
+                payload: data
+            })
+
+        } catch (error) {
+            dispatch({
+                type: USER_CONSTANTS.USER_FORGOT_FAIL,
+                payload: { status: error.response.status, messages: error.response.data }
+            })
+        }
+    }
 export const getUserProfile = () => async (dispatch, getState) => {
     try {
         dispatch({

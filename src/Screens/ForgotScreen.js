@@ -5,16 +5,15 @@ import { useLocation } from 'react-router'
 import { Link, useNavigate } from 'react-router-dom'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-
+import { forgotPassword} from '../actions/userActions'
 import FormContainer from '../components/FormContainer'
 
 
 const ForgotScreen = () => {
 
     const dispatch = useDispatch()
-    const userLogin = useSelector(state => state.userLogin)
-    const { loading, error, userInfo } = userLogin
-
+    const userForgotPassWord = useSelector(state => state.userForgotPassWord)
+    const { loading, resMessage } = userForgotPassWord
     const [email, setEmail] = useState('')
    
 
@@ -27,13 +26,13 @@ const ForgotScreen = () => {
 
     const submitHandler = (e) => {
         e.preventDefault() //dispatch login
-        
+        dispatch(forgotPassword(email))
     }
 
     return (
         <FormContainer>
             <h1 style={{ color: 'lightyellow', textAlign: 'center', marginBottom: 30 }}>Quên mật khẩu</h1>
-            {error && <Message variant='danger'>{error}</Message>}
+            {resMessage && <Message variant='danger'>{resMessage}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='accNumber'>
@@ -47,7 +46,7 @@ const ForgotScreen = () => {
                 <Row className="py-4">
                
                     <Col>
-                        <Button type='submit' >Gửi</Button>
+                        <Button type='submit' variant='success' style={{width:"100%"}}>Gửi</Button>
                     </Col>
                     
                 </Row>

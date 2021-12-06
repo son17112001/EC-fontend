@@ -2,13 +2,14 @@ import thunk from "redux-thunk"
 import { createStore, combineReducers, applyMiddleware } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import { cardListReducer, cardDetailReducer } from "./reducers/cardReducers"
-import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, userWithDrawReducer } from "./reducers/userReducers"
+import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, userWithDrawReducer,userForgotPassReducer } from "./reducers/userReducers"
 
 const reducer = combineReducers({
   cardList: cardListReducer,
   cardDetail: cardDetailReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userForgotPassWord: userForgotPassReducer,
   userProfile: userProfileReducer,
   userUpdatePass: userUpdatePassReducer,
   userGetPayment: userGetPaymentReducer,
