@@ -22,7 +22,7 @@ function HomeScreen() {
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FintCredits%2Fthe-lts-internaional-credit-mastercard-gold.png?alt=media" alt />
+               <img className src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FintCredits%2Fthe-lts-internaional-credit-mastercard-gold.png?alt=media" alt="homeimage" />
                <div className="date">
                  <span className="month">Credit</span>
                </div>
@@ -49,7 +49,7 @@ function HomeScreen() {
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FintDebits%2Fthe-lts-internaional-Debit-mastercard-standard.png?alt=media" alt />
+               <img className alt="homeimage2" src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FintDebits%2Fthe-lts-internaional-Debit-mastercard-standard.png?alt=media"/>
                <div className="date">
                  <span className="month">Debit</span>
                </div>
@@ -77,7 +77,7 @@ function HomeScreen() {
            <div className="card border-0 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
-               <img className src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FdomDebits%2Fthe-lts-domestic-Debit-Napas-standard.png?alt=media" alt />
+               <img className alt="homeimage3" src="https://firebasestorage.googleapis.com/v0/b/cardec-30bbb.appspot.com/o/CardTypes%2FdomDebits%2Fthe-lts-domestic-Debit-Napas-standard.png?alt=media"  />
                <div className="date">
                  <span className="month">Debit</span>
                </div>

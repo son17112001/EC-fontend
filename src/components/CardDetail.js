@@ -1,16 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
-    Row,
-    Col,
-    Image,
-    ListGroup,
-    Card,
-    Button,
-    Form,
-    ListGroupItem,
-} from "react-bootstrap";
+import React, {  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import {  useParams} from "react-router-dom";
 import { detailCard } from "../actions/cardAction"
 import $ from "jquery";
 function CardDetail() {
@@ -34,8 +24,8 @@ function CardDetail() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(detailCard(cardType, cardUrl))
-    }, []);
-    const { loading, card } = useSelector(state => state.cardDetail)
+    }, [dispatch,cardType,cardUrl]);
+    const {  card } = useSelector(state => state.cardDetail)
     var isIssuing = 'Không';
     var maxPay = `${card.maxPay}`;
     console.log(card.maxPay);
@@ -57,7 +47,7 @@ function CardDetail() {
                         <div class="row">
                             <div class="col-lg-5 col-md-5 col-sm-6">
                                 <div class="white-box text-center">
-                                    <img src={card.image} class="img-responsive" /></div>
+                                    <img alt="detailimage" src={card.image} class="img-responsive" /></div>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-6">
                                 <h4 class="box-title mt-5">Thông tin thẻ</h4>
@@ -130,7 +120,7 @@ function CardDetail() {
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-6">
                             <div class="white-box text-center">
-                                <img src={card.image} class="img-responsive" /></div>
+                                <img alt="detailimage"  src={card.image} class="img-responsive" /></div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
                             <h4 class="box-title mt-5">Thông tin thẻ</h4>
@@ -215,7 +205,7 @@ function CardDetail() {
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-6">
                             <div class="white-box text-center">
-                                <img src={card.image} class="img-responsive" /></div>
+                                <img alt="detailimage"  src={card.image} class="img-responsive" /></div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
                             <h4 class="box-title mt-5">Thông tin thẻ</h4>
