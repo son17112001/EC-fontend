@@ -5,20 +5,43 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { forgotPassword } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
-
+import ReCAPTCHA from "react-google-recaptcha";
+import feEnv from "../config/envfile"
+import {useNavigate} from "react-router-dom"
 const ForgotScreen = () => {
   const dispatch = useDispatch();
+  const navigate= useNavigate()
   const userForgotPassWord = useSelector((state) => state.userForgotPassWord);
   const { loading, resMessage } = userForgotPassWord;
+  var { success } = userForgotPassWord;
   const [email, setEmail] = useState("");
+  const [vertify, setVertify]= useState(false)
+  const [noti,setNoti]= useState("")
 
-  useEffect(() => {}, []);
-
+  useEffect(() => {
+    if(success===true){
+      setNoti("Đổi mật khẩu thành công, chuyển hướng đến trang đang nhập!!!")
+      setTimeout(()=>{
+        navigate("/login")
+      },3000)
+    }
+  }, [success,navigate]);
+ 
   const submitHandler = (e) => {
-    e.preventDefault(); //dispatch login
-    dispatch(forgotPassword(email));
+    e.preventDefault();//dispatch login
+    if(vertify){
+      
+      dispatch(forgotPassword(email));
+      setNoti("");
+     
+    }
+    else{
+      setNoti("Check reCaptcha trước khi gửi !!!")
+    }
   };
-
+  const handleVerify =(value)=>{
+    setVertify(true);
+  }
   return (
     <FormContainer>
       <h1
@@ -26,7 +49,8 @@ const ForgotScreen = () => {
       >
         Quên mật khẩu
       </h1>
-      {resMessage && <Message variant="danger">{resMessage}</Message>}
+      {noti && <Message variant="warning">{noti}</Message>}
+      {success===false && <Message variant="danger">{resMessage}</Message> }
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="accNumber">
@@ -37,6 +61,10 @@ const ForgotScreen = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
+                                  <ReCAPTCHA
+    sitekey={`${feEnv.RECAPTCHA_KEY}`}
+    onChange={handleVerify}
+  />
         </Form.Group>
 
         <Row className="py-4">

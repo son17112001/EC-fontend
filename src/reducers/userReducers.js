@@ -22,9 +22,9 @@ export const userRegisterReducer = (state = {}, action) => {
 
 export const userForgotPassReducer = (state = {}, action) => {
     switch (action.type) {
-        case USER_CONSTANTS.USER_FORGOT_REQUEST: return { loading: true }
-        case USER_CONSTANTS.USER_FORGOT_SUCCESS: return { loading: false, resMessage: action.payload.message } //, userInfo: action.payload
-        case USER_CONSTANTS.USER_FORGOT_FAIL: return { loading: false, resMessage: action.payload.messages.message }
+        case USER_CONSTANTS.USER_FORGOT_REQUEST: return { loading: true,success:false }
+        case USER_CONSTANTS.USER_FORGOT_SUCCESS: return { loading: false, resMessage: action.payload.message,success:true } //, userInfo: action.payload
+        case USER_CONSTANTS.USER_FORGOT_FAIL: return { loading: false, resMessage: action.payload.messages.message,success:false }
         default: return state
     }
 }
