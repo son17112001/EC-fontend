@@ -15,6 +15,8 @@ import IntCreditScreen from "./Screens/intCreditScreen";
 import IntDebitScreen from "./Screens/intDebitScreen";
 import DomDebitScreen from "./Screens/domDebitScreen";
 import ForgotScreen from "./Screens/ForgotScreen";
+import FindCardScreen from "./Screens/FindCardScreen"
+import AdminScreen from "./Screens/AdminScreen"
 require('dotenv').config()
 function App() {
   return (
@@ -22,16 +24,17 @@ function App() {
       <Navbar />
       <main className="py-3" style={{ marginTop: "72px" }}>
         <Routes>
+
           <Route path="/card/intCredits" element={<IntCreditScreen />} />
           <Route path="/card/intDebits" element={<IntDebitScreen />} />
           <Route path="/card/domDebits" element={<DomDebitScreen />} />
           <Route path="/" element={<HomeScreen />} />
-          <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
-          <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
+          <Route path="/find/:cardname" element={<FindCardScreen />} />
+          <Route path="/admin" element={<AdminScreen />} />
 
+          <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/login/forgot" element={< ForgotScreen/>} />
-
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/profile" element={<ProfileScreen />} />
           <Route path="/user/charge/submit" element={<SubChargeScreen />} />

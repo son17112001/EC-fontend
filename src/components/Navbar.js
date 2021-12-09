@@ -1,20 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import {Link} from "react-router-dom"
 
 import { useDispatch, useSelector } from 'react-redux'
-import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown, Image,Button } from "react-bootstrap";
 import { logout } from "../actions/userActions";
+import {useLocation,useNavigate} from "react-router-dom"
 
 function NavbarComponent() {
 
   const dispatch = useDispatch()
+  const location= useLocation();
+  const navigate= useNavigate();
   const userLogin = useSelector(state => state.userLogin)
+  
   const { userInfo } = userLogin
-
+  const [search,setSearch]=useState();
   const logoutHandler = () => {
     dispatch(logout())
   }
 
+  const handlerSearch =()=>{  
+      
+      navigate(`/find/:${search}`);
+  }
   return (
     <>
       <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -47,6 +55,19 @@ function NavbarComponent() {
                 </NavDropdown.Item>
               </NavDropdown> 
             </Nav>
+
+            <Nav>
+          <div className="input-group rounded">
+                      <input type="search" className="form-control rounded" placeholder="Tìm tên thẻ" aria-label="Search" aria-describedby="search-addon" value={search} onChange={(e)=>{setSearch(e.target.value)}}/>
+                      <span className="input-group-text border-0" id="search-addon">
+                      <Button onClick={handlerSearch}><i className="fas fa-search" /> </Button> 
+                      </span>
+                      
+                    </div>
+
+
+                         
+                       </Nav>
 
             <Nav>
               {userInfo ? (

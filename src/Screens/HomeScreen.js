@@ -19,6 +19,7 @@ function HomeScreen() {
          <div className="container card-info">
          
          <div className="d-lg-flex">
+         <Link to={`/card/intCredits`} style={{textDecoration:"none"}} >
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
@@ -45,7 +46,9 @@ function HomeScreen() {
                  </div>
                </div>
              </div>
-           </div>
+           </div></Link>
+         <Link to={`/card/intCredits`} style={{textDecoration:"none"}}>
+
            <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
@@ -73,7 +76,9 @@ function HomeScreen() {
                  </div>
                </div>
              </div>
-           </div>
+           </div></Link>
+         <Link to={`/card/intCredits`} style={{textDecoration:"none"}}>
+
            <div className="card border-0 mb-lg-0 mb-4">
              <div className="backgroundEffect" />
              <div className="pic">
@@ -103,6 +108,7 @@ function HomeScreen() {
                </div>
              </div>
            </div>
+           </Link>
          </div>
        </div></Row>
       </Container>
