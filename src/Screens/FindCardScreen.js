@@ -149,7 +149,7 @@ function FindCardScreen() {
               </Message>
             )
           ) : (
-            <Message variant="success">Đã tìm được ${store.length} thẻ</Message>
+            <Message variant="success">Đã tìm được </Message>
           )}
           {store ? (
             store.map((card) => (
