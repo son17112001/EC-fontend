@@ -25,7 +25,7 @@ function NavbarComponent() {
   }
   return (
     <>
-      <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="primary" variant="dark">
+      {location.pathname!=='/admin'&& location.pathname!=='/admin/control/user'  && ( <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container>
 
           <Link to="/"> 
@@ -88,7 +88,8 @@ function NavbarComponent() {
 
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+      </Navbar>)}
+     
     </>
   );
 }

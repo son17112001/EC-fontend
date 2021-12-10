@@ -390,7 +390,17 @@ footer .quick-links {
 }
 /* ----------------------------------CARD_COMPONET--END--------------------------------------- */
 
+.jUqJls.toggled{
+  min-width: 50px !important;
+  width: 75px  !important;
+}
+.jlLlam{
+  height: 103% !important;
+}
 
-
-
-
+.navbar-dark{
+  background-color: red !important;
+}
+.cdb-input{
+  color: black !important;
+}

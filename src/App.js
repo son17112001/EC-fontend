@@ -17,6 +17,7 @@ import DomDebitScreen from "./Screens/domDebitScreen";
 import ForgotScreen from "./Screens/ForgotScreen";
 import FindCardScreen from "./Screens/FindCardScreen"
 import AdminScreen from "./Screens/AdminScreen"
+import AdminUserControl from "./Screens/AdminUserControl"
 require('dotenv').config()
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/find/:cardname" element={<FindCardScreen />} />
           <Route path="/admin" element={<AdminScreen />} />
-
+          <Route path="/admin/control/user" element={<AdminUserControl />} />
           <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/login/forgot" element={< ForgotScreen/>} />
@@ -46,6 +47,7 @@ function App() {
       </main>
 
       <Footer />
+      
     </BrowserRouter>
   );
 }
