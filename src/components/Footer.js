@@ -4,7 +4,7 @@ function Footer() {
   const location= useLocation();
   return (
     <footer>
-      {location.pathname !=='/admin' && location.pathname!=='/admin/control/user' && ( <div className="container">
+      {location.pathname !=='/admin' && location.pathname!=='/admin/control/user'&& location.pathname!=='/admin/welcome' && ( <div className="container">
       <div className="row">
         <div className="col-md-4 footer-column">
           <ul className="nav flex-column">

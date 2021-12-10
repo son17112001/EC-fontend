@@ -13,7 +13,7 @@ function AdminNav() {
     {/* Collapsible wrapper */}
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       {/* Navbar brand */}
-      <a className="navbar-brand mt-2 mt-lg-0" href="#">
+      <a className="navbar-brand mt-2 mt-lg-0" href="/">
         <img src="/logo.png" height={40 } alt="LTS Logo" loading="lazy" />
       </a>
       

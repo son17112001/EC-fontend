@@ -25,7 +25,7 @@ function NavbarComponent() {
   }
   return (
     <>
-      {location.pathname!=='/admin'&& location.pathname!=='/admin/control/user'  && ( <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="primary" variant="dark">
+      {location.pathname!=='/admin'&& location.pathname!=='/admin/control/user'&& location.pathname!=='/admin/welcome'  && ( <Navbar className="fixed-top" collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container>
 
           <Link to="/"> 

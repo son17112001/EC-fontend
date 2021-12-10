@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {useDispatch} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,9 +13,27 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {login} from "../actions/adminAuthAction"
+import {useLocation,useNavigate} from "react-router-dom"
 const theme = createTheme();
 function AdminLogin() {
    
+    const [email,setEmail]=useState();
+    const [password,setPassword]=useState();
+    const dispatch=useDispatch();
+    const navigate= useNavigate()
+    const adminLogin= useSelector(state =>state.adminLogin)
+    const {adminInfo,loading}= adminLogin;
+    console.log(adminInfo);
+    const submitHandler=(e)=>{
+        e.preventDefault();
+        dispatch(login(email,password))
+    }
+    useEffect(()=>{
+        if(adminInfo){
+              navigate('/admin/welcome')
+        }
+    },[adminInfo,navigate])
     return (
         <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
@@ -32,7 +50,7 @@ function AdminLogin() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Đăng nhập
             </Typography>
             <Box component="form"  noValidate sx={{ mt: 1 }}>
               <TextField
@@ -40,32 +58,38 @@ function AdminLogin() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Địa chỉ email"
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={e=>{setEmail(e.target.value)}}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Mật khẩu"
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={e=>{setPassword(e.target.value)}}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label="Nhớ mật khẩu"
+                onSubmit={submitHandler}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={submitHandler}
               >
-                Sign In
+                Login
               </Button>
             
             </Box>

@@ -18,6 +18,7 @@ import ForgotScreen from "./Screens/ForgotScreen";
 import FindCardScreen from "./Screens/FindCardScreen"
 import AdminScreen from "./Screens/AdminScreen"
 import AdminUserControl from "./Screens/AdminUserControl"
+import AdminWelcome from "./Screens/AdminWelcome";
 require('dotenv').config()
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/find/:cardname" element={<FindCardScreen />} />
           <Route path="/admin" element={<AdminScreen />} />
           <Route path="/admin/control/user" element={<AdminUserControl />} />
+          <Route path="/admin/welcome" element={<AdminWelcome />} />
           <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/login/forgot" element={< ForgotScreen/>} />
