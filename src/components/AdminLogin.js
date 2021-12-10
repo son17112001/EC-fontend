@@ -1,54 +1,78 @@
-import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBLink, CDBContainer } from "cdbreact";
-
-import React from 'react'
-
+import React,{useState,useEffect} from 'react'
+import {useDispatch} from "react-redux"
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+const theme = createTheme();
 function AdminLogin() {
+   
     return (
-                       
-                        <CDBCard style={{ width: "30rem", margin:"100px 0 0 500px",height:"500px"    }}>
-                        <CDBCardBody className="mx-4" style={{color:"black"}}>
-                            <div className="text-center mt-4 mb-2">
-                            <p className="h4" style={{color:"black"}}> Sign in </p>
-                            </div>
-                            <CDBInput className="cdb-input" material hint="E-mail" type="email"  style={{color:"black"}} />
-
-                            <CDBInput className="cdb-input"  material hint="Password" type="password" />
-                            <div className="d-flex flex-wrap justify-content-center align-items-center">
-                            <CDBInput type="Checkbox" />
-                            
-                            {/* <CDBLink to="#">Forgot Password ?</CDBLink> */}
-                            </div>
-                            <CDBBtn
-                            color="dark"
-                            className="btn-block my-3 mx-0" >
-                                Sign in
-                            </CDBBtn>
-                            {/* <p className="text-center">Not a member? <CDBLink className="d-inline p-0" to="#">Register</CDBLink></p> */}
-                         
-                            <div className="row my-3 d-flex justify-content-center">
-                            <CDBBtn
-                                color="white"
-                                style={{boxShadow:"none"}}
-                            >
-                                {/* <CDBIcon fab icon="facebook-f" /> */}
-                            </CDBBtn>
-                            <CDBBtn
-                                color="white"
-                                className="m-0"
-                                style={{boxShadow:"none"}}
-                            >
-                                {/* <CDBIcon fab icon="twitter" /> */}
-                            </CDBBtn>
-                            <CDBBtn
-                                color="white"
-                                style={{boxShadow:"none"}}
-                            >
-                                {/* <CDBIcon fab icon="google-plus-g"/> */}
-                            </CDBBtn>
-                            </div>
-                        </CDBCardBody>
-                        </CDBCard>
-              
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'rgb(16, 26, 51)' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form"  noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+            
+            </Box>
+          </Box>
+         
+        </Container>
+      </ThemeProvider>
     )
 }
 

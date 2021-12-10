@@ -3,7 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import { cardListReducer, cardDetailReducer } from "./reducers/cardReducers"
 import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, userWithDrawReducer,userForgotPassReducer } from "./reducers/userReducers"
-
+import {adminLoginReducer} from "./reducers/AdminAuthReducer"
 const reducer = combineReducers({
   cardList: cardListReducer,
   cardDetail: cardDetailReducer,
@@ -15,15 +15,20 @@ const reducer = combineReducers({
   userGetPayment: userGetPaymentReducer,
   userSubPayment: userSubPaymentReducer,
   userWithDraw: userWithDrawReducer,
-
+  adminLogin: adminLoginReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
+  const adminInfoFromStorage = localStorage.getItem("adminInfo")
+  ? JSON.parse(localStorage.getItem("adminInfo"))
+  : null;
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
+  adminLogin: { adminInfo: userInfoFromStorage },
+
 };
 
 const middleware = [thunk];
