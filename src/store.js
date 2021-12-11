@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension"
 import { cardListReducer, cardDetailReducer } from "./reducers/cardReducers"
 import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, userWithDrawReducer,userForgotPassReducer } from "./reducers/userReducers"
 import {adminLoginReducer} from "./reducers/AdminAuthReducer"
+import {adminControlUser,adminControlUserDetail} from "./reducers/AdminControlReducer"
 const reducer = combineReducers({
   cardList: cardListReducer,
   cardDetail: cardDetailReducer,
@@ -16,6 +17,8 @@ const reducer = combineReducers({
   userSubPayment: userSubPaymentReducer,
   userWithDraw: userWithDrawReducer,
   adminLogin: adminLoginReducer,
+  adminControl:adminControlUser,
+  adminControlUserDetail:adminControlUserDetail
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

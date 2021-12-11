@@ -1,6 +1,24 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import {Dropdown} from "react-bootstrap"
+import {logout} from  "../actions/adminAuthAction"
+import {useDispatch,useSelector} from "react-redux"
+import {useNavigate} from "react-router-dom"
 function AdminNav() {
-  
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+  const adminLogin= useSelector(state =>state.adminLogin)
+  const [admin,setAdmin]=useState()
+  const {adminInfo}= adminLogin;
+  useEffect(()=>{
+    if(adminInfo){
+      setAdmin(adminInfo.name)
+    }
+    
+  },[adminInfo])
+  function logoutHandler(){
+    dispatch(logout())
+    navigate('/admin')
+  }
   return (
     
    <nav className="navbar navbar-expand-lg navbar-dark bg-dark admin-page" style={{ backgroundColor: 'blue'}} >
@@ -42,20 +60,20 @@ function AdminNav() {
         </li>
       </ul>
       {/* Avatar */}
-      <a className="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+      {/* <a className="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
         <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" className="rounded-circle" height={25} alt="Black and White Portrait of a Man" loading="lazy" />
-      </a>
-      <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-        <li>
-          <a className="dropdown-item" href="#">My profile</a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#">Settings</a>
-        </li>
-        <li>
-          <a className="dropdown-item" href="#">Logout</a>
-        </li>
-      </ul>
+      </a> */}
+      {admin && (<Dropdown>
+  <Dropdown.Toggle variant="primary" id="dropdown-basic">
+   Admin
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item>Profile</Dropdown.Item>
+    <Dropdown.Item onClick={logoutHandler}>Logout</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>)}
+      
     </div>
     {/* Right elements */}
   </div>

@@ -24,16 +24,19 @@ function AdminLogin() {
     const navigate= useNavigate()
     const adminLogin= useSelector(state =>state.adminLogin)
     const {adminInfo,loading}= adminLogin;
-    console.log(adminInfo);
+    useEffect(()=>{
+      if(adminInfo){
+            if(Object.keys(adminInfo).length!==0){
+              navigate('/admin/welcome')
+            }
+            
+      }
+  },[adminInfo,navigate])
     const submitHandler=(e)=>{
         e.preventDefault();
         dispatch(login(email,password))
     }
-    useEffect(()=>{
-        if(adminInfo){
-              navigate('/admin/welcome')
-        }
-    },[adminInfo,navigate])
+   
     return (
         <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">

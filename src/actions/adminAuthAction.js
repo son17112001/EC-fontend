@@ -34,3 +34,20 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
+
+export const logout = () => async (dispatch) => {
+    try {
+        localStorage.removeItem("adminInfo");
+        dispatch({
+            type:  ADMIN_CONSTANTS.ADMIN_LOGIN_SUCCESS,
+            payload: {}
+        })
+    } catch (error) {
+        dispatch({
+            type:  ADMIN_CONSTANTS.ADMIN_LOGIN_FAIL,
+            payload: error.response && error.response.data.message
+                ? error.response.data.message : error.message
+        })
+    }
+}
+
