@@ -3,7 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import { cardListReducer, cardDetailReducer } from "./reducers/cardReducers"
 import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, userWithDrawReducer,userForgotPassReducer } from "./reducers/userReducers"
-import {adminLoginReducer} from "./reducers/AdminAuthReducer"
+import {adminLoginReducer,adminProfileReducer,adminUpdateReducer,adminPasswordReducer} from "./reducers/AdminAuthReducer"
 import {adminControlUser,adminControlUserDetail} from "./reducers/AdminControlReducer"
 const reducer = combineReducers({
   cardList: cardListReducer,
@@ -18,7 +18,10 @@ const reducer = combineReducers({
   userWithDraw: userWithDrawReducer,
   adminLogin: adminLoginReducer,
   adminControl:adminControlUser,
-  adminControlUserDetail:adminControlUserDetail
+  adminControlUserDetail:adminControlUserDetail,
+  adminProfile:adminProfileReducer,
+  notification:adminUpdateReducer,
+  notiPass:adminPasswordReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
@@ -39,5 +42,5 @@ const store = createStore(
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
-
+  
 export default store;

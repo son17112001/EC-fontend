@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Dropdown} from "react-bootstrap"
 import {logout} from  "../actions/adminAuthAction"
 import {useDispatch,useSelector} from "react-redux"
-import {useNavigate} from "react-router-dom"
+import {useNavigate,Link} from "react-router-dom"
 function AdminNav() {
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -18,6 +18,9 @@ function AdminNav() {
   function logoutHandler(){
     dispatch(logout())
     navigate('/admin')
+  }
+  function profileHandler(){
+    navigate('/admin/profile')
   }
   return (
     
@@ -69,7 +72,8 @@ function AdminNav() {
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item>Profile</Dropdown.Item>
+   
+    <Dropdown.Item onClick={profileHandler}>Profile</Dropdown.Item>
     <Dropdown.Item onClick={logoutHandler}>Logout</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>)}

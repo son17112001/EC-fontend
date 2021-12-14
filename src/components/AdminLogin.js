@@ -15,6 +15,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {login} from "../actions/adminAuthAction"
 import {useLocation,useNavigate} from "react-router-dom"
+import Loader from '../components/Loader'
+import { Alert } from '@mui/material';
+
 const theme = createTheme();
 function AdminLogin() {
    
@@ -23,7 +26,7 @@ function AdminLogin() {
     const dispatch=useDispatch();
     const navigate= useNavigate()
     const adminLogin= useSelector(state =>state.adminLogin)
-    const {adminInfo,loading}= adminLogin;
+    const {adminInfo,loading,error}= adminLogin;
     useEffect(()=>{
       if(adminInfo){
             if(Object.keys(adminInfo).length!==0){
@@ -55,6 +58,9 @@ function AdminLogin() {
             <Typography component="h1" variant="h5">
               Đăng nhập
             </Typography>
+            
+            {loading && <Loader/>}
+           
             <Box component="form"  noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -85,6 +91,7 @@ function AdminLogin() {
                 label="Nhớ mật khẩu"
                 onSubmit={submitHandler}
               />
+               {error && (<Alert severity="warning">{error}</Alert>)}
               <Button
                 type="submit"
                 fullWidth

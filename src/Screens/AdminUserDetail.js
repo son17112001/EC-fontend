@@ -138,15 +138,7 @@ function AdminUserDetail() {
                           <span style={{color:"black"}}>
                             <Checkbox {...label} defaultChecked />Trạng thái</span>
                         </div>
-                        <TextField
-                            id="standard-read-only-input"
-                            label="Số tài khoản"
-                            defaultValue={detail.accNumber}
-                            InputProps={{
-                              readOnly: true,
-                            }}
-                            variant="standard"
-                          />
+                        
                         <TextField
                             id="standard-read-only-input"
                             label="Số dư trong tài khoản"
