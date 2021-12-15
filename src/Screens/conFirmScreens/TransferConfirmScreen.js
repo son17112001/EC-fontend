@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Alert, Row, Col, Form } from 'react-bootstrap'
 import { useLocation } from 'react-router'
 import { useNavigate } from 'react-router-dom'
-import Loader from '../components/Loader'
-import { verify_DT_Service } from '../actions/userActions'
-import FormContainer from '../components/FormContainer'
+import Loader from '../../components/Loader'
+import { verify_DT_Service } from '../../actions/userActions'
+import FormContainer from '../../components/FormContainer'
 
 
 const TransferConfirmScreen = () => {
@@ -64,7 +64,7 @@ const TransferConfirmScreen = () => {
                 <Row>
                     <Form.Group controlId='emailPayPal'>
                         <Form.Label>Account Number</Form.Label>
-                        <Form.Control disabled type='text' placeholder='email PayPal' required disable={true}
+                        <Form.Control disabled type='text' placeholder='email PayPal' required
                             value={accNumber} onChange={e => setAccNumber(e.target.value)}>
                         </Form.Control>
                     </Form.Group>
@@ -73,14 +73,14 @@ const TransferConfirmScreen = () => {
                 <Row>
                     <Form.Group as={Col} controlId='amount'>
                         <Form.Label>Amount</Form.Label>
-                        <Form.Control disabled type='number' placeholder='amount' required disable={true}
+                        <Form.Control disabled type='number' placeholder='amount' required
                             value={amount} onChange={e => setAmount(e.target.value)}>
                         </Form.Control>
                     </Form.Group>
 
                     <Form.Group as={Col} controlId='currency'>
                         <Form.Label>Currency</Form.Label>
-                        <Form.Control disabled type='text' placeholder='currency' required disable={true}
+                        <Form.Control disabled type='text' placeholder='currency' required
                             value={currency} onChange={e => setCurrency(e.target.value)}>
                         </Form.Control>
                     </Form.Group>

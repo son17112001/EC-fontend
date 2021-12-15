@@ -15,7 +15,9 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
+
         const { data } = await axios.post(`${feEnv.HOST}/v1/user/login`, { email, password }, config)
+
 
         dispatch({
             type: USER_CONSTANTS.USER_LOGIN_SUCCESS,
@@ -76,7 +78,9 @@ export const register = (
                 }
             }
 
+
             const { data } = await axios.post(`${feEnv.HOST}/v1/user/register`,
+
                 {
                     name, birth, isMale,
                     personalIdNumber, phoneNumber,
@@ -95,6 +99,76 @@ export const register = (
             })
         }
     }
+
+export const forgotPassword = (email) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_CONSTANTS.USER_FORGOT_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/forgot-password`, { email }, config)
+
+        dispatch({
+            type: USER_CONSTANTS.USER_FORGOT_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: USER_CONSTANTS.USER_FORGOT_FAIL,
+            payload: { status: error.response.status, messages: error.response.data }
+        })
+    }
+}
+
+export const userUpForgot = (forgotToken, forgotType, newPass, conNewPass) => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_CONSTANTS.USER_FORGOT_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        let body = {}
+
+        if (forgotType === 'verify') {
+            body = {
+                token: forgotToken
+            }
+        }
+        else {
+            body = {
+                newPassword: newPass,
+                confirmNewPassword: conNewPass,
+                token: forgotToken
+            }
+        }
+
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/forgot-password/${forgotType}`, body, config)
+
+        dispatch({
+            type: USER_CONSTANTS.USER_FORGOT_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: USER_CONSTANTS.USER_FORGOT_FAIL,
+            payload: { status: error.response.status, messages: error.response.data }
+        })
+    }
+}
 
 export const getUserProfile = () => async (dispatch, getState) => {
     try {
@@ -183,7 +257,7 @@ export const getPayment = (amountNumber) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(`${feEnv.HOST}/v1/user/charge`, totalAmount, config)
-        
+
         dispatch({
             type: USER_CONSTANTS.USER_GET_PAYMENT_SUCCESS,
             payload: data

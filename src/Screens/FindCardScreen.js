@@ -5,41 +5,78 @@ import { useDispatch, useSelector } from "react-redux";
 import OneCard from "../components/OneCard";
 import { listCard } from "../actions/cardAction";
 import Loading from "../components/Loading";
-function IntDebitScreen() {
+import { useLocation, useParams } from "react-router";
+import Message from "../components/Message";
+function FindCardScreen() {
   const dispatch = useDispatch(); //backend
+  const location = useLocation();
+  const params = useParams();
+  var cardname = params.cardname;
   const { loading, cards } = useSelector((state) => state.cardList);
-  const { intDebits } = cards;
+  const { intCredits, intDebits, domDebits } = cards;
+  const [store, setStore] = useState();
+  const [all, setAll] = useState();
   const [save, setSave] = useState([]);
   useEffect(() => {
     dispatch(listCard());
   }, [dispatch]);
+
   useEffect(() => {
-    setSave(intDebits);
-  }, [intDebits]);
+    setSave(intCredits);
+    if (intCredits) {
+      const allcard = [...intCredits, ...intDebits, ...domDebits];
+      setStore(allcard);
+      setAll(allcard);
+      if (all) {
+        let filtedArray = all.filter((card) => {
+          let upperCard = card.cardName.toUpperCase();
+          let upperSearch = params.cardname.slice(1).toUpperCase();
+          if (upperCard.includes(`${upperSearch}`)) {
+            return card;
+          }
+        });
+        setStore(filtedArray);
+      }
+    }
+  }, [intCredits, intDebits, domDebits]);
+  useEffect(() => {
+    if (all) {
+      let filtedArray = all.filter((card) => {
+        let upperCard = card.cardName.toUpperCase();
+        let upperSearch = params.cardname.slice(1).toUpperCase();
+        if (upperCard.includes(`${upperSearch}`)) {
+          return card;
+        }
+      });
+      setStore(filtedArray);
+    }
+  }, [cardname]);
+
   function filterCard(type) {
-    if (save) {
+    if (store) {
       if (type === "Gold") {
-        let result = intDebits.filter((c) => c.cardRank === "Gold");
-        setSave(result);
+        let result = all.filter((c) => c.cardRank === "Gold");
+        setStore(result);
       }
       if (type === "Standard") {
-        let result = intDebits.filter((c) => c.cardRank === "Standard");
-        setSave(result);
+        let result = all.filter((c) => c.cardRank === "Standard");
+        setStore(result);
       }
 
       if (type === "MasterCard") {
-        let result = intDebits.filter((c) => c.publisher === "MasterCard");
-        setSave(result);
+        let result = all.filter((c) => c.publisher === "MasterCard");
+        setStore(result);
       }
       if (type === "VISA") {
-        let result = intDebits.filter((c) => c.publisher === "VISA");
-        setSave(result);
+        let result = all.filter((c) => c.publisher === "VISA");
+        setStore(result);
       }
       if (type === "All") {
-        setSave(cards.intDebits);
+        setStore(all);
       }
     }
   }
+
   return (
     <>
       <Container className="">
@@ -102,12 +139,22 @@ function IntDebitScreen() {
         </Dropdown>
 
         <Row className="card-item">
-          <h2>Thẻ ghi nợ quốc tế </h2>
-
-          {save ? (
-            save.map((card) => (
+          <h2>Các loại thẻ </h2>
+          {store ? (
+            store.length === 0 ? (
+              <Message variant="danger">Không tìm thấy thẻ</Message>
+            ) : (
+              <Message variant="success">
+                Đã tìm được {store.length} thẻ
+              </Message>
+            )
+          ) : (
+            <Message variant="success">Đã tìm được </Message>
+          )}
+          {store ? (
+            store.map((card) => (
               <Col xs="8" md="6" className="py-3">
-                <OneCard card={card} cardType="intDebits" />
+                <OneCard card={card} cardType="intCredits" />
               </Col>
             ))
           ) : (
@@ -119,4 +166,4 @@ function IntDebitScreen() {
   );
 }
 
-export default IntDebitScreen;
+export default FindCardScreen;

@@ -20,6 +20,16 @@ export const userRegisterReducer = (state = {}, action) => {
     }
 }
 
+export const userForgotPassReducer = (state = { resMessage: {} }, action) => {
+    switch (action.type) {
+        case USER_CONSTANTS.USER_FORGOT_REQUEST: return { ...state, loading: true }
+        case USER_CONSTANTS.USER_FORGOT_SUCCESS: return { loading: false, resMessage: action.payload, success: true } //, userInfo: action.payload
+        case USER_CONSTANTS.USER_FORGOT_FAIL: return { loading: false, resMessage: action.payload, success: false }
+        case USER_CONSTANTS.USER_FORGOT_RESET: return {}
+        default: return state
+    }
+}
+
 
 export const userProfileReducer = (state = { user: {} }, action) => {
     switch (action.type) {

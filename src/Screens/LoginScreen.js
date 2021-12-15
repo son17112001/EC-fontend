@@ -54,6 +54,9 @@ const LoginScreen = () => {
                 </Form.Group>
 
                 <Row className="py-4">
+                    <Link to="/login/forgot" style={{ textDecoration: 'none' }}>
+                        <p style={{ color: "red", fontSize: "15px" }}>Forgot password ?</p>
+                    </Link>
                     <Col>
                         <Button type='submit' >Sign In</Button>
                     </Col>
