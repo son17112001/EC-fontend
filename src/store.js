@@ -2,7 +2,7 @@ import thunk from "redux-thunk"
 import { createStore, combineReducers, applyMiddleware } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import { cardListReducer, cardDetailReducer } from "./reducers/cardReducers"
-import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, userWithDrawReducer } from "./reducers/userReducers"
+import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, user_DT_Reducer } from "./reducers/userReducers"
 
 const reducer = combineReducers({
   cardList: cardListReducer,
@@ -13,7 +13,7 @@ const reducer = combineReducers({
   userUpdatePass: userUpdatePassReducer,
   userGetPayment: userGetPaymentReducer,
   userSubPayment: userSubPaymentReducer,
-  userWithDraw: userWithDrawReducer,
+  user_DT_services: user_DT_Reducer,
 
 });
 

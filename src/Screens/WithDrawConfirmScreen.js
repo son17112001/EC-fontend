@@ -20,8 +20,8 @@ const WithDrawConfirmScreen = () => {
     const token = new URLSearchParams(curURL).get('token');
     const uId = new URLSearchParams(curURL).get('uid');
 
-    const userWithDraw = useSelector(state => state.userWithDraw)
-    const { loading, res, errorRes } = userWithDraw
+    const user_DT_services = useSelector(state => state.user_DT_services)
+    const { loading, res, errorRes } = user_DT_services
 
     const [emailPayPal, setEmailPayPal] = useState('')
     const [amount, setAmount] = useState(0)

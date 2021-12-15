@@ -233,7 +233,7 @@ export const submitPayment = (paymentId, PayerID) => async (dispatch, getState) 
 export const init_DT_Service = (amountNumber, services, perInfo) => async (dispatch, getState) => {
     try {
         dispatch({
-            type: USER_CONSTANTS.USER_WITHDRAW_REQUEST
+            type: USER_CONSTANTS.USER_DT_REQUEST
         })
 
         const { userLogin: { userInfo } } = getState()
@@ -266,13 +266,13 @@ export const init_DT_Service = (amountNumber, services, perInfo) => async (dispa
         const { data } = await axios.post(`${feEnv.HOST}/v1/user/${services}`, body, config)
 
         dispatch({
-            type: USER_CONSTANTS.USER_WITHDRAW_SUCCESS,
+            type: USER_CONSTANTS.USER_DT_SUCCESS,
             payload: data
         })
 
     } catch (error) {
         dispatch({
-            type: USER_CONSTANTS.USER_WITHDRAW_FAIL,
+            type: USER_CONSTANTS.USER_DT_FAIL,
             payload: error.response.data
         })
     }
@@ -281,7 +281,7 @@ export const init_DT_Service = (amountNumber, services, perInfo) => async (dispa
 export const verify_DT_Service = (servicesToken, services, type) => async (dispatch, getState) => {
     try {
         dispatch({
-            type: USER_CONSTANTS.USER_WITHDRAW_REQUEST
+            type: USER_CONSTANTS.USER_DT_REQUEST
         })
 
         const { userLogin: { userInfo } } = getState()
@@ -298,13 +298,13 @@ export const verify_DT_Service = (servicesToken, services, type) => async (dispa
         const { data } = await axios.post(`${feEnv.HOST}/v1/user/${services}/${type}`, body, config)
 
         dispatch({
-            type: USER_CONSTANTS.USER_WITHDRAW_SUCCESS,
+            type: USER_CONSTANTS.USER_DT_SUCCESS,
             payload: data
         })
 
     } catch (error) {
         dispatch({
-            type: USER_CONSTANTS.USER_WITHDRAW_FAIL,
+            type: USER_CONSTANTS.USER_DT_FAIL,
             payload: error.response.data
         })
     }

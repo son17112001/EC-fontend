@@ -39,9 +39,9 @@ const LoginScreen = () => {
             {messages && <Message variant='danger'>Tài khoản hết hạn đăng nhập, vui lòng đăng nhập lại</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
-                <Form.Group controlId='accNumber'>
-                    <Form.Label>Account Number</Form.Label>
-                    <Form.Control type='accNumber' placeholder='Enter Account Number'
+                <Form.Group controlId='email'>
+                    <Form.Label>Account Email</Form.Label>
+                    <Form.Control type='email' placeholder='Enter Account Email'
                         value={email} onChange={e => setEmail(e.target.value)}>
                     </Form.Control>
                 </Form.Group>

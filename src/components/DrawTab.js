@@ -13,8 +13,8 @@ const DrawTab = () => {
     const [amountNumber, setAmountNumber] = useState(5)
 
 
-    const userWithDraw = useSelector(state => state.userWithDraw)
-    const { loading, res } = userWithDraw
+    const user_DT_services = useSelector(state => state.user_DT_services)
+    const { loading, res } = user_DT_services
 
     const [toVND, setToVND] = useState(0)
     const [exchangerate, setexChangerate] = useState(0)

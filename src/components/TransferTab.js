@@ -12,8 +12,8 @@ const TransferTab = () => {
     const [amountNumber, setAmountNumber] = useState(50000)
 
 
-    const userWithDraw = useSelector(state => state.userWithDraw)
-    const { loading, res } = userWithDraw
+    const user_DT_services = useSelector(state => state.user_DT_services)
+    const { loading, res } = user_DT_services
 
     const [accNumber, setAccNumber] = useState('')
 

@@ -57,11 +57,11 @@ export const userSubPaymentReducer = (state = {}, action) => {
     }
 }
 
-export const userWithDrawReducer = (state = { res: {} }, action) => {
+export const user_DT_Reducer = (state = { res: {} }, action) => {
     switch (action.type) {
-        case USER_CONSTANTS.USER_WITHDRAW_REQUEST: return { ...state, loading: true }
-        case USER_CONSTANTS.USER_WITHDRAW_SUCCESS: return { loading: false, res: action.payload, errorRes: false }
-        case USER_CONSTANTS.USER_WITHDRAW_FAIL: return { loading: false, res: action.payload, errorRes: true }
+        case USER_CONSTANTS.USER_DT_REQUEST: return { ...state, loading: true }
+        case USER_CONSTANTS.USER_DT_SUCCESS: return { loading: false, res: action.payload, errorRes: false }
+        case USER_CONSTANTS.USER_DT_FAIL: return { loading: false, res: action.payload, errorRes: true }
         default: return state
     }
 }
