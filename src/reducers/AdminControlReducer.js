@@ -19,3 +19,23 @@ export const adminControlUserDetail = (state = {}, action) => {
         default: return state
     }
 }
+
+
+export const adminControlUserUpdate = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_CONSTANTS.ADMIN_PUT_REQUEST: return { loading: true }
+        case ADMIN_CONSTANTS.ADMIN_PUT_SUCCESS: return { loading: false, noti: action.payload,error:null }
+        case ADMIN_CONSTANTS.ADMIN_PUT_FAIL: return { loading: false, error: action.payload,noti:null }
+        default: return state
+    }
+}
+
+
+export const adminControlUserTransaction = (state = {}, action) => {
+    switch (action.type) {
+        case ADMIN_CONSTANTS.ADMIN_TRANS_REQUEST: return { loading: true }
+        case ADMIN_CONSTANTS.ADMIN_TRANS_SUCCESS: return { loading: false, userTrans: action.payload,error:null }
+        case ADMIN_CONSTANTS.ADMIN_TRANS_FAIL: return { loading: false, error: action.payload,userTrans:null }
+        default: return state
+    }
+}

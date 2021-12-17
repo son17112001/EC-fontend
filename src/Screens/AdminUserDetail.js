@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from "react";
 import AdminNav from "../components/AdminNav";
 import SlideBar from "../components/SlideBar";
-import { Container } from "@mui/material";
+import { Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {Checkbox,Button} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import {useDispatch,useSelector} from "react-redux"
-import {getDetailUserInfo} from "../actions/adminControlAction"
+import {getDetailUserInfo,updateUserProfile} from "../actions/adminControlAction"
 import {useLocation,useNavigate} from "react-router-dom"
 import Loader from '../components/Loader'
 import AdminUserTrans from "./AdminUserTrans";
@@ -20,6 +20,26 @@ function AdminUserDetail() {
     const id= location.search.slice(5);
     const adminLogin= useSelector(state =>state.adminLogin)
     const {adminInfo}= adminLogin;
+    const [user,setUser]=useState({
+      _id: null,
+      name: null,
+      birth: null,
+      isMale: null,
+      personalIdNumber: {
+          number: null,
+          issueDate: null,
+          issuePlace: null
+      },
+      phoneNumber: null,
+      email: null,
+      homeAddress: null,
+      job: {
+          title: null,
+          workAddress: null,
+          salary: null
+      },
+      isActive: null
+})
     useEffect(()=>{
       if(adminInfo){
         if(Object.keys(adminInfo).length===0){
@@ -30,17 +50,75 @@ function AdminUserDetail() {
   },[adminInfo,navigate])
     useEffect(()=>{
       dispatch(getDetailUserInfo(id))
+      
     },[id,dispatch])
-    const {loading, userDetail,error} = useSelector(state=>state.adminControlUserDetail)
+    const {loading, userDetail} = useSelector(state=>state.adminControlUserDetail)
     const[detail,setDetail]= useState()
+    const [open, setOpen] = React.useState(false);
     useEffect(()=>{
       if(userDetail){
         setDetail(userDetail)
+        setUser({
+          _id: userDetail._id,
+          name: userDetail.name,
+          birth: userDetail.birth,
+          isMale: userDetail.isMale,
+          personalIdNumber: {
+              number: userDetail.personalIdNumber.number,
+              issueDate: userDetail.personalIdNumber.issueDate,
+              issuePlace: userDetail.personalIdNumber.issuePlace
+          },
+          phoneNumber: userDetail.phoneNumber,
+          email: userDetail.email,
+          homeAddress: userDetail.homeAddress,
+          job: {
+              title: userDetail.job.title,
+              workAddress: userDetail.job.workAddress,
+              salary: userDetail.job.salary
+          },
+          isActive: userDetail.isActive
+          
+        })
+
+        console.log(user)
       }
     },[userDetail])
+    const {noti,error}=useSelector(state=>state.notiUser)
+    useEffect(()=>{
+      if(noti){
+        setOpen(true);
+      }
+    },[noti])
     const clickHandler=()=>{
       navigate(`/admin/control/user/transaction?_id=${id}`)
     }
+
+    function statusHandler(e){
+  
+
+  
+      setUser({
+        ...user,
+        isActive:e.target.checked
+      })
+      console.log(user)
+    }
+    function maleHandler(e){
+        setUser({
+          ...user,
+          isMale:e.target.checked
+        })
+    }
+
+    function sendHandler(){
+        dispatch(updateUserProfile(user))
+        
+    }
+    
+  const handleClose = () => {
+    setOpen(false);
+    window.location.reload(false)
+  };
     return (
         <div
         className="content-wrapper"
@@ -61,6 +139,29 @@ function AdminUserDetail() {
             <SlideBar />
             <Container style={{marginTop:"50px"}}>
             <h2 style={{ textAlign: "center" ,color:"black",marginBottom:"50px"}}>Thông tin cá nhân</h2>
+
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Thông báo!!!"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                   Đã cập nhật thông tin tài khoản thành công.
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  
+                  <Button onClick={handleClose} autoFocus>
+                    Đồng ý
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
             {detail ? (<> <Box
                         component="form"
                         sx={{
@@ -80,32 +181,51 @@ function AdminUserDetail() {
                               readOnly: true,
                             }}
                             variant="standard"
+                            color="warning"
+                            focused
                           />
                            <TextField
                             id="standard-read-only-input"
                             label="Tên khách hàng"
                             defaultValue={detail.name}
                             InputProps={{
-                              readOnly: true,
+                              
                             }}
+                            color="success"
                             variant="standard"
+                            onChange={(e)=>{setUser(
+                              {
+                                ...user,
+                                name:e.target.value
+                              }
+                            )}}
                           />
                            <TextField
                             id="standard-read-only-input"
                             label="Ngày sinh"
                             defaultValue={detail.birth.slice(0,10)}
-                            InputProps={{
-                              readOnly: true,
-                            }}
+                          
                             variant="standard"
+                            onChange={(e)=>{setUser(
+                              {
+                                ...user,
+                                birth:e.target.value
+                              }
+                            )}}
                           />
                            <TextField
                             id="standard-read-only-input"
                             label="Số điện thoại"
                             defaultValue={detail.phoneNumber}
                             InputProps={{
-                              readOnly: true,
+                             
                             }}
+                            onChange={(e)=>{setUser(
+                              {
+                                ...user,
+                                phoneNumber:e.target.value
+                              }
+                            )}}
                             variant="standard"
                           />
                             <TextField
@@ -113,8 +233,14 @@ function AdminUserDetail() {
                             label="Email"
                             defaultValue={detail.email}
                             InputProps={{
-                              readOnly: true,
+                             
                             }}
+                            onChange={(e)=>{setUser(
+                              {
+                                ...user,
+                                email:e.target.value
+                              }
+                            )}}
                             variant="standard"
                           />
                             <TextField
@@ -122,8 +248,14 @@ function AdminUserDetail() {
                             label="Địa chỉ"
                             defaultValue={detail.homeAddress}
                             InputProps={{
-                              readOnly: true,
+                             
                             }}
+                            onChange={(e)=>{setUser(
+                              {
+                                ...user,
+                                homeAddress:e.target.value
+                              }
+                            )}}
                             variant="standard"
                           />
                             <TextField
@@ -133,23 +265,32 @@ function AdminUserDetail() {
                             InputProps={{
                               readOnly: true,
                             }}
+                            
+                            color="warning"
+                            focused 
                             variant="standard"
                           />
-                          <span style={{color:"black"}}>
-                            <Checkbox {...label} defaultChecked />Trạng thái</span>
-                        </div>
-                        
-                        <TextField
+                             <TextField
                             id="standard-read-only-input"
                             label="Số dư trong tài khoản"
                             defaultValue={detail.balance}
                             InputProps={{
                               readOnly: true,
                             }}
+                            color="warning"
+                            focused
                             variant="standard"
                           />
-                                                  <Button variant="contained" style={{margin:"15px 0 0 5px"}} onClick={clickHandler}>
-                          Lịch sử giao dịch
+                          <span style={{color:"black"}}>
+                            <Checkbox {...label} checked={user.isActive}  onChange={e=>{statusHandler(e)}} />Trạng thái</span>
+                            <span style={{color:"black"}}>
+                            <Checkbox {...label} checked={user.isMale}  onChange={maleHandler} />Nam</span>
+                        </div>
+                        
+                     
+                                                  
+                        <Button variant="contained"  style={{margin:"15px 0 0 5px"}} onClick={sendHandler}>
+                          Gửi
                         </Button>
                       </Box>
 
@@ -169,8 +310,17 @@ function AdminUserDetail() {
                                         label="Số CMND"
                                         defaultValue={detail.personalIdNumber.number}
                                         InputProps={{
-                                          readOnly: true,
+                                         
                                         }}
+                                        onChange={(e)=>{setUser(
+                                          {
+                                            ...user,
+                                            personalIdNumber:{
+                                              ...user.personalIdNumber,
+                                              number:e.target.value
+                                            }
+                                          }
+                                        )}}
                                         variant="standard"
                                       />
                                       <TextField
@@ -178,8 +328,17 @@ function AdminUserDetail() {
                                         label="Ngày phát hành"
                                         defaultValue={detail.personalIdNumber.issueDate.slice(0,10)}
                                         InputProps={{
-                                          readOnly: true,
+                                         
                                         }}
+                                        onChange={(e)=>{setUser(
+                                          {
+                                            ...user,
+                                            personalIdNumber:{
+                                              ...user.personalIdNumber,
+                                              issueDate:e.target.value
+                                            }
+                                          }
+                                        )}}
                                         variant="standard"
                                       />
                                       <TextField
@@ -187,8 +346,17 @@ function AdminUserDetail() {
                                         label="Nơi cấp"
                                         defaultValue={detail.personalIdNumber.issuePlace}
                                         InputProps={{
-                                          readOnly: true,
+                                         
                                         }}
+                                        onChange={(e)=>{setUser(
+                                          {
+                                            ...user,
+                                            personalIdNumber:{
+                                              ...user.personalIdNumber,
+                                              issuePlace:e.target.value
+                                            }
+                                          }
+                                        )}}
                                         variant="standard"
                                       />
                                       <TextField
@@ -196,29 +364,58 @@ function AdminUserDetail() {
                                         label="Nghề nghiệp"
                                         defaultValue={detail.job.title}
                                         InputProps={{
-                                          readOnly: true,
+                                         
                                         }}
+                                        onChange={(e)=>{setUser(
+                                          {
+                                            ...user,
+                                            job:{
+                                              ...user.job,
+                                              title:e.target.value
+                                            }
+                                          }
+                                        )}}
                                         variant="standard"
                                       />
                                         <TextField
                                         id="standard-read-only-input"
                                         label="Nơi làm việc"
                                         defaultValue={detail.job.workAddress}
+                                        onChange={(e)=>{setUser(
+                                          {
+                                            ...user,
+                                            job:{
+                                              ...user.job,
+                                              workAddress:e.target.value
+                                            }
+                                          }
+                                        )}}
                                         InputProps={{
-                                          readOnly: true,
+                                        
                                         }}
                                         variant="standard"
                                       />
                                         <TextField
                                         id="standard-read-only-input"
                                         label="Mức lương"
+                                        onChange={(e)=>{setUser(
+                                          {
+                                            ...user,
+                                            job:{
+                                              ...user.job,
+                                              salary:e.target.value
+                                            }
+                                          }
+                                        )}}
                                         defaultValue={detail.job.salary}
                                         InputProps={{
-                                          readOnly: true,
+                                         
                                         }}
                                         variant="standard"
                                       />
-                                      
+                                      <Button variant="contained" style={{margin:"15px 0 0 5px"}} onClick={clickHandler}>
+                          Lịch sử giao dịch
+                        </Button>
                                           </div>
                                     </Box></> 
                       ) : <Loader />}

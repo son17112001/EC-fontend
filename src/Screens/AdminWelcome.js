@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AdminNav from "../components/AdminNav";
 import SlideBar from "../components/SlideBar";
 import AdminUserView from "./AdminUserView";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import {  useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 function AdminWelcome() {
+  const navigate= useNavigate()
+  const { loading, error, listUser } = useSelector(
+    (state) => state.adminControl
+  );
+  const adminLogin= useSelector(state =>state.adminLogin)
+  const {adminInfo}= adminLogin;
+  useEffect(()=>{
+    if(adminInfo){
+      if(Object.keys(adminInfo).length===0){
+        console.log(adminInfo)
+        navigate('/admin')
+      } 
+    }
+},[adminInfo,navigate])
+  useEffect(() => {
+    if(adminInfo===null){
+    
+       
+        navigate('/admin')
+    }
+  }, []);
   return (
     <div
       className="content-wrapper"

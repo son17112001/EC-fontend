@@ -22,6 +22,7 @@ import AdminWelcome from "./Screens/AdminWelcome";
 import AdminUserDetail from "./Screens/AdminUserDetail";
 import AdminUserTrans from "./Screens/AdminUserTrans";
 import AdminProfile from "./Screens/AdminProfile";
+import AdminUserTransLog from "./Screens/AdminUserTransLog";
 require('dotenv').config()
 function App() {
   return (
@@ -29,7 +30,6 @@ function App() {
       <Navbar />
       <main className="py-3" style={{ marginTop: "72px" }}>
         <Routes>
-
           <Route path="/card/intCredits" element={<IntCreditScreen />} />
           <Route path="/card/intDebits" element={<IntDebitScreen />} />
           <Route path="/card/domDebits" element={<DomDebitScreen />} />
@@ -39,6 +39,7 @@ function App() {
           <Route path="/admin/control/user" element={<AdminUserControl />} />
           <Route path="/admin/profile" element={<AdminProfile />} />
           <Route path="/admin/control/user/details" element={<AdminUserDetail />} />
+          <Route path="/admin/control/user/transactionlog" element={<AdminUserTransLog />} />
           <Route path="/admin/control/user/transaction" element={<AdminUserTrans />} />
           <Route path="/admin/welcome" element={<AdminWelcome />} />
           <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />

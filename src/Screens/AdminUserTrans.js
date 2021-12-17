@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { getAllUserInfo } from "../actions/adminControlAction";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate,useLocation} from "react-router-dom"
@@ -70,6 +70,10 @@ function AdminUserTrans() {
     navigate(`/admin/control/user/details?_id=${params.id}`)
 
   };
+
+  function logHandler (){
+    navigate(`/admin/control/user/transactionlog?_id=${id}`)
+  }  
   return (
     <>
 
@@ -93,6 +97,9 @@ function AdminUserTrans() {
             <Container maxWidth="lg" style={{ marginTop: "100px" }}>
         <div style={{ height: 400, width: "100%" }}>
           <h2 style={{ textAlign: "center" }}>Lịch sử giao dịch</h2>
+          <Button variant="contained" style={{margin:"15px 0 0 5px"}} onClick={logHandler}>
+                          Log
+                        </Button>
           {data ? (<DataGrid
             onCellDoubleClick={clickHandler}
             
