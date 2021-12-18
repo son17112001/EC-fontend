@@ -56,9 +56,9 @@ const TransferConfirmScreen = () => {
     return (
         <FormContainer style={{ marginTop: 110 }}>
             {(res.message && !errorRes) && (<Alert className='justify-content-center' variant='success'>{res.message}&#160;&#160;&#160;
-                <Alert.Link href="/">Go back to homepage </Alert.Link></Alert>)}
+                <Alert.Link href="/">Trở về trang chủ </Alert.Link></Alert>)}
             {errorRes && < Alert className='justify-content-center' variant='danger'>{res.message}&#160;&#160;&#160;
-                <Alert.Link href="/">Go back to homepage </Alert.Link></Alert>}
+                <Alert.Link href="/">Trở về trang chủ </Alert.Link></Alert>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Row>

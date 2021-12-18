@@ -22,6 +22,7 @@ const SubChargeScreen = () => {
 
     const userSubPayment = useSelector(state => state.userSubPayment)
     const { loading, errorRes, successRes } = userSubPayment
+    
     useEffect(() => {
         if (!userInfo || !paymentId || !token || !PayerID) {
             navigate('/login')
@@ -45,7 +46,7 @@ const SubChargeScreen = () => {
                         <Alert.Link href="/">Trở lại trang cá nhân trong 10 giây </Alert.Link></Alert>
                     )}
                     {errorRes && <Alert className='justify-content-center' variant='danger'>{errorRes.message}&#160;&#160;&#160;
-                        <Alert.Link href="/">Go back to homepage <ArrowBarRight /></Alert.Link></Alert>}
+                        <Alert.Link href="/">Trở về trang chủ <ArrowBarRight /></Alert.Link></Alert>}
                     {loading && <Loader />}
                 </Col>
             </Row>

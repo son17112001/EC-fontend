@@ -327,8 +327,6 @@ export const init_DT_Service = (amountNumber, services, perInfo) => async (dispa
                 amount: amountNumber,
                 emailPayPal: perInfo
             }
-
-
         }
         else {
             body = {

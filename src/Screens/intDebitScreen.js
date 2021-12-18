@@ -27,8 +27,8 @@ function IntDebitScreen() {
         setSave(result);
       }
 
-      if (type === "MasterCard") {
-        let result = intDebits.filter((c) => c.publisher === "MasterCard");
+      if (type === "Mastercard") {
+        let result = intDebits.filter((c) => c.publisher === "Mastercard");
         setSave(result);
       }
       if (type === "VISA") {
@@ -41,81 +41,79 @@ function IntDebitScreen() {
     }
   }
   return (
-    <>
-      <Container className="">
-        {loading && <Loading />}
+    <Container className="my-4">
+      {loading && <Loading />}
 
-        <Dropdown className="d-inline" style={{ marginRight: "3px" }}>
-          {" "}
-          Bộ lọc
-          <Button
-            variant="info"
-            style={{ marginLeft: "15px" }}
+      <Dropdown className="d-inline" style={{ marginRight: "3px" }}>
+        {" "}
+        Bộ lọc
+        <Button
+          variant="info"
+          style={{ marginLeft: "15px" }}
+          onClick={(e) => {
+            filterCard("All");
+          }}
+        >
+          Tất cả
+        </Button>{" "}
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Hạng thẻ
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item
             onClick={(e) => {
-              filterCard("All");
+              filterCard("Gold");
             }}
           >
-            Tất cả
-          </Button>{" "}
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Hạng thẻ
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item
-              onClick={(e) => {
-                filterCard("Gold");
-              }}
-            >
-              Gold
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={(e) => {
-                filterCard("Standard");
-              }}
-            >
-              Standard
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+            Gold
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              filterCard("Standard");
+            }}
+          >
+            Standard
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
 
-        <Dropdown className="d-inline">
-          <Dropdown.Toggle variant="success" id="dropdown-basic1">
-            Nhà phát hành
-          </Dropdown.Toggle>
+      <Dropdown className="d-inline">
+        <Dropdown.Toggle variant="success" id="dropdown-basic1">
+          Nhà phát hành
+        </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item
-              onClick={(e) => {
-                filterCard("MasterCard");
-              }}
-            >
-              Master Card
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={(e) => {
-                filterCard("VISA");
-              }}
-            >
-              Visa
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Dropdown.Menu>
+          <Dropdown.Item
+            onClick={(e) => {
+              filterCard("Mastercard");
+            }}
+          >
+            Master Card
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              filterCard("VISA");
+            }}
+          >
+            Visa
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
 
-        <Row className="card-item">
-          <h2>Thẻ ghi nợ quốc tế </h2>
+      <Row className="card-item">
+        <h2>Thẻ ghi nợ quốc tế </h2>
 
-          {save ? (
-            save.map((card) => (
-              <Col xs="8" md="6" className="py-3">
-                <OneCard card={card} cardType="intDebits" />
-              </Col>
-            ))
-          ) : (
-            <Loading />
-          )}
-        </Row>
-      </Container>
-    </>
+        {save ? (
+          save.map((card) => (
+            <Col xs="8" md="6" className="py-3">
+              <OneCard card={card} cardType="intDebits" />
+            </Col>
+          ))
+        ) : (
+          <Loading />
+        )}
+      </Row>
+    </Container>
   );
 }
 

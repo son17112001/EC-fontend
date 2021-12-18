@@ -5,6 +5,7 @@ import { cardListReducer, cardDetailReducer } from "./reducers/cardReducers"
 import { userLoginReducer, userRegisterReducer, userProfileReducer, userUpdatePassReducer, userGetPaymentReducer, userSubPaymentReducer, user_DT_Reducer, userForgotPassReducer } from "./reducers/userReducers"
 import { adminLoginReducer, adminProfileReducer, adminUpdateReducer, adminPasswordReducer } from "./reducers/AdminAuthReducer"
 import { adminControlUser, adminControlUserDetail } from "./reducers/AdminControlReducer"
+import { initializeOrderReducer } from "./reducers/orderReducers"
 
 const reducer = combineReducers({
   cardList: cardListReducer,
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   adminProfile: adminProfileReducer,
   notification: adminUpdateReducer,
   notiPass: adminPasswordReducer,
+  initializeOrder: initializeOrderReducer
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

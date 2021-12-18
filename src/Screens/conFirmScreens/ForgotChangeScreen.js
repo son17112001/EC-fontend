@@ -51,8 +51,8 @@ const ForgotChangeScreen = () => {
     return (
         <FormContainer style={{ marginTop: 110 }}>
             {(success === true && resMessage.message) && (<Alert className='justify-content-center' variant='success'>{resMessage.message}&#160;&#160;&#160;
-                <Alert.Link href="/">Go back to homepage </Alert.Link></Alert>)}
-                
+                <Alert.Link href="/">Trở về trang chủ </Alert.Link></Alert>)}
+
             {success === false && resMessage.status === 422
                 && (< Alert className='justify-content-center' variant='danger'>
                     {resMessage.messages.errors.map(e => e.msg).join(', ')}&#160;</Alert>)}

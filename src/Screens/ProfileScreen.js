@@ -55,8 +55,6 @@ const ProfileScreen = () => {
     const userUpdatePass = useSelector(state => state.userUpdatePass)
     const { successRes, errorRes } = userUpdatePass
 
-
-
     const [name, setName] = useState('')
     const [birth, setBirth] = useState('')
     const [isMale, setIsMale] = useState(true)

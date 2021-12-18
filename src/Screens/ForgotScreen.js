@@ -33,17 +33,15 @@ const ForgotScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (vertify) {
-
       dispatch(forgotPassword(email));
-      setNoti("");
-
     }
     else {
       setNoti("vui lòng check reCaptcha")
     }
   };
   const handleVerify = (value) => {
-    setVertify(true);
+    setVertify(!vertify);
+    setNoti("");
   }
   return (
     <FormContainer>

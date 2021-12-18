@@ -15,9 +15,7 @@ function Header() {
           </Row>
             <Row>
               <Col xs="5" md="4" className="mt-4">  <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.Lorem Ipsum has been the industry's standard
-                dummy text ever since the 1500s{" "}
+                DỊCH VỤ PHÁT HÀNH THẺ LTS BANK XIN CHÀO QUÝ KHÁCH
               </p> </Col>
 
             </Row></Container>

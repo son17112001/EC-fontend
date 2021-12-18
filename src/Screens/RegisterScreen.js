@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
@@ -28,12 +29,22 @@ const RegisterScreen = () => {
     const [salary, setSalary] = useState()
     const job = { title, workAddress, salary }
 
+    const navigate = useNavigate()
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    useEffect(() => {
+        if (userInfo) {
+            navigate('/')
+        }
+    }, [dispatch, navigate, userInfo])
+
     const submitHandler = (e) => {
         e.preventDefault() //dispatch register
         dispatch(register(name, birth, isMale, personalIdNumber, phoneNumber, email, homeAddress, job))
     }
 
-   console.log(isMale)
+    console.log(isMale)
     return (<FormContainer>
         <h1 style={{ color: 'lightyellow', textAlign: 'center', marginBottom: 30 }}>Sign Up</h1>
         <Form style={{ color: 'deepskyblue' }} onSubmit={submitHandler}>
@@ -52,9 +63,9 @@ const RegisterScreen = () => {
 
                 <Form.Group as={Col} id="gender" >
                     <Form.Label >Gender</Form.Label>
-                    <div style={{ display: 'flex',justifyContent: 'space-around' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                         <Form.Check style={{ color: 'springgreen' }} type="radio" label="Nam" checked={isMale === true}
-                             onChange={() => setIsMale(true)} />
+                            onChange={() => setIsMale(true)} />
                         <Form.Check style={{ color: 'springgreen' }} type="radio" label="Nữ" checked={isMale === false}
                             onChange={() => setIsMale(false)} />
                     </div>

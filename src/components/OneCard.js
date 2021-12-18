@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Card({ card, cardType }) {
 
+function OneCard({ card, cardType }) {
   return (
     <div className="card border-0 me-lg-4 mb-lg-0 mb-4">
       <div className="backgroundEffect" />
@@ -33,4 +33,4 @@ function Card({ card, cardType }) {
   );
 }
 
-export default Card;
+export default OneCard;

@@ -63,8 +63,8 @@ function FindCardScreen() {
         setStore(result);
       }
 
-      if (type === "MasterCard") {
-        let result = all.filter((c) => c.publisher === "MasterCard");
+      if (type === "Mastercard") {
+        let result = all.filter((c) => c.publisher === "Mastercard");
         setStore(result);
       }
       if (type === "VISA") {
@@ -123,7 +123,7 @@ function FindCardScreen() {
           <Dropdown.Menu>
             <Dropdown.Item
               onClick={(e) => {
-                filterCard("MasterCard");
+                filterCard("Mastercard");
               }}
             >
               Master Card
@@ -154,7 +154,7 @@ function FindCardScreen() {
           {store ? (
             store.map((card) => (
               <Col xs="8" md="6" className="py-3">
-                <OneCard card={card} cardType="intCredits" />
+                <OneCard card={card} cardType={card.cardType} />
               </Col>
             ))
           ) : (
