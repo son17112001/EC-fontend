@@ -2,7 +2,6 @@ import React from 'react'
 import {
   CDBSidebar,
   CDBSidebarContent,
-  CDBSidebarFooter,
   CDBSidebarHeader,
   CDBSidebarMenu,
   CDBSidebarMenuItem,
@@ -24,14 +23,17 @@ function SlideBar() {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
+            <NavLink exact to="/admin/control/card/view" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="far fa-credit-card">Card</CDBSidebarMenuItem>
+
             </NavLink>
+            
             <NavLink exact to="/admin/control/user" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">User management</CDBSidebarMenuItem>
+            </NavLink>  
+            <NavLink exact to="/admin/control/order" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Order</CDBSidebarMenuItem>
+              
             </NavLink>
             <NavLink exact to="/analytics" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">

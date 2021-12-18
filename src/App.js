@@ -30,6 +30,13 @@ import jwt_decode from "jwt-decode";
 import Page404 from "./components/Page404";
 import InitGateScreen from "./Screens/orderScreens/InitGateScreen";
 import SupportScreen from "./Screens/orderScreens/SupportScreen";
+import AdminUserTransLog from "./Screens/AdminUserTransLog";
+import AdminCardCreate from "./Screens/AdminCardCreate";
+import AdminCardView from "./Screens/AdminCardView";
+import AdminCardUpdate from "./Screens/AdminCardUpdate";
+import AdminOrderView from "./Screens/AdminOderView";
+import AdminOrderDetail from "./Screens/AdminOrderDetail";
+
 require('dotenv').config()
 
 function App() {
@@ -48,7 +55,6 @@ function App() {
       <Navbar />
       <main className="py-3" style={{ marginTop: "72px" }}>
         <Routes>
-
           <Route path="/card/intCredits" element={<IntCreditScreen />} />
           <Route path="/card/intDebits" element={<IntDebitScreen />} />
           <Route path="/card/domDebits" element={<DomDebitScreen />} />
@@ -59,7 +65,13 @@ function App() {
           <Route path="/admin/control/user" element={<AdminUserControl />} />
           <Route path="/admin/profile" element={<AdminProfile />} />
           <Route path="/admin/control/user/details" element={<AdminUserDetail />} />
+          <Route path="/admin/control/user/transactionlog" element={<AdminUserTransLog />} />
           <Route path="/admin/control/user/transaction" element={<AdminUserTrans />} />
+          <Route path="/admin/control/card/create" element={<AdminCardCreate />} />
+          <Route path="/admin/control/card/view" element={<AdminCardView />} />
+          <Route path="/admin/control/card/update/:type/:cardurl" element={<AdminCardUpdate />} />
+          <Route path="/admin/control/order" element={<AdminOrderView />} />
+          <Route path="/admin/control/order/detail/:id" element={<AdminOrderDetail />} />
           <Route path="/admin/welcome" element={<AdminWelcome />} />
           <Route path="/card/:cardType&:cardUrl" exact element={<CardDetail />} />
           <Route path="/card/:cardType&:cardUrl/init-card" exact element={<InitCardScreen />} />

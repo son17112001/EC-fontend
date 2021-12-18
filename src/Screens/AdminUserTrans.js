@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Container } from "@mui/material";
-import { getAllUserInfo } from "../actions/adminControlAction";
+import { Button, Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate,useLocation} from "react-router-dom"
 import {getDetailUserInfo} from "../actions/adminControlAction"
@@ -32,7 +31,7 @@ function AdminUserTrans() {
   const location = useLocation()
   const id= location.search.slice(5);
   const [data, setData] = useState();
-  const {loading, userDetail,error} = useSelector(state=>state.adminControlUserDetail)
+  const { userDetail} = useSelector(state=>state.adminControlUserDetail)
 
   const adminLogin= useSelector(state =>state.adminLogin)
     const {adminInfo}= adminLogin;
@@ -70,6 +69,10 @@ function AdminUserTrans() {
     navigate(`/admin/control/user/details?_id=${params.id}`)
 
   };
+
+  function logHandler (){
+    navigate(`/admin/control/user/transactionlog?_id=${id}`)
+  }  
   return (
     <>
 
@@ -93,6 +96,9 @@ function AdminUserTrans() {
             <Container maxWidth="lg" style={{ marginTop: "100px" }}>
         <div style={{ height: 400, width: "100%" }}>
           <h2 style={{ textAlign: "center" }}>Lịch sử giao dịch</h2>
+          <Button variant="contained" style={{margin:"15px 0 0 5px"}} onClick={logHandler}>
+                          Log
+                        </Button>
           {data ? (<DataGrid
             onCellDoubleClick={clickHandler}
             

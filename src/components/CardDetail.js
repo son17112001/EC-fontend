@@ -33,9 +33,6 @@ function CardDetail() {
         dispatch(detailCard(cardType, cardUrl))
     }, [dispatch, navigate, cardType, cardUrl]);
 
-    var maxPay = `${card.maxPay}`;
-    //console.log(card.maxPay);
-
     const regisCard = (e) => {
         e.preventDefault()
         navigate(`/login?redirect=${curURL}/init-card`)

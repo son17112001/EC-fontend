@@ -1,8 +1,6 @@
 import React from 'react'
 import AdminLogin from '../components/AdminLogin'
-import AdminNav from '../components/AdminNav'
 import SlideBar from '../components/SlideBar'
-import AdminUserControl from './AdminUserControl'
 function AdminMain() {
     return (
         <>
@@ -10,7 +8,7 @@ function AdminMain() {
             <SlideBar/>
             <AdminLogin/>
             </div>
-    )
+    
         </>
     )
 }
