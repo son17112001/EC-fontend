@@ -83,7 +83,7 @@ function AdminUserView() {
   const [data, setData] = useState();
   const [prop,setProp]=useState();
   const [key,setKey]=useState()
-  const { loading, error, listUser } = useSelector(
+  const {   listUser } = useSelector(
     (state) => state.adminControl
   );
   const adminLogin= useSelector(state =>state.adminLogin)
@@ -106,7 +106,7 @@ function AdminUserView() {
       dispatch(getAllUserInfo(page));
     }
    
-  }, []);
+  }, [adminInfo,dispatch,navigate]);
 
   useEffect(() => {
     if (listUser) {
@@ -138,13 +138,12 @@ function AdminUserView() {
 
   const clickHandler = (params, event) => {
     navigate(`/admin/control/user/details?_id=${params.id}`)
-
   };
   function handleChange(event, value){
 
         dispatch(getAllUserInfo(value));
         page=value;
-        console.log(page);
+      
   }
   
   const searchHandler=(e)=>{

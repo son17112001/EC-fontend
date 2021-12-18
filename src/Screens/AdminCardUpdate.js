@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdminNav from "../components/AdminNav";
 import SlideBar from "../components/SlideBar";
+import SendIcon from '@mui/icons-material/Send';
 import {
   Container,
   Dialog,
@@ -17,19 +18,21 @@ import { Checkbox, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
-import {  createCard } from "../actions/adminControlAction";
-import { useNavigate } from "react-router-dom";
-
+import {   searchCard,updateCard} from "../actions/adminControlAction";
+import { useNavigate,useParams } from "react-router-dom";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function AdminCardCreate() {
+function AdminCardUpdate() {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+  const params= useParams();
+  
+
 
   const [open, setOpen] = React.useState(false);
   const [type, setType] = useState("intCredits");
   const [card, setCard] = useState({
+    _id:null,
     cardName: null,
     image: null,
     isIssuing: true,
@@ -45,9 +48,11 @@ function AdminCardCreate() {
     yearlyFee: null,
     exCurrency: null,
     maxPay: null,
+    createdAt:null,
+    updatedAt:null
   });
 
-  const { notiCard } = useSelector((state) => state.notiCardCreate);
+  const { adminCardSearch } = useSelector((state) => state.adminCardSearch);
   const adminLogin = useSelector((state) => state.adminLogin);
 
   const { adminInfo } = adminLogin;
@@ -60,11 +65,76 @@ function AdminCardCreate() {
       }
     }
   }, [adminInfo, navigate]);
-  useEffect(() => {
-    if (notiCard) {
-      setOpen(true);
+  useEffect(()=>{
+    dispatch(searchCard(params.type,params.cardurl))
+    setType(params.type);
+  },[dispatch,setType,params])
+  useEffect(()=>{
+    
+    if(adminCardSearch){
+      console.log(type)
+      switch(type){
+        case "intCredits":
+          setCard({
+            _id:adminCardSearch,
+            cardName: adminCardSearch.cardName,
+            image: adminCardSearch.image,
+            isIssuing: adminCardSearch.isIssuing,
+            cardRank: adminCardSearch.cardRank,
+            publisher:adminCardSearch.publisher,
+            description: adminCardSearch.description,
+            creditLine: adminCardSearch.creditLine,
+            condition: adminCardSearch.condition,
+            statmentDay: adminCardSearch.statmentDay,
+            payWithin: adminCardSearch.payWithin,
+            interestRate: adminCardSearch.interestRate,
+            issueFee: adminCardSearch.issueFee,
+            yearlyFee: adminCardSearch.yearlyFee,
+            exCurrency: adminCardSearch.exCurrency,
+            createdAt:adminCardSearch.createdAt,
+            updatedAt:adminCardSearch.updatedAt
+          })
+        break
+        case "intDebits":
+          setCard({
+            _id:adminCardSearch,
+            cardName: adminCardSearch.cardName,
+            image: adminCardSearch.image,
+            isIssuing: adminCardSearch.isIssuing,
+            cardRank: adminCardSearch.cardRank,
+            publisher:adminCardSearch.publisher,
+            description: adminCardSearch.description,
+            issueFee: adminCardSearch.issueFee,
+            yearlyFee: adminCardSearch.yearlyFee,
+            exCurrency: adminCardSearch.exCurrency,
+            maxPay: adminCardSearch.maxPay,
+            createdAt:adminCardSearch.createdAt,
+            updatedAt:adminCardSearch.updatedAt
+          })
+        break
+        case "domDebits":
+          setCard({
+            _id:adminCardSearch,
+            cardName: adminCardSearch.cardName,
+            image: adminCardSearch.image,
+            isIssuing: adminCardSearch.isIssuing,
+            cardRank: adminCardSearch.cardRank,
+            publisher:adminCardSearch.publisher,
+            description: adminCardSearch.description,
+            issueFee: adminCardSearch.issueFee,
+            yearlyFee: adminCardSearch.yearlyFee,
+            maxPay: adminCardSearch.maxPay,
+            createdAt:adminCardSearch.createdAt,
+            updatedAt:adminCardSearch.updatedAt
+          })
+        break
+        default: return 
+      }
+      
+      console.log(card)
     }
-  }, [notiCard]);
+    
+  },[adminCardSearch,card,type])
 
   const handleClose = () => {
     setOpen(false);
@@ -74,7 +144,7 @@ function AdminCardCreate() {
     console.log(card);
     console.log(type);
     if (type !== "" && card) {
-      dispatch(createCard(type, card));
+      dispatch(updateCard(type, card));
     }
   }
 
@@ -106,7 +176,7 @@ function AdminCardCreate() {
             >
               Thông tin thẻ
             </h2>
-            <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+            {/* <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="demo-simple-select-filled-label">
                 Loại thẻ
               </InputLabel>
@@ -121,7 +191,7 @@ function AdminCardCreate() {
                 <MenuItem value="intDebits">Ghi nợ quốc tế</MenuItem>
                 <MenuItem value="domDebits">Ghi nợ nội địa</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
             <Dialog
               open={open}
               onClose={handleClose}
@@ -157,48 +227,56 @@ function AdminCardCreate() {
                   id="standard-read-only-input"
                   label="Tên thẻ"
                   variant="standard"
+                  value={card.cardName}
                   onChange={(e) => {
                     setCard({
                       ...card,
                       cardName: e.target.value,
                     });
                   }}
+                  focused
                 />
                 <TextField
                   id="standard-read-only-input"
                   label="Link hình thẻ"
-                  color="success"
+                  
                   variant="standard"
+                  value={card.image}
                   onChange={(e) => {
                     setCard({
                       ...card,
                       image: e.target.value,
                     });
                   }}
+                  focused
                 />
 
                 <TextField
                   id="standard-read-only-input"
                   label="Mô tả"
                   variant="standard"
+                  value={card.description}
                   onChange={(e) => {
                     setCard({
                       ...card,
                       description: e.target.value,
                     });
                   }}
+                  focused
                 />
 
                 <TextField
                   id="standard-read-only-input"
                   label="Nhà phát hành"
                   variant="standard"
+                  value={card.publisher}
                   onChange={(e) => {
                     setCard({
                       ...card,
                       publisher: e.target.value,
                     });
                   }}
+                  focused
                 />
 
                 {type === "intCredits" && (
@@ -206,6 +284,7 @@ function AdminCardCreate() {
                     <TextField
                       id="standard-read-only-input"
                       label="Hạn mức tín dụng"
+                      value={card.creditLine}
                       onChange={(e) => {
                         setCard({
                           ...card,
@@ -213,10 +292,12 @@ function AdminCardCreate() {
                         });
                       }}
                       variant="standard"
+                      focused
                     />
                     <TextField
                       id="standard-read-only-input"
                       label="Điều kiện"
+                      value={card.condition}
                       InputProps={{}}
                       onChange={(e) => {
                         setCard({
@@ -225,10 +306,12 @@ function AdminCardCreate() {
                         });
                       }}
                       variant="standard"
+                      focused
                     />
                     <TextField
                       id="standard-read-only-input"
                       label="Ngày sao kê"
+                      value={card.statmentDay}
                       onChange={(e) => {
                         setCard({
                           ...card,
@@ -236,10 +319,12 @@ function AdminCardCreate() {
                         });
                       }}
                       variant="standard"
+                      focused
                     />
                     <TextField
                       id="standard-read-only-input"
                       label="Ngày thanh toán sau sao kê"
+                      value={card.payWithin}
                       onChange={(e) => {
                         setCard({
                           ...card,
@@ -247,10 +332,12 @@ function AdminCardCreate() {
                         });
                       }}
                       variant="standard"
+                      focused
                     />
                     <TextField
                       id="standard-read-only-input"
                       label="Lãi suất"
+                      value={card.interestRate}
                       onChange={(e) => {
                         setCard({
                           ...card,
@@ -258,6 +345,7 @@ function AdminCardCreate() {
                         });
                       }}
                       variant="standard"
+                      focused
                     />
                   </>
                 )}
@@ -265,6 +353,7 @@ function AdminCardCreate() {
                 <TextField
                   id="standard-read-only-input"
                   label="Phí làm lại thẻ"
+                  value={card.issueFee}
                   onChange={(e) => {
                     setCard({
                       ...card,
@@ -272,10 +361,12 @@ function AdminCardCreate() {
                     });
                   }}
                   variant="standard"
+                  focused
                 />
                 <TextField
                   id="standard-read-only-input"
                   label="Phí hằng năm "
+                  value={card.yearlyFee}
                   onChange={(e) => {
                     setCard({
                       ...card,
@@ -283,10 +374,12 @@ function AdminCardCreate() {
                     });
                   }}
                   variant="standard"
+                  focused
                 />
                 {type!=="domDebits"&& ( <TextField
                   id="standard-read-only-input"
                   label="Phí đổi ngoại tệ"
+                  value={card.exCurrency}
                   onChange={(e) => {
                     setCard({
                       ...card,
@@ -294,11 +387,13 @@ function AdminCardCreate() {
                     });
                   }}
                   variant="standard"
+                  focused
                 />)}
                
                 {type === "intDebits" && (
                   <TextField
                     id="standard-read-only-input"
+                    value={card.maxPay}
                     label="Số tiền chuyển được tối đa"
                     onChange={(e) => {
                       setCard({
@@ -307,6 +402,7 @@ function AdminCardCreate() {
                       });
                     }}
                     variant="standard"
+                    focused
                   />
                 )}
 
@@ -318,12 +414,14 @@ function AdminCardCreate() {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
+                      defaultValue={card.cardRank}
                       onChange={(e) => {
                         setCard({
                           ...card,
                           cardRank: e.target.value,
                         });
                       }}
+                      
                     >
                       <MenuItem value="Gold">Vàng</MenuItem>
                       <MenuItem value="Standard">Thường</MenuItem>
@@ -334,6 +432,7 @@ function AdminCardCreate() {
                   <Checkbox
                     {...label}
                     checked={card.isIssuing}
+                    value={card.isIssuing}
                     onChange={(e) => {
                       setCard({
                         ...card,
@@ -349,6 +448,7 @@ function AdminCardCreate() {
                 variant="contained"
                 style={{ margin: "15px 0 0 5px" }}
                 onClick={sendHandler}
+                endIcon={<SendIcon />}
               >
                 Gửi
               </Button>
@@ -360,4 +460,4 @@ function AdminCardCreate() {
   );
 }
 
-export default AdminCardCreate;
+export default AdminCardUpdate;

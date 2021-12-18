@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Container } from "@mui/material";
-import { getAllUserInfo } from "../actions/adminControlAction";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate,useLocation} from "react-router-dom"
 import {getDetailUserInfo} from "../actions/adminControlAction"
@@ -32,7 +31,7 @@ function AdminUserTrans() {
   const location = useLocation()
   const id= location.search.slice(5);
   const [data, setData] = useState();
-  const {loading, userDetail,error} = useSelector(state=>state.adminControlUserDetail)
+  const { userDetail} = useSelector(state=>state.adminControlUserDetail)
 
   const adminLogin= useSelector(state =>state.adminLogin)
     const {adminInfo}= adminLogin;

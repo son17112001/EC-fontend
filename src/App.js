@@ -23,6 +23,12 @@ import AdminUserDetail from "./Screens/AdminUserDetail";
 import AdminUserTrans from "./Screens/AdminUserTrans";
 import AdminProfile from "./Screens/AdminProfile";
 import AdminUserTransLog from "./Screens/AdminUserTransLog";
+import AdminCardCreate from "./Screens/AdminCardCreate";
+import AdminCardView from "./Screens/AdminCardView";
+import AdminCardUpdate from "./Screens/AdminCardUpdate";
+import NOTFOUND404 from "./Screens/NOTFOUND404";
+import AdminOrderView from "./Screens/AdminOderView";
+import AdminOrderDetail from "./Screens/AdminOrderDetail";
 require('dotenv').config()
 function App() {
   return (
@@ -41,6 +47,11 @@ function App() {
           <Route path="/admin/control/user/details" element={<AdminUserDetail />} />
           <Route path="/admin/control/user/transactionlog" element={<AdminUserTransLog />} />
           <Route path="/admin/control/user/transaction" element={<AdminUserTrans />} />
+          <Route path="/admin/control/card/create" element={<AdminCardCreate />} />
+          <Route path="/admin/control/card/view" element={<AdminCardView />} />
+          <Route path="/admin/control/card/update/:type/:cardurl" element={<AdminCardUpdate />} />
+          <Route path="/admin/control/order" element={<AdminOrderView />} />
+          <Route path="/admin/control/order/detail/:id" element={<AdminOrderDetail />} />
           <Route path="/admin/welcome" element={<AdminWelcome />} />
           <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
           <Route path="/login" element={<LoginScreen />} />
@@ -50,6 +61,8 @@ function App() {
           <Route path="/user/charge/submit" element={<SubChargeScreen />} />
           <Route path="/user/withdraw-money/verify" element={<WithDrawConfirmScreen />} />
           <Route path="/user/transfer/verify" element={<TransferConfirmScreen />} />
+          <Route path="/user/transfer/verify" element={<TransferConfirmScreen />} />
+          <Route path="/*" element={<NOTFOUND404 />} />
           {/* <Route path="/history" element={<TransLogScreen />} /> */}
         </Routes>
 

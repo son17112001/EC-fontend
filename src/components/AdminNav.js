@@ -2,7 +2,7 @@ import React,{useEffect,useState} from "react";
 import {Dropdown} from "react-bootstrap"
 import {logout} from  "../actions/adminAuthAction"
 import {useDispatch,useSelector} from "react-redux"
-import {useNavigate,Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 function AdminNav() {
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -42,11 +42,11 @@ function AdminNav() {
     {/* Collapsible wrapper */}
     {/* Right elements */}
     <div className="d-flex align-items-center">
-      {/* Icon */}
+{/*       
       <a className="text-reset me-3" href="#">
         <i className="fas fa-shopping-cart" />
       </a>
-      {/* Notifications */}
+    
       <a className="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
         <i className="fas fa-bell" />
         <span className="badge rounded-pill badge-notification bg-danger">1</span>
@@ -61,8 +61,8 @@ function AdminNav() {
         <li>
           <a className="dropdown-item" href="#">Something else here</a>
         </li>
-      </ul>
-      {/* Avatar */}
+      </ul> */}
+    
       {/* <a className="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
         <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" className="rounded-circle" height={25} alt="Black and White Portrait of a Man" loading="lazy" />
       </a> */}

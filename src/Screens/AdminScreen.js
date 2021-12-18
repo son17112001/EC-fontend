@@ -1,7 +1,5 @@
 import React from 'react'
-import SlideBar from '../components/SlideBar'
 import AdminNav from '../components/AdminNav'
-import AdminLogin from '../components/AdminLogin'
 import AdminMain from './AdminMain'
 function AdminScreen() { 
     return (

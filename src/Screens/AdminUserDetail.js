@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import AdminNav from "../components/AdminNav";
 import SlideBar from "../components/SlideBar";
 import { Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import {Checkbox,Button} from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
@@ -10,7 +9,6 @@ import {useDispatch,useSelector} from "react-redux"
 import {getDetailUserInfo,updateUserProfile} from "../actions/adminControlAction"
 import {useLocation,useNavigate} from "react-router-dom"
 import Loader from '../components/Loader'
-import AdminUserTrans from "./AdminUserTrans";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function AdminUserDetail() {
@@ -52,7 +50,7 @@ function AdminUserDetail() {
       dispatch(getDetailUserInfo(id))
       
     },[id,dispatch])
-    const {loading, userDetail} = useSelector(state=>state.adminControlUserDetail)
+    const { userDetail} = useSelector(state=>state.adminControlUserDetail)
     const[detail,setDetail]= useState()
     const [open, setOpen] = React.useState(false);
     useEffect(()=>{
@@ -82,8 +80,8 @@ function AdminUserDetail() {
 
         console.log(user)
       }
-    },[userDetail])
-    const {noti,error}=useSelector(state=>state.notiUser)
+    },[userDetail,user])
+    const {noti}=useSelector(state=>state.notiUser)
     useEffect(()=>{
       if(noti){
         setOpen(true);

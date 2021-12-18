@@ -6,9 +6,7 @@ import { Checkbox, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailUserInfo } from "../actions/adminControlAction";
-import { useLocation, useNavigate } from "react-router-dom";
-import {Form} from "react-bootstrap"
+import {  useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { profile ,updateProfile,updatePassword,logout} from "../actions/adminAuthAction";
 import Dialog from '@mui/material/Dialog';
@@ -41,12 +39,11 @@ var update={
 function AdminProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation()
   const adminLogin = useSelector((state) => state.adminLogin);
   const notification = useSelector((state) => state.notification);
   const notiPassword = useSelector((state)=>state.notiPass)
-  const {notiPass,errorPass}=notiPassword
-  const {noti,error}=notification
+  const {notiPass}=notiPassword
+  const {noti}=notification
   const [open, setOpen] = React.useState(false);
   
   useEffect(()=>{
@@ -80,7 +77,7 @@ function AdminProfile() {
   useEffect(() => {
     dispatch(profile());
   }, [dispatch]);
-  const { loading, adminProfile } = useSelector(
+  const {  adminProfile } = useSelector(
     (state) => state.adminProfile
   );
   const [detail, setDetail] = useState();
@@ -404,7 +401,7 @@ function AdminProfile() {
                     />
 
                           <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-                  <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                  <InputLabel htmlFor="standard-adornment-password">Mật khẩu</InputLabel>
                   <Input
                    
                     type={values.showPassword ? 'text' : 'password'}
@@ -425,7 +422,7 @@ function AdminProfile() {
                 </FormControl>
                
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-                  <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                  <InputLabel htmlFor="standard-adornment-password">Nhập lại mật khẩu</InputLabel>
                   <Input
                    
                     type={values.showPassword ? 'text' : 'password'}

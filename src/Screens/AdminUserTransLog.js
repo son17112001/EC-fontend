@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
-import { Button, Container, Pagination } from "@mui/material";
+import {  Container, Pagination } from "@mui/material";
 import { getUserTransactionLog } from "../actions/adminControlAction";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate,useLocation} from "react-router-dom"
-import {getDetailUserInfo} from "../actions/adminControlAction"
 import AdminNav from "../components/AdminNav";
 import SlideBar from "../components/SlideBar";
 import Loader from "../components/Loader";
@@ -17,7 +15,7 @@ function AdminUserTransLog() {
   const id= location.search.slice(5);
   const [data, setData] = useState();
  
-  const {loading, userTrans,error} = useSelector(state=>state.adminControlUserTransaction)
+  const { userTrans} = useSelector(state=>state.adminControlUserTransaction)
 
   const adminLogin= useSelector(state =>state.adminLogin)
     const {adminInfo}= adminLogin;
@@ -31,7 +29,7 @@ function AdminUserTransLog() {
   },[adminInfo,navigate])
   useEffect(()=>{
     dispatch(getUserTransactionLog(id,page));
-  },[])
+  },[dispatch,id])
   useEffect(()=>{
     if(userTrans){
         setData(userTrans.docs)
