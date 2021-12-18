@@ -35,7 +35,10 @@ function NavbarComponent() {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link className="nav-item" href="/profile"> CÁ NHÂN </Nav.Link>
+                {userInfo && <NavDropdown title="CÁ NHÂN" id='personal'>
+                  <NavDropdown.Item href="/profile">Tài khoản</NavDropdown.Item>
+                  <NavDropdown.Item href="/support">Hỗ Trợ</NavDropdown.Item>
+                </NavDropdown>}
                 <Nav.Link className="nav-item" href="/#"> ĐIỀU KHOẢN </Nav.Link>
                 {userInfo && <NavDropdown title="QUẢN LÝ" id='MANAGE'>
                   <NavDropdown.Item href="/cards">Quản lý thẻ</NavDropdown.Item>

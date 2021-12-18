@@ -29,6 +29,7 @@ import { logout } from "./actions/userActions";
 import jwt_decode from "jwt-decode";
 import Page404 from "./components/Page404";
 import InitGateScreen from "./Screens/orderScreens/InitGateScreen";
+import SupportScreen from "./Screens/orderScreens/SupportScreen";
 require('dotenv').config()
 
 function App() {
@@ -60,16 +61,17 @@ function App() {
           <Route path="/admin/control/user/details" element={<AdminUserDetail />} />
           <Route path="/admin/control/user/transaction" element={<AdminUserTrans />} />
           <Route path="/admin/welcome" element={<AdminWelcome />} />
-          <Route path="/card/:cardType&:cardUrl" element={<CardDetail />} />
-          <Route path="/card/:cardType&:cardUrl/init-card" element={<InitCardScreen />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/login/forgot" element={< ForgotScreen />} />
+          <Route path="/card/:cardType&:cardUrl" exact element={<CardDetail />} />
+          <Route path="/card/:cardType&:cardUrl/init-card" exact element={<InitCardScreen />} />
+          <Route path="/login" exact element={<LoginScreen />} />
+          <Route path="/login/forgot" exact element={< ForgotScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/profile" element={<ProfileScreen />} />
-          <Route path="/user/charge/submit" element={<SubChargeScreen />} />
-          <Route path="/user/withdraw-money/verify" element={<WithDrawConfirmScreen />} />
-          <Route path="/user/transfer/verify" element={<TransferConfirmScreen />} />
-          <Route path="/user/forgot-password/verify" element={<ForgotChangeScreen />} />
+          <Route path="/support" element={<SupportScreen />} />
+          <Route path="/user/charge/submit" exact element={<SubChargeScreen />} />
+          <Route path="/user/withdraw-money/verify" exact element={<WithDrawConfirmScreen />} />
+          <Route path="/user/transfer/verify" exact element={<TransferConfirmScreen />} />
+          <Route path="/user/forgot-password/verify" exact element={<ForgotChangeScreen />} />
           <Route path="/paymentgate" element={<InitGateScreen />} />
           {/* <Route path="/history" element={<TransLogScreen />} /> */}
           <Route path="*" element={<Page404 />} />

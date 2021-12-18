@@ -82,7 +82,7 @@ function HomeScreen() {
       <Header />
       <Container>
         <Row className="mt-4">  <Col><h2>Dịch vụ thẻ </h2> </Col>
-          <Col > <button onClick={() => setModalShow(true)} type="button" class="btn btn-primary fa-pull-right">Tìm thẻ phù hợp</button></Col>
+          <Col > <button onClick={() => setModalShow(true)} type="button" className="btn btn-primary fa-pull-right">Tìm thẻ phù hợp</button></Col>
         </Row>
 
         <Row>

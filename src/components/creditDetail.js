@@ -35,32 +35,32 @@ function CreditDetail() {
 
     return (
         <>
-            <div class="container">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5 col-sm-6">
-                            <div class="white-box text-center">
-                                <img src={card.image} class="img-responsive" /></div>
+            <div className="container">
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col-lg-5 col-md-5 col-sm-6">
+                            <div className="white-box text-center">
+                                <img src={card.image} className="img-responsive" /></div>
                         </div>
-                        <div class="col-lg-7 col-md-7 col-sm-6">
-                            <h4 class="box-title mt-5">Thông tin thẻ</h4>
+                        <div className="col-lg-7 col-md-7 col-sm-6">
+                            <h4 className="box-title mt-5">Thông tin thẻ</h4>
                             <p>{card.description}</p>
 
 
 
 
-                            <h3 class="box-title mt-5">Thông tin chính</h3>
-                            <ul class="list-unstyled">
-                                <li><i class="fa fa-check text-success"></i>Tên thẻ: {card.cardName}</li>
-                                <li><i class="fa fa-check text-success"></i>Hạng thẻ: {card.cardRank}</li>
-                                <li><i class="fa fa-check text-success"></i>Nhà phát hành: {card.publisher}</li>
+                            <h3 className="box-title mt-5">Thông tin chính</h3>
+                            <ul className="list-unstyled">
+                                <li><i className="fa fa-check text-success"></i>Tên thẻ: {card.cardName}</li>
+                                <li><i className="fa fa-check text-success"></i>Hạng thẻ: {card.cardRank}</li>
+                                <li><i className="fa fa-check text-success"></i>Nhà phát hành: {card.publisher}</li>
 
                             </ul>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h3 class="box-title mt-5">General Info</h3>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-product">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
+                            <h3 className="box-title mt-5">General Info</h3>
+                            <div className="table-responsive">
+                                <table className="table table-striped table-product">
                                     <tbody>
                                         <tr>
                                             <td>Loại thẻ</td>

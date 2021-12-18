@@ -137,9 +137,6 @@ const InitGateScreen = () => {
                     }
                 </Col>
             </Row>
-
-
-
         </Container >
     )
 }

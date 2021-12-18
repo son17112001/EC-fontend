@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Col, Row, Image, Alert } from "react-bootstrap";
+import { Form, Col, Row } from "react-bootstrap";
 
 export const CreditInfoPanel = (props) => {
     return (
