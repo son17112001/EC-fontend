@@ -68,7 +68,7 @@ function PaymentGate() {
   },[allPaymentgate])
 
   const clickHandler = (params, event) => {
-    navigate(`/history/detail?id=${params.id}`);
+    
   };
   function handleChange(event, value) {
     // dispatch(allTransaction(value));
