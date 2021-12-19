@@ -36,6 +36,7 @@ import AdminCardView from "./Screens/AdminCardView";
 import AdminCardUpdate from "./Screens/AdminCardUpdate";
 import AdminOrderView from "./Screens/AdminOderView";
 import AdminOrderDetail from "./Screens/AdminOrderDetail";
+import CompareScreen from "./Screens/CompareScreen";
 
 require('dotenv').config()
 
@@ -85,6 +86,7 @@ function App() {
           <Route path="/user/transfer/verify" exact element={<TransferConfirmScreen />} />
           <Route path="/user/forgot-password/verify" exact element={<ForgotChangeScreen />} />
           <Route path="/paymentgate" element={<InitGateScreen />} />
+          <Route path="/card/compare" element={<CompareScreen />} />
           {/* <Route path="/history" element={<TransLogScreen />} /> */}
           <Route path="*" element={<Page404 />} />
         </Routes>

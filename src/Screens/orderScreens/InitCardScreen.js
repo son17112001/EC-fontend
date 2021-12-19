@@ -97,7 +97,12 @@ const InitCardScreen = () => {
                         <Row>
                             <Col>
                                 <Form.Label>Loại Thẻ</Form.Label>
-                                <Form.Control disabled value={card.cardType} placeholder="cardtype" />
+                                <Form.Control disabled value={
+                                    card.cardType === 'intCredits' ? 'Thẻ tín dụng'
+                                        : card.cardType === 'intdebits' ? 'Thẻ ghi nợ Quốc Tế'
+                                            : card.cardType === 'domdebits' ? 'Thẻ ghi nợ Nội Địa'
+                                                : ''
+                                } placeholder="cardtype" />
                             </Col>
                             <Col>
                                 <Form.Label>Cấp Thẻ</Form.Label>

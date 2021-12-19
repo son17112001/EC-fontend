@@ -10,6 +10,7 @@ function OneCard({ card, cardType }) {
         <div className="date">
           <span className="month">{card.cardRank} </span>
         </div>
+
       </div>
       <div className="content">
         <p className="h-1 mt-4">{card.cardName}</p>
@@ -21,6 +22,7 @@ function OneCard({ card, cardType }) {
               <span className="fas fa-arrow-right" />
             </div>
           </Link>
+
 
           <div className="d-flex align-items-center justify-content-center foot">
             <p className="ps-3 icon text-muted">
