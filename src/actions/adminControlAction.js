@@ -68,7 +68,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_PUT_REQUEST
         })
-        console.log(user);
+    
         const { adminLogin: { adminInfo } } = getState()
 
         const config = {

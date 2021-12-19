@@ -36,6 +36,9 @@ import AdminCardView from "./Screens/AdminCardView";
 import AdminCardUpdate from "./Screens/AdminCardUpdate";
 import AdminOrderView from "./Screens/AdminOderView";
 import AdminOrderDetail from "./Screens/AdminOrderDetail";
+import TransLogScreen from "./Screens/TransLogScreen";
+import TransLogDetailScreen from "./Screens/TransLogDetailScreen";
+import CardManagerment from "./Screens/CardManagerment";
 
 require('dotenv').config()
 
@@ -75,6 +78,7 @@ function App() {
           <Route path="/admin/welcome" element={<AdminWelcome />} />
           <Route path="/card/:cardType&:cardUrl" exact element={<CardDetail />} />
           <Route path="/card/:cardType&:cardUrl/init-card" exact element={<InitCardScreen />} />
+          <Route path="/card" exact element={<CardManagerment />} />
           <Route path="/login" exact element={<LoginScreen />} />
           <Route path="/login/forgot" exact element={< ForgotScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
@@ -85,7 +89,9 @@ function App() {
           <Route path="/user/transfer/verify" exact element={<TransferConfirmScreen />} />
           <Route path="/user/forgot-password/verify" exact element={<ForgotChangeScreen />} />
           <Route path="/paymentgate" element={<InitGateScreen />} />
-          {/* <Route path="/history" element={<TransLogScreen />} /> */}
+          <Route path="/history" element={<TransLogScreen />} />
+          <Route path="/history/detail" element={<TransLogDetailScreen />} />
+
           <Route path="*" element={<Page404 />} />
         </Routes>
 

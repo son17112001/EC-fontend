@@ -41,11 +41,12 @@ function AdminUserDetail() {
     useEffect(()=>{
       if(adminInfo){
         if(Object.keys(adminInfo).length===0){
-          console.log(adminInfo)
+          
           navigate('/admin')
         } 
       }
-  },[adminInfo,navigate])
+  // eslint-disable-next-line
+  },[adminInfo])
     useEffect(()=>{
       dispatch(getDetailUserInfo(id))
       
@@ -78,9 +79,8 @@ function AdminUserDetail() {
           
         })
 
-        console.log(user)
-      }
-    },[userDetail,user])
+          }
+    },[userDetail])
     const {noti}=useSelector(state=>state.notiUser)
     useEffect(()=>{
       if(noti){
@@ -99,8 +99,7 @@ function AdminUserDetail() {
         ...user,
         isActive:e.target.checked
       })
-      console.log(user)
-    }
+      }
     function maleHandler(e){
         setUser({
           ...user,

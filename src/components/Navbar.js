@@ -19,10 +19,15 @@ function NavbarComponent() {
     dispatch(logout())
   }
 
-  const handlerSearch = () => {
-
-    navigate(`/find/:${search}`);
+  const handlerSearch = (e) => {
+    
+  
+    e.preventDefault();
+    if (e.keyCode === 13) {
+      navigate(`/find/:${search}`);
+    }
   }
+
   return (
     <>
       {!location.pathname.includes('admin') && (
@@ -41,7 +46,7 @@ function NavbarComponent() {
                 </NavDropdown>}
                 <Nav.Link className="nav-item" href="/#"> ĐIỀU KHOẢN </Nav.Link>
                 {userInfo && <NavDropdown title="QUẢN LÝ" id='MANAGE'>
-                  <NavDropdown.Item href="/cards">Quản lý thẻ</NavDropdown.Item>
+                  <NavDropdown.Item href="/card">Quản lý thẻ</NavDropdown.Item>
                   <NavDropdown.Item href="/history">Lịch sử giao dịch</NavDropdown.Item>
                 </NavDropdown>}
                 {userInfo && <NavDropdown title="DỊCH VỤ CỔNG THANH TOÁN" id='PAYMENTGATESERVICE'>
@@ -57,10 +62,8 @@ function NavbarComponent() {
 
               <Nav>
                 <div className="input-group rounded">
-                  <input type="search" className="form-control rounded" placeholder="Tìm tên thẻ" aria-label="Search" aria-describedby="search-addon" value={search} onChange={(e) => { setSearch(e.target.value) }} />
-                  <span className="input-group-text border-0" id="search-addon">
-                    <Button onClick={handlerSearch}><i className="fas fa-search" /> </Button>
-                  </span>
+                  <input type="search" className="form-control rounded" placeholder="Tìm tên thẻ" aria-label="Search" aria-describedby="search-addon" value={search} onChange={(e) => { setSearch(e.target.value) }} onKeyUp={handlerSearch}/>
+                
                 </div>
               </Nav>
 
