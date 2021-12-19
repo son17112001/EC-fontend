@@ -285,10 +285,7 @@ function AdminUserDetail() {
                         </div>
                         
                      
-                                                  
-                        <Button variant="contained"  style={{margin:"15px 0 0 5px"}} onClick={sendHandler}>
-                          Gửi
-                        </Button>
+                      
                       </Box>
 
                                     <Box
@@ -413,8 +410,13 @@ function AdminUserDetail() {
                                       <Button variant="contained" style={{margin:"15px 0 0 5px"}} onClick={clickHandler}>
                           Lịch sử giao dịch
                         </Button>
+                        
                                           </div>
-                                    </Box></> 
+                                    </Box>
+                                                                
+                        <Button variant="contained" color="success"  style={{margin:"15px 0 0 5px"}} onClick={sendHandler}>
+                          Gửi
+                        </Button></> 
                       ) : <Loader />}
                 
             </Container>

@@ -39,6 +39,7 @@ import AdminOrderDetail from "./Screens/AdminOrderDetail";
 import TransLogScreen from "./Screens/TransLogScreen";
 import TransLogDetailScreen from "./Screens/TransLogDetailScreen";
 import CardManagerment from "./Screens/CardManagerment";
+import PaymentGate from "./Screens/PaymentGate";
 
 require('dotenv').config()
 
@@ -88,7 +89,8 @@ function App() {
           <Route path="/user/withdraw-money/verify" exact element={<WithDrawConfirmScreen />} />
           <Route path="/user/transfer/verify" exact element={<TransferConfirmScreen />} />
           <Route path="/user/forgot-password/verify" exact element={<ForgotChangeScreen />} />
-          <Route path="/paymentgate" element={<InitGateScreen />} />
+          <Route path="/paymentgate/create" element={<InitGateScreen />} />
+          <Route path="/paymentgate" element={<PaymentGate />} />
           <Route path="/history" element={<TransLogScreen />} />
           <Route path="/history/detail" element={<TransLogDetailScreen />} />
 

@@ -50,7 +50,8 @@ function NavbarComponent() {
                   <NavDropdown.Item href="/history">Lịch sử giao dịch</NavDropdown.Item>
                 </NavDropdown>}
                 {userInfo && <NavDropdown title="DỊCH VỤ CỔNG THANH TOÁN" id='PAYMENTGATESERVICE'>
-                  <NavDropdown.Item href="/paymentgate">Mở cổng thanh toán</NavDropdown.Item>
+                  <NavDropdown.Item href="/paymentgate/create">Mở cổng thanh toán</NavDropdown.Item>
+                  <NavDropdown.Item href="/paymentgate">Các cổng thanh toán đã mở</NavDropdown.Item>
                 </NavDropdown>}
                 <NavDropdown title="DỊCH VỤ THẺ" id='CARDSERVICE'>
                   <NavDropdown.Item href="/card/intCredits">Thẻ Tín dụng</NavDropdown.Item>

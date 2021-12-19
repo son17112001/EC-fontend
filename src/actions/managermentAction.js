@@ -1,5 +1,6 @@
 import { TRANSACTION_CONSTANTS } from "../constants/managermentConstant"
 import { CARD_CONSTANTS } from "../constants/managermentConstant"
+import { PAYMENTGATE_CONSTANTS } from "../constants/managermentConstant"
 
 import feEnv from "../config/envfile"
 import axios from 'axios'
@@ -157,6 +158,36 @@ export const deactiveCardAction= (cardId) => async (dispatch, getState) => {
 }
   
   
+export const allPaymentGate= () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: PAYMENTGATE_CONSTANTS.PAYMENTGATE_ALL_REQUEST
+        })
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+        const { data } = await axios.get(`${feEnv.HOST}/v1/gateways/all-gateways`,config)
+
+        dispatch({
+            type: PAYMENTGATE_CONSTANTS.PAYMENTGATE_ALL_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: PAYMENTGATE_CONSTANTS.PAYMENTGATE_ALL_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+  
+  
+   
   
   
   

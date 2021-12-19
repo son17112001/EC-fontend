@@ -1,5 +1,6 @@
 import { TRANSACTION_CONSTANTS } from "../constants/managermentConstant"
 import { CARD_CONSTANTS } from "../constants/managermentConstant"
+import { PAYMENTGATE_CONSTANTS } from "../constants/managermentConstant"
 
 
 export const getAllTransaction = (state = {}, action) => {
@@ -49,5 +50,13 @@ export const deactiveCard = (state = {}, action) => {
     }
 }
 
+export const getAllPaymentgate= (state = {}, action) => {
+    switch (action.type) {
+        case PAYMENTGATE_CONSTANTS.PAYMENTGATE_ALL_REQUEST: return { loading: true }
+        case PAYMENTGATE_CONSTANTS.PAYMENTGATE_ALL_SUCCESS: return { loading: false, allPaymentgate: action.payload,errorAllPaymentgate:null }
+        case PAYMENTGATE_CONSTANTS.PAYMENTGATE_ALL_FAIL: return { loading: false, errorAllPaymentgate: action.payload,allPaymentgate:null }
+        default: return state
+    }
+}
 
 

@@ -75,7 +75,7 @@ function TransLogScreen() {
      
             <Container maxWidth="lg" style={{ marginTop: "100px",backgroundColor:"white",minHeight:"70vh" }}>
               <div style={{ height: 400, width: "100%" }}>
-                <h2 style={{ textAlign: "center" }}>Danh sách đơn</h2>
+                <h2 style={{ textAlign: "center" }}>Lịch sử giao dịch</h2>
                 {data && listTrans ? (
                   <>
                     <DataGrid
