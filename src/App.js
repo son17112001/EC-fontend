@@ -6,7 +6,6 @@ import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 import SubChargeScreen from "./Screens/conFirmScreens/SubChargeScreen";
-//import TransLogScreen from "./Screens/TransLogScreen";
 import WithDrawConfirmScreen from "./Screens/conFirmScreens/WithDrawConfirmScreen";
 import TransferConfirmScreen from "./Screens/conFirmScreens/TransferConfirmScreen";
 import CardDetail from "./components/CardDetail";
@@ -37,6 +36,10 @@ import AdminCardUpdate from "./Screens/AdminCardUpdate";
 import AdminOrderView from "./Screens/AdminOderView";
 import AdminOrderDetail from "./Screens/AdminOrderDetail";
 import CompareScreen from "./Screens/CompareScreen";
+import TransLogScreen from "./Screens/TransLogScreen";
+import TransLogDetailScreen from "./Screens/TransLogDetailScreen";
+import CardManagerment from "./Screens/CardManagerment";
+import PaymentGate from "./Screens/PaymentGate";
 
 require('dotenv').config()
 
@@ -76,6 +79,7 @@ function App() {
           <Route path="/admin/welcome" element={<AdminWelcome />} />
           <Route path="/card/:cardType&:cardUrl" exact element={<CardDetail />} />
           <Route path="/card/:cardType&:cardUrl/init-card" exact element={<InitCardScreen />} />
+          <Route path="/card" exact element={<CardManagerment />} />
           <Route path="/login" exact element={<LoginScreen />} />
           <Route path="/login/forgot" exact element={< ForgotScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
@@ -85,9 +89,11 @@ function App() {
           <Route path="/user/withdraw-money/verify" exact element={<WithDrawConfirmScreen />} />
           <Route path="/user/transfer/verify" exact element={<TransferConfirmScreen />} />
           <Route path="/user/forgot-password/verify" exact element={<ForgotChangeScreen />} />
-          <Route path="/paymentgate" element={<InitGateScreen />} />
           <Route path="/card/compare" element={<CompareScreen />} />
-          {/* <Route path="/history" element={<TransLogScreen />} /> */}
+          <Route path="/paymentgate/create" element={<InitGateScreen />} />
+          <Route path="/paymentgate" element={<PaymentGate />} />
+          <Route path="/history" element={<TransLogScreen />} />
+          <Route path="/history/detail" element={<TransLogDetailScreen />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
 

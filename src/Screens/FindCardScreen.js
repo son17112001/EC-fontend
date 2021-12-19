@@ -5,23 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import OneCard from "../components/OneCard";
 import { listCard } from "../actions/cardAction";
 import Loading from "../components/Loading";
-import {  useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import Message from "../components/Message";
 function FindCardScreen() {
   const dispatch = useDispatch(); //backend
+  const location = useLocation();
   const params = useParams();
   var cardname = params.cardname;
   const { loading, cards } = useSelector((state) => state.cardList);
   const { intCredits, intDebits, domDebits } = cards;
   const [store, setStore] = useState();
   const [all, setAll] = useState();
-
+  const [save, setSave] = useState([]);
   useEffect(() => {
     dispatch(listCard());
   }, [dispatch]);
 
   useEffect(() => {
-  
+    setSave(intCredits);
     if (intCredits) {
       const allcard = [...intCredits, ...intDebits, ...domDebits];
       setStore(allcard);
@@ -33,12 +34,11 @@ function FindCardScreen() {
           if (upperCard.includes(`${upperSearch}`)) {
             return card;
           }
-          return null
         });
         setStore(filtedArray);
       }
     }
-  }, [intCredits, intDebits, domDebits,all,params]);
+  }, [intCredits, intDebits, domDebits]);
   useEffect(() => {
     if (all) {
       let filtedArray = all.filter((card) => {
@@ -47,11 +47,10 @@ function FindCardScreen() {
         if (upperCard.includes(`${upperSearch}`)) {
           return card;
         }
-        return null
       });
       setStore(filtedArray);
     }
-  }, [cardname,all,params]);
+  }, [cardname]);
 
   function filterCard(type) {
     if (store) {
@@ -64,8 +63,8 @@ function FindCardScreen() {
         setStore(result);
       }
 
-      if (type === "Mastercard") {
-        let result = all.filter((c) => c.publisher === "Mastercard");
+      if (type === "MasterCard") {
+        let result = all.filter((c) => c.publisher === "MasterCard");
         setStore(result);
       }
       if (type === "VISA") {
@@ -80,7 +79,7 @@ function FindCardScreen() {
 
   return (
     <>
-      <Container className="">
+      <Container className="" style={{marginTop:"30px"}}>
         {loading && <Loading />}
 
         <Dropdown className="d-inline" style={{ marginRight: "3px" }}>
@@ -124,7 +123,7 @@ function FindCardScreen() {
           <Dropdown.Menu>
             <Dropdown.Item
               onClick={(e) => {
-                filterCard("Mastercard");
+                filterCard("MasterCard");
               }}
             >
               Master Card
@@ -155,7 +154,7 @@ function FindCardScreen() {
           {store ? (
             store.map((card) => (
               <Col xs="8" md="6" className="py-3">
-                <OneCard card={card} cardType={card.cardType} />
+                <OneCard card={card} cardType="intCredits" />
               </Col>
             ))
           ) : (
