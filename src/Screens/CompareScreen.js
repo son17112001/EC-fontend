@@ -40,7 +40,7 @@ const CompareScreen = () => {
         <>
             {comparedCardsDetail.length !== 0 ?
                 <>
-                    <Link style={{ color: 'white', width: '20%' }} className='btn button-20 my-3' to={`/card/${type}`}>Quay về</Link>
+                    <Link style={{ color: 'white', width: '10%' }} className='btn button-20 my-3' to={`/card/${type}`}>Quay về</Link>
                     {loading && <Loader />}
                     <div xs={12} md={8} lg={7} className='my-2 d-lg-flex d-md-flex'>
                         {comparedCardsDetail.map(e =>
