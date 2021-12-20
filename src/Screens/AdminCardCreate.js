@@ -60,6 +60,7 @@ function AdminCardCreate() {
         navigate("/admin");
       }
     }
+    // eslint-disable-next-line
   }, [adminInfo]);
   useEffect(() => {
     if (notiCard) {

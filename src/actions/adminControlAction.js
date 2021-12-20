@@ -441,12 +441,13 @@ export const denyOrder = (id,cmt) => async (dispatch, getState) => {
 }
 
 
-export const newCard = (id,card) => async (dispatch, getState) => {
+export const newCard = (type,id,card) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_NEW_REQUEST
         })
         console.log(id)
+        console.log(type)
         console.log(card)
 
         const { adminLogin: { adminInfo } } = getState()
@@ -458,7 +459,7 @@ export const newCard = (id,card) => async (dispatch, getState) => {
             }
         }
       
-        const { data } = await axios.post(`${feEnv.HOST}/v2/card-type/intCredits/new?cardTypeId=`,card,config)
+        const { data } = await axios.post(`${feEnv.HOST}/v2/card-type/${type}/new?cardTypeId=${id}`,card,config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_NEW_SUCCESS,

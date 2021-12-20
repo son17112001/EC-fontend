@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
-// import cards from "../data/Card";
 import { Container, Row, Col, Dropdown, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import OneCard from "../components/OneCard";
 import { listCard } from "../actions/cardAction";
 import Loading from "../components/Loading";
-import { useLocation, useParams } from "react-router";
+import {  useParams } from "react-router";
 import Message from "../components/Message";
 function FindCardScreen() {
   const dispatch = useDispatch(); //backend
-  const location = useLocation();
   const params = useParams();
   var cardname = params.cardname;
   const { loading, cards } = useSelector((state) => state.cardList);
   const { intCredits, intDebits, domDebits } = cards;
   const [store, setStore] = useState();
   const [all, setAll] = useState();
-  const [save, setSave] = useState([]);
   useEffect(() => {
     dispatch(listCard());
   }, [dispatch]);
 
   useEffect(() => {
-    setSave(intCredits);
     if (intCredits) {
       const allcard = [...intCredits, ...intDebits, ...domDebits];
       setStore(allcard);
@@ -34,10 +30,12 @@ function FindCardScreen() {
           if (upperCard.includes(`${upperSearch}`)) {
             return card;
           }
+          return null
         });
         setStore(filtedArray);
       }
     }
+     // eslint-disable-next-line
   }, [intCredits, intDebits, domDebits]);
   useEffect(() => {
     if (all) {
@@ -47,9 +45,11 @@ function FindCardScreen() {
         if (upperCard.includes(`${upperSearch}`)) {
           return card;
         }
+        return null
       });
       setStore(filtedArray);
     }
+     // eslint-disable-next-line
   }, [cardname]);
 
   function filterCard(type) {

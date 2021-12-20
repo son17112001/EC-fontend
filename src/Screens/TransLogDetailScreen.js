@@ -1,48 +1,30 @@
 import React,{useState,useEffect} from "react";
-import { Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
-import {Checkbox,Button} from "@mui/material";
+import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import {useDispatch,useSelector} from "react-redux"
-import {getDetailOrder,approveOrder,denyOrder} from "../actions/adminControlAction"
 import {detailTransaction} from "../actions/managermentAction"
-import {useNavigate,useParams,useLocation} from "react-router-dom"
+import {useLocation} from "react-router-dom"
 import Loader from '../components/Loader'
 import localTime from "../util/localTime";
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 function TransLogDetailScreen() {
     const dispatch= useDispatch();
-    const navigate=useNavigate()
     const location= useLocation()
     const id= location.search.slice(4)
 
     const[detail,setDetail]= useState()
     const trans=useSelector(state=>state.detailTransaction)
-    const {detailTrans,errorDetailTrans} = trans
+    const {detailTrans} = trans
     
     useEffect(()=>{
       dispatch(detailTransaction(id))
+      // eslint-disable-next-line
     },[dispatch])
     useEffect(()=>{
         if(detailTrans){
             setDetail(detailTrans) 
         }
     },[detailTrans])
-   
-   
- 
-
- 
-
-   
-  
-   
-    
-    
-
-  
- 
- 
     return (
        
             <Container style={{marginTop:"50px",backgroundColor:"white",minHeight:"70vh"}}>

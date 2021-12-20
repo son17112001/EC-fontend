@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import {getAllCard,deactiveCardAction,activeCardAction} from "../actions/managermentAction"
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -45,11 +42,9 @@ const columns = [
     width: 280,
   },
 ];
-var page = 1;
+
 function CardManagerment() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [data, setData] = useState();
   const [edit, setEdit] = useState(false);
   const [id, setId] = useState();
@@ -57,9 +52,9 @@ function CardManagerment() {
   const [message, setMessage] = useState();
   const [open, setOpen] = React.useState(false);
 
-  const {allCard,errorAllCard} = useSelector(state=>state.getAllCard)
-  const {deactiveCard,errorDeactiveCard} = useSelector(state=>state.deactiveCard)
-  const {activeCard,errorActiveCard} = useSelector(state=>state.activeCard)
+  const {allCard} = useSelector(state=>state.getAllCard)
+  const {deactiveCard} = useSelector(state=>state.deactiveCard)
+  const {activeCard} = useSelector(state=>state.activeCard)
 
 
   

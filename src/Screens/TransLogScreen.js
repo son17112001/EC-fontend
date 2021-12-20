@@ -36,7 +36,7 @@ function TransLogScreen() {
 
   const [data, setData] = useState();
 
-  const {listTrans,errorTrans} = useSelector(state=>state.listTransaction)
+  const {listTrans} = useSelector(state=>state.listTransaction)
 
   
   useEffect(() => {

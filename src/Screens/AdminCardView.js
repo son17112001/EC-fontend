@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button, Container, TextField } from "@mui/material";
+import { Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 import { viewCard,newCard } from "../actions/adminControlAction";
 import { useDispatch, useSelector } from "react-redux";
 import {useNavigate,Link} from "react-router-dom"
 import Box from "@mui/material/Box";
-import Stack from '@mui/material/Stack';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -54,9 +53,11 @@ function AdminCardView() {
   })
 
   const [type,setType]=useState("intCredits")
-
+  const [message,setMessage]=useState("intCredits")
+  const [open, setOpen] = React.useState(false);
   const {adminCard} = useSelector (state=>state.adminCardView)
   const adminLogin= useSelector(state =>state.adminLogin)
+  const {errorCardNewnull,notiCardNew}=useSelector(state=>state.adminCardNew)
   const {adminInfo}= adminLogin;
   
   useEffect(()=>{
@@ -77,7 +78,17 @@ function AdminCardView() {
       
     }
   },[adminCard])
-  
+  useEffect(()=>{
+    if(notiCardNew){
+      setMessage(notiCardNew.message)
+      setOpen(true)
+    }
+    if(errorCardNewnull){
+      setMessage(errorCardNewnull.message)
+      setOpen(true)
+    }
+  },[notiCardNew,errorCardNewnull])
+
   function filter(array){
       let array2= array.map(card=>{
         var filted={
@@ -105,9 +116,13 @@ function AdminCardView() {
 
   }
   function sendHandler(){
-    dispatch(newCard(id,send))
+    dispatch(newCard(type,id,send))
   }
- 
+  
+  const handleClose = () => {
+    setOpen(false);
+    window.location.reload(false);
+  };
 
   return (
     <>
@@ -149,7 +164,27 @@ function AdminCardView() {
         <AddIcon fontSize="large"/>
       </IconButton> 
             </span></Link>
-            
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Thông báo!!!"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  {message}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose} autoFocus>
+                  Đồng ý
+                </Button>
+              </DialogActions>
+            </Dialog>
+
                     
           {data &&   (<>
            <DataGrid
