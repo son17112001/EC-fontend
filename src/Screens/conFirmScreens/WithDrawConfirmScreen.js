@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Alert, Row, Col, Form } from 'react-bootstrap'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Loader from '../../components/Loader'
-import { verify_DT_Service } from '../../actions/userActions'
+import { verify_DT_Service, logout } from '../../actions/userActions'
 import FormContainer from '../../components/FormContainer'
 
 
@@ -34,6 +34,9 @@ const WithDrawConfirmScreen = () => {
             if (Object.keys(res).length === 0) {
                 dispatch(verify_DT_Service(token, 'withdraw-money', 'verify'))
             }
+            else if (errorRes && res.message === 'Unauthorized token') {
+                dispatch(logout('logout'))
+            }
             else if (!errorRes) {
                 setEmailPayPal(res.emailPayPal)
                 setAmount(res.amount)
@@ -59,6 +62,7 @@ const WithDrawConfirmScreen = () => {
             {errorRes && < Alert className='justify-content-center' variant='danger'>{res.message}&#160;&#160;&#160;
                 <Alert.Link href="/">Trở về trang chủ </Alert.Link></Alert>}
             {loading && <Loader />}
+            <h1>Xác nhận Rút tiền</h1>
             <Form onSubmit={submitHandler}>
                 <Row>
                     <Form.Group controlId='emailPayPal'>
@@ -84,7 +88,7 @@ const WithDrawConfirmScreen = () => {
                         </Form.Control>
                     </Form.Group>
                 </Row>
-                <Button type='submit' className='mt-3' >Confirm WithDraw</Button>
+                <Button type='submit' className='mt-3' >Xác nhận</Button>
             </Form>
         </FormContainer >
     )

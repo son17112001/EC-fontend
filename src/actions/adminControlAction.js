@@ -1,5 +1,5 @@
 
-import {ADMIN_CONSTANTS} from "../constants/adminConstant"
+import { ADMIN_CONSTANTS } from "../constants/adminConstant"
 import feEnv from "../config/envfile"
 import axios from 'axios'
 export const getAllUserInfo = (page) => async (dispatch, getState) => {
@@ -68,7 +68,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_PUT_REQUEST
         })
-    
+
         const { adminLogin: { adminInfo } } = getState()
 
         const config = {
@@ -78,7 +78,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put(`${feEnv.HOST}/v2/users/user/details`,user,config)
+        const { data } = await axios.put(`${feEnv.HOST}/v2/users/user/details`, user, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_PUT_SUCCESS,
@@ -94,7 +94,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 }
 
 
-export const getUserTransactionLog = (id,page) => async (dispatch, getState) => {
+export const getUserTransactionLog = (id, page) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_TRANS_REQUEST
@@ -124,7 +124,7 @@ export const getUserTransactionLog = (id,page) => async (dispatch, getState) => 
     }
 }
 
-export const getSearchlUserInfo = (property,keyword) => async (dispatch, getState) => {
+export const getSearchlUserInfo = (property, keyword) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_GET_REQUEST
@@ -139,7 +139,7 @@ export const getSearchlUserInfo = (property,keyword) => async (dispatch, getStat
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-        
+
         const { data } = await axios.get(`${feEnv.HOST}/v2/users/user-search?property=${property}&keyword=${keyword}`, config)
 
         dispatch({
@@ -156,36 +156,36 @@ export const getSearchlUserInfo = (property,keyword) => async (dispatch, getStat
 }
 
 
-export const createCard = (type,card) => async (dispatch, getState) => {
+export const createCard = (type, card) => async (dispatch, getState) => {
     try {
 
-        switch(type){
-            case "intCredits": 
-            delete card.maxPay
-            break
-            case "intDebits": 
-            delete card.creditLine
-            delete card.condition
-            delete card.payWithin
-            delete card.interestRate
-            break
-            case "domDebits": 
-            delete card.maxPay
-            delete card.creditLine
-            delete card.condition
-            delete card.payWithin
-            delete card.interestRate
-            delete card.exCurrency
-            break
+        switch (type) {
+            case "intCredits":
+                delete card.maxPay
+                break
+            case "intDebits":
+                delete card.creditLine
+                delete card.condition
+                delete card.payWithin
+                delete card.interestRate
+                break
+            case "domDebits":
+                delete card.maxPay
+                delete card.creditLine
+                delete card.condition
+                delete card.payWithin
+                delete card.interestRate
+                delete card.exCurrency
+                break
             default: return card
         }
-    
-      
+
+
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_CREATE_REQUEST
         })
-        
+
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -195,8 +195,8 @@ export const createCard = (type,card) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-     
-        const { data } = await axios.post(`${feEnv.HOST}/v2/card-type/${type}`,card,config)
+
+        const { data } = await axios.post(`${feEnv.HOST}/v2/card-type/${type}`, card, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_CREATE_SUCCESS,
@@ -217,7 +217,7 @@ export const viewCard = (type) => async (dispatch, getState) => {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_VIEW_REQUEST
         })
-     
+
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -227,8 +227,8 @@ export const viewCard = (type) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-      
-        const { data } = await axios.get(`${feEnv.HOST}/v2/card-type/${type}`,config)
+
+        const { data } = await axios.get(`${feEnv.HOST}/v2/card-type/${type}`, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_VIEW_SUCCESS,
@@ -243,12 +243,12 @@ export const viewCard = (type) => async (dispatch, getState) => {
     }
 }
 
-export const searchCard = (type,cardUrl) => async (dispatch, getState) => {
+export const searchCard = (type, cardUrl) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_SEARCH_REQUEST
         })
-      
+
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -258,8 +258,8 @@ export const searchCard = (type,cardUrl) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-      
-        const { data } = await axios.get(`${feEnv.HOST}/v2/card-type/${type}/${cardUrl}`,config)
+
+        const { data } = await axios.get(`${feEnv.HOST}/v2/card-type/${type}/${cardUrl}`, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_SEARCH_SUCCESS,
@@ -275,12 +275,12 @@ export const searchCard = (type,cardUrl) => async (dispatch, getState) => {
 }
 
 
-export const updateCard = (type,card) => async (dispatch, getState) => {
+export const updateCard = (type, card) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_UPDATE_REQUEST
         })
- 
+
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -290,8 +290,8 @@ export const updateCard = (type,card) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-      
-        const { data } = await axios.put(`${feEnv.HOST}/v2/card-type/${type}`,card,config)
+
+        const { data } = await axios.put(`${feEnv.HOST}/v2/card-type/${type}`, card, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_UPDATE_SUCCESS,
@@ -321,8 +321,8 @@ export const allOrder = (page) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-      
-        const { data } = await axios.get(`${feEnv.HOST}/v2/orders/all-order?page=${page}`,config)
+
+        const { data } = await axios.get(`${feEnv.HOST}/v2/orders/all-order?page=${page}`, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_ORDER_ALL_SUCCESS,
@@ -343,7 +343,7 @@ export const getDetailOrder = (id) => async (dispatch, getState) => {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_ORDER_DETAIL_REQUEST
         })
- 
+
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -353,7 +353,7 @@ export const getDetailOrder = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-        const { data } = await axios.get(`${feEnv.HOST}/v2/orders/order/details?orderId=${id}`,config)
+        const { data } = await axios.get(`${feEnv.HOST}/v2/orders/order/details?orderId=${id}`, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_ORDER_DETAIL_SUCCESS,
@@ -368,12 +368,12 @@ export const getDetailOrder = (id) => async (dispatch, getState) => {
     }
 }
 
-export const approveOrder = (id,cmt) => async (dispatch, getState) => {
+export const approveOrder = (id, cmt) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_ORDER_APPROVE_REQUEST
         })
- 
+
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -383,13 +383,13 @@ export const approveOrder = (id,cmt) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-        const order=
-            {
-                orderId: id,
-                bankCmt: cmt
-            }
-        
-        const { data } = await axios.post(`${feEnv.HOST}/v2/orders/order/approve`,order,config)
+        const order =
+        {
+            orderId: id,
+            bankCmt: cmt
+        }
+
+        const { data } = await axios.post(`${feEnv.HOST}/v2/orders/order/approve`, order, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_ORDER_APPROVE_SUCCESS,
@@ -404,12 +404,12 @@ export const approveOrder = (id,cmt) => async (dispatch, getState) => {
     }
 }
 
-export const denyOrder = (id,cmt) => async (dispatch, getState) => {
+export const denyOrder = (id, cmt) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_ORDER_DENY_REQUEST
         })
- 
+
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -419,13 +419,13 @@ export const denyOrder = (id,cmt) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-        const order=
-            {
-                orderId: id,
-                bankCmt: cmt
-            }
-        
-        const { data } = await axios.post(`${feEnv.HOST}/v2/orders/order/deny`,order,config)
+        const order =
+        {
+            orderId: id,
+            bankCmt: cmt
+        }
+
+        const { data } = await axios.post(`${feEnv.HOST}/v2/orders/order/deny`, order, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_ORDER_DENY_SUCCESS,
@@ -441,14 +441,11 @@ export const denyOrder = (id,cmt) => async (dispatch, getState) => {
 }
 
 
-export const newCard = (type,id,card) => async (dispatch, getState) => {
+export const newCard = (type, id, card) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_NEW_REQUEST
         })
-        console.log(id)
-        console.log(type)
-        console.log(card)
 
         const { adminLogin: { adminInfo } } = getState()
 
@@ -458,8 +455,8 @@ export const newCard = (type,id,card) => async (dispatch, getState) => {
                 Authorization: `Bearer ${adminInfo.token}`
             }
         }
-      
-        const { data } = await axios.post(`${feEnv.HOST}/v2/card-type/${type}/new?cardTypeId=${id}`,card,config)
+
+        const { data } = await axios.post(`${feEnv.HOST}/v2/card-type/${type}/new?cardTypeId=${id}`, card, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_CARD_NEW_SUCCESS,

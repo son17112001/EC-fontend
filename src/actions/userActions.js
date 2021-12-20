@@ -35,25 +35,24 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 
-export const logout = () => async (dispatch, getState) => {
+export const logout = (type) => async (dispatch, getState) => {
     try {
 
         const { userLogin: { userInfo } } = getState()
-        localStorage.removeItem("userInfo");
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-
-        const { data } = await axios.post(`${feEnv.HOST}/v1/user/logout`, {}, config)
+        const { data } = await axios.post(`${feEnv.HOST}/v1/user/${type}`, {}, config)
 
         dispatch({
             type: USER_CONSTANTS.USER_LOGOUT,
             payload: data
         })
-
+        localStorage.removeItem("userInfo");
     } catch (error) {
         dispatch({
             type: USER_CONSTANTS.USER_LOGOUT,
@@ -272,7 +271,7 @@ export const getPayment = (amountNumber) => async (dispatch, getState) => {
     }
 }
 
-export const submitPayment = (paymentId, PayerID) => async (dispatch, getState) => {
+export const submitPayment = (paymentId, PayerID, token) => async (dispatch, getState) => {
     try {
         dispatch({
             type: USER_CONSTANTS.USER_SUB_PAYMENT_REQUEST
@@ -287,7 +286,7 @@ export const submitPayment = (paymentId, PayerID) => async (dispatch, getState) 
             }
         }
         const body = {
-            paymentId, PayerID
+            paymentId, PayerID, token
         }
         const { data } = await axios.post(`${feEnv.HOST}/v1/user/charge/submit`, body, config)
 
@@ -328,10 +327,16 @@ export const init_DT_Service = (amountNumber, services, perInfo) => async (dispa
                 emailPayPal: perInfo
             }
         }
-        else {
+        else if (services === 'transfer') {
             body = {
                 amount: amountNumber,
                 accNumber: perInfo
+            }
+        }
+        else if (services === 'debt-payment') {
+            body = {
+                amount: amountNumber,
+                cardId: perInfo
             }
         }
 
@@ -341,6 +346,9 @@ export const init_DT_Service = (amountNumber, services, perInfo) => async (dispa
             type: USER_CONSTANTS.USER_DT_SUCCESS,
             payload: data
         })
+        setTimeout(function () {
+            dispatch({ type: USER_CONSTANTS.USER_DT_RESET })
+        }, 15000);
 
     } catch (error) {
         dispatch({

@@ -63,7 +63,7 @@ export const CompareCreditPanel = (props) => {
 
 
             <Form.Group className="text-center" id="formGridCheckbox">
-                <Link to={`/card/intDebits&${props.cardUrl}`}> <Button className='my-3 button-64'
+                <Link to={`/card/intCredits&${props.cardUrl}`}> <Button className='my-3 button-64'
                     style={{ width: '50%' }}>Đăng kí ngay</Button></Link>
             </Form.Group>
 

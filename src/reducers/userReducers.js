@@ -72,6 +72,7 @@ export const user_DT_Reducer = (state = { res: {} }, action) => {
         case USER_CONSTANTS.USER_DT_REQUEST: return { ...state, loading: true }
         case USER_CONSTANTS.USER_DT_SUCCESS: return { loading: false, res: action.payload, errorRes: false }
         case USER_CONSTANTS.USER_DT_FAIL: return { loading: false, res: action.payload, errorRes: true }
+        case USER_CONSTANTS.USER_DT_RESET: return { res: {} }
         default: return state
     }
 }

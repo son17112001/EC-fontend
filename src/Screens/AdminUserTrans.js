@@ -38,7 +38,6 @@ function AdminUserTrans() {
     useEffect(()=>{
       if(adminInfo){
         if(Object.keys(adminInfo).length===0){
-          console.log(adminInfo)
           navigate('/admin')
         } 
       }
@@ -51,7 +50,6 @@ function AdminUserTrans() {
     if (userDetail) {
       let save = validateData(userDetail);
       setData(save);
-      console.log(save);
     }
   }, [userDetail]);
   function validateData(list) {

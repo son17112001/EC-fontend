@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import {allTransaction} from "../actions/managermentAction"
+import { allTransaction } from "../actions/managermentAction"
+import { logout } from "../actions/userActions";
+
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "bank", headerName: "Từ ngân hàng", width: 120 },
@@ -36,32 +38,43 @@ function TransLogScreen() {
 
   const [data, setData] = useState();
 
-  const {listTrans} = useSelector(state=>state.listTransaction)
+  const { listTrans, errorTrans } = useSelector(state => state.listTransaction)
 
-  
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
     dispatch(allTransaction());
   }, [dispatch]);
- 
-  useEffect(()=>{
-    if(listTrans){
-        let filted= listTrans.docs.map(trans=>{
-            let time = new Date(trans.createdAt)
-            let arr={
-                id:trans._id,
-                bank: trans.from.bank,
-                remitterName: trans.from.remitterName,
-                number: trans.to.number,
-                transactionAmount: trans.fromCurrency.transactionAmount,
-                transactionFee: trans.fromCurrency.transactionFee,
-                description: trans.description,
-                createdAt: time,
-            }
-            return arr
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login')
+    }
+    else {
+      if (errorTrans) {
+        dispatch(logout('logout'))
+      }
+      else if (listTrans) {
+        let filted = listTrans.docs.map(trans => {
+          let time = new Date(trans.createdAt)
+          let arr = {
+            id: trans._id,
+            bank: trans.from.bank,
+            remitterName: trans.from.remitterName,
+            number: trans.to.number,
+            transactionAmount: trans.fromCurrency.transactionAmount,
+            transactionFee: trans.fromCurrency.transactionFee,
+            description: trans.description,
+            createdAt: time,
+          }
+          return arr
         })
         setData(filted)
+      }
     }
-  },[listTrans])
+    // eslint-disable-next-line
+  }, [listTrans, userInfo, navigate, dispatch])
 
   const clickHandler = (params, event) => {
     navigate(`/history/detail?id=${params.id}`);
@@ -72,31 +85,31 @@ function TransLogScreen() {
   }
   return (
     <>
-     
-            <Container maxWidth="lg" style={{ marginTop: "100px",backgroundColor:"white",minHeight:"70vh" }}>
-              <div style={{ height: 400, width: "100%" }}>
-                <h2 style={{ textAlign: "center" }}>Lịch sử giao dịch</h2>
-                {data && listTrans ? (
-                  <>
-                    <DataGrid
-                      style={{ marginTop: "50px" }}
-                      onCellDoubleClick={clickHandler}
-                      rows={data}
-                      columns={columns}
-                      pageSize={10}
-                      rowsPerPageOptions={[10]}
-                      hideFooterPagination={true}
-                    />{" "}
-                    <Stack spacing={2}>
-                      <Pagination count={listTrans.totalPages} variant="outlined" shape="rounded" page={page}  onChange={handleChange}/>
-                    </Stack>{" "}
-                  </>
-                ) : (
-                  <Loader />
-                )}
-              </div>
-            </Container>
-        
+
+      <Container maxWidth="lg" style={{ marginTop: "100px", backgroundColor: "white", minHeight: "70vh" }}>
+        <div style={{ height: 400, width: "100%" }}>
+          <h2 style={{ textAlign: "center" }}>Lịch sử giao dịch</h2>
+          {data && listTrans ? (
+            <>
+              <DataGrid
+                style={{ marginTop: "50px" }}
+                onCellDoubleClick={clickHandler}
+                rows={data}
+                columns={columns}
+                pageSize={10}
+                rowsPerPageOptions={[10]}
+                hideFooterPagination={true}
+              />{" "}
+              <Stack spacing={2}>
+                <Pagination count={listTrans.totalPages} variant="outlined" shape="rounded" page={page} onChange={handleChange} />
+              </Stack>{" "}
+            </>
+          ) : (
+            <Loader />
+          )}
+        </div>
+      </Container>
+
     </>
   );
 }

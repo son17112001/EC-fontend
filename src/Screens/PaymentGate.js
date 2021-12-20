@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader";
 import { allPaymentGate } from "../actions/managermentAction";
+import { logout } from "../actions/userActions";
+
 const columns = [
   { field: "id", headerName: "ID", width: 150 },
   { field: "gateOwner", headerName: "Người mở cổng thanh toán", width: 180 },
@@ -23,17 +26,29 @@ const columns = [
 
 function PaymentGate() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [data, setData] = useState();
 
-  const { allPaymentgate } = useSelector((state) => state.getAllPaymentgate);
+  const { allPaymentgate, errorAllPaymentgate } = useSelector((state) => state.getAllPaymentgate);
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
   useEffect(() => {
-    dispatch(allPaymentGate());
-  }, [dispatch]);
+    if (!userInfo) {
+      navigate('/login')
+    }
+    else {
+      dispatch(allPaymentGate());
+    }
+  }, [dispatch, navigate, userInfo]);
 
   useEffect(() => {
-    if (allPaymentgate) {
+    if (errorAllPaymentgate) {
+      dispatch(logout('logout'))
+    }
+    else if (allPaymentgate) {
       let filted = allPaymentgate.map((payment) => {
         let time = new Date(payment.createdAt);
         let type;
@@ -60,7 +75,8 @@ function PaymentGate() {
       });
       setData(filted);
     }
-  }, [allPaymentgate]);
+    // eslint-disable-next-line
+  }, [allPaymentgate, dispatch]);
 
   return (
     <>

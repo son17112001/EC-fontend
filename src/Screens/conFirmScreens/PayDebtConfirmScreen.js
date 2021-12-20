@@ -6,9 +6,7 @@ import Loader from '../../components/Loader'
 import { verify_DT_Service, logout } from '../../actions/userActions'
 import FormContainer from '../../components/FormContainer'
 
-
-const TransferConfirmScreen = () => {
-
+const PayDebtConfirmScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const curURL = useLocation().search;
@@ -22,7 +20,6 @@ const TransferConfirmScreen = () => {
     const user_DT_services = useSelector(state => state.user_DT_services)
     const { loading, res, errorRes } = user_DT_services
 
-    const [accNumber, setAccNumber] = useState('')
     const [amount, setAmount] = useState(0)
     const [currency, setCurrency] = useState('')
 
@@ -32,13 +29,12 @@ const TransferConfirmScreen = () => {
         }
         else {
             if (Object.keys(res).length === 0) {
-                dispatch(verify_DT_Service(token, 'transfer', 'verify'))
+                dispatch(verify_DT_Service(token, 'debt-payment', 'verify'))
             }
             else if (errorRes && res.message === 'Unauthorized token') {
                 dispatch(logout('logout'))
             }
             else if (!errorRes) {
-                setAccNumber(res.receiverAccNumber)
                 setAmount(res.amount)
                 setCurrency(res.currency)
             }
@@ -52,9 +48,10 @@ const TransferConfirmScreen = () => {
 
     const submitHandler = (e) => {
         e.preventDefault() //dispatch
-        dispatch(verify_DT_Service(token, 'transfer', 'submit'))
+        dispatch(verify_DT_Service(token, 'debt-payment', 'submit'))
 
     }
+
     return (
         <FormContainer style={{ marginTop: 110 }}>
             {(res.message && !errorRes) && (<Alert className='justify-content-center' variant='success'>{res.message}&#160;&#160;&#160;
@@ -62,17 +59,8 @@ const TransferConfirmScreen = () => {
             {errorRes && < Alert className='justify-content-center' variant='danger'>{res.message}&#160;&#160;&#160;
                 <Alert.Link href="/">Trở về trang chủ </Alert.Link></Alert>}
             {loading && <Loader />}
-            <h1>Xác nhận Chuyển tiền</h1>
+            <h1>Xác nhận Thanh toán nợ tín dụng</h1>
             <Form onSubmit={submitHandler}>
-                <Row>
-                    <Form.Group controlId='emailPayPal'>
-                        <Form.Label>Account Number</Form.Label>
-                        <Form.Control disabled type='text' placeholder='email PayPal' required
-                            value={accNumber} onChange={e => setAccNumber(e.target.value)}>
-                        </Form.Control>
-                    </Form.Group>
-                </Row>
-
                 <Row>
                     <Form.Group as={Col} controlId='amount'>
                         <Form.Label>Amount</Form.Label>
@@ -88,10 +76,10 @@ const TransferConfirmScreen = () => {
                         </Form.Control>
                     </Form.Group>
                 </Row>
-                <Button type='submit' className='mt-3' >xác nhận</Button>
+                <Button type='submit' className='mt-3' >Xác nhận thanh toán nợ</Button>
             </Form>
         </FormContainer >
     )
 }
 
-export default TransferConfirmScreen;
+export default PayDebtConfirmScreen

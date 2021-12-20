@@ -91,7 +91,6 @@ function AdminUserView() {
   useEffect(()=>{
     if(adminInfo){
       if(Object.keys(adminInfo).length===0){
-        console.log(adminInfo)
         navigate('/admin')
       } 
     }

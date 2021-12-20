@@ -53,13 +53,13 @@ const LoginScreen = () => {
 
                 <Row className="py-4">
                     <Link to="/login/forgot" style={{ textDecoration: 'none' }}>
-                        <p style={{ color: "red", fontSize: "15px" }}>Forgot password ?</p>
+                        <p style={{ color: "red", fontSize: "15px" }}>quên mật khẩu</p>
                     </Link>
                     <Col>
-                        <Button type='submit' >Sign In</Button>
+                        <Button type='submit' >Đăng nhập</Button>
                     </Col>
                     <Col>
-                        <Link to={'/register'}>New customer sign up here ?&#160;</Link>
+                        <Link to={'/register'}>Đăng ký&#160;</Link>
                     </Col>
                 </Row>
 

@@ -24,7 +24,6 @@ function CreditDetail() {
     const { loading, card } = useSelector(state => state.cardDetail)
     var isIssuing = 'Không';
     var maxPay = `${card.maxPay}`;
-    console.log(card.maxPay);
 
     if (card.isIssuing) {
         isIssuing = 'Có';

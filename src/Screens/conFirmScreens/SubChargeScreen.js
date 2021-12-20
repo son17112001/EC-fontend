@@ -27,7 +27,7 @@ const SubChargeScreen = () => {
             navigate('/login')
         }
         else {
-            dispatch(submitPayment(paymentId, PayerID))
+            dispatch(submitPayment(paymentId, PayerID, token))
             if (!loading) {
                 setTimeout(function () {
                     window.location.href = '/profile';

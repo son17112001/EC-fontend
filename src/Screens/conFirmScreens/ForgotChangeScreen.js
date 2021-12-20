@@ -31,9 +31,6 @@ const ForgotChangeScreen = () => {
             if (Object.keys(resMessage).length === 0) {
                 dispatch(userUpForgot(token, 'verify', newPass, conNewPass))
             }
-            else {
-                console.log('test')
-            }
         }
         // eslint-disable-next-line
     }, [dispatch, navigate, token, resMessage])

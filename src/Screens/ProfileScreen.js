@@ -87,7 +87,7 @@ const ProfileScreen = () => {
                 dispatch(getUserProfile())
             }
             else if (error) {
-                dispatch(logout())
+                dispatch(logout('logout'))
             }
             else {
                 setName(user.name)

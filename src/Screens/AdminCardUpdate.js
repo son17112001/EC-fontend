@@ -60,7 +60,6 @@ function AdminCardUpdate() {
   useEffect(() => {
     if (adminInfo) {
       if (Object.keys(adminInfo).length === 0) {
-        console.log(adminInfo);
         navigate("/admin");
       }
     }
@@ -72,7 +71,6 @@ function AdminCardUpdate() {
   useEffect(()=>{
     
     if(adminCardSearch){
-      console.log(type)
       switch(type){
         case "intCredits":
           setCard({
@@ -130,8 +128,6 @@ function AdminCardUpdate() {
         break
         default: return 
       }
-      
-      console.log(card)
     }
     
   },[adminCardSearch,card,type])
@@ -141,8 +137,6 @@ function AdminCardUpdate() {
     window.location.reload(false);
   };
   function sendHandler() {
-    console.log(card);
-    console.log(type);
     if (type !== "" && card) {
       dispatch(updateCard(type, card));
     }

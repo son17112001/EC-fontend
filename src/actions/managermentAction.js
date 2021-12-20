@@ -138,7 +138,6 @@ export const deactiveCardAction= (cardId) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        console.log(cardId)
         let obj={
             cardId:cardId,
         }

@@ -36,7 +36,7 @@ const InitGateScreen = () => {
                 dispatch(getUserProfile())
             }
             else if (error) {
-                dispatch(logout())
+                dispatch(logout('logout'))
             }
         }
         // eslint-disable-next-line

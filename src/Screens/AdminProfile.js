@@ -69,7 +69,6 @@ function AdminProfile() {
   useEffect(() => {
     if (adminInfo) {
       if (Object.keys(adminInfo).length === 0) {
-        console.log(adminInfo);
         navigate("/admin");
       }
     }
@@ -155,14 +154,12 @@ function AdminProfile() {
       ...password,
       newPassword: event.target.value
     })
-    console.log(password)
   };
   const handleReChange = (prop) => (event) => {
     setPassword({
       ...password,
       confirmNewPassword: event.target.value
     })
-    console.log(password)
   };
   const handleClickShowPassword = () => {
     setValues({

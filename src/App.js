@@ -40,6 +40,7 @@ import TransLogScreen from "./Screens/TransLogScreen";
 import TransLogDetailScreen from "./Screens/TransLogDetailScreen";
 import CardManagerment from "./Screens/CardManagerment";
 import PaymentGate from "./Screens/PaymentGate";
+import PayDebtConfirmScreen from "./Screens/conFirmScreens/PayDebtConfirmScreen";
 
 require('dotenv').config()
 
@@ -51,7 +52,7 @@ function App() {
   if (userInfo) {
     var curToken = jwt_decode(userInfo.token)
     if (curToken.exp * 1000 < Date.now()) {
-      dispatch(logout())
+      dispatch(logout('logout'))
     }
   }
   return (
@@ -87,6 +88,7 @@ function App() {
           <Route path="/support" element={<SupportScreen />} />
           <Route path="/user/charge/submit" exact element={<SubChargeScreen />} />
           <Route path="/user/withdraw-money/verify" exact element={<WithDrawConfirmScreen />} />
+          <Route path="/user/debt-payment/verify" exact element={<PayDebtConfirmScreen />} />
           <Route path="/user/transfer/verify" exact element={<TransferConfirmScreen />} />
           <Route path="/user/forgot-password/verify" exact element={<ForgotChangeScreen />} />
           <Route path="/card/compare" element={<CompareScreen />} />

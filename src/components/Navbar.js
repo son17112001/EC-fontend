@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"
-
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Navbar, Nav, NavDropdown, Image } from "react-bootstrap";
 import { logout } from "../actions/userActions";
@@ -15,13 +14,12 @@ function NavbarComponent() {
 
   const { userInfo } = userLogin
   const [search, setSearch] = useState();
-  const logoutHandler = () => {
-    dispatch(logout())
+  const logoutHandler = (e) => {
+    e.preventDefault()
+    dispatch(logout(e.target.id))
   }
 
   const handlerSearch = (e) => {
-    
-  
     e.preventDefault();
     if (e.keyCode === 13) {
       navigate(`/find/:${search}`);
@@ -63,21 +61,21 @@ function NavbarComponent() {
 
               <Nav>
                 <div className="input-group rounded">
-                  <input type="search" className="form-control rounded" placeholder="Tìm tên thẻ" aria-label="Search" aria-describedby="search-addon" value={search} onChange={(e) => { setSearch(e.target.value) }} onKeyUp={handlerSearch}/>
-                
+                  <input type="search" className="form-control rounded" placeholder="Tìm tên thẻ" aria-label="Search" aria-describedby="search-addon" value={search} onChange={(e) => { setSearch(e.target.value) }} onKeyUp={handlerSearch} />
+
                 </div>
               </Nav>
 
               <Nav>
                 {userInfo ? (
                   <NavDropdown title={userInfo.name} id='username'>
-                    <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                    <NavDropdown.Item style={{ color: 'black' }} id='logout' onClick={e => logoutHandler(e)}>Đăng xuất</NavDropdown.Item>
+                    <NavDropdown.Item style={{ color: 'black' }} id='logoutall' onClick={e => logoutHandler(e)}>Đăng xuất tất cả thiết bị</NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <Nav>
-                    <Nav.Link href="/login">LOGIN</Nav.Link>
-                    <Nav.Link href="/register">SIGN UP</Nav.Link>
+                    <Nav.Link href="/login">Đăng nhập</Nav.Link>
+                    <Nav.Link href="/register">Đăng ký</Nav.Link>
                   </Nav>
                 )}
               </Nav>
