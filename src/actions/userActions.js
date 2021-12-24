@@ -37,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = (type) => async (dispatch, getState) => {
     try {
-
+        localStorage.removeItem("userInfo");
         const { userLogin: { userInfo } } = getState()
 
         const config = {
@@ -52,7 +52,7 @@ export const logout = (type) => async (dispatch, getState) => {
             type: USER_CONSTANTS.USER_LOGOUT,
             payload: data
         })
-        localStorage.removeItem("userInfo");
+        
     } catch (error) {
         dispatch({
             type: USER_CONSTANTS.USER_LOGOUT,
