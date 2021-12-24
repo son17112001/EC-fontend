@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -86,10 +85,11 @@ function TransLogScreen() {
   return (
     <>
 
-      <Container maxWidth="lg" style={{ marginTop: "100px", backgroundColor: "white", minHeight: "70vh" }}>
+      <div maxWidth="lg" style={{ marginTop: "-10px", backgroundColor: "white", minHeight: "80vh" }}>
         <div style={{ height: 400, width: "100%" }}>
-          <h2 style={{ textAlign: "center" }}>Lịch sử giao dịch</h2>
+          <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Lịch sử giao dịch</h2>
           {data && listTrans ? (
+
             <>
               <DataGrid
                 style={{ marginTop: "50px" }}
@@ -99,6 +99,7 @@ function TransLogScreen() {
                 pageSize={10}
                 rowsPerPageOptions={[10]}
                 hideFooterPagination={true}
+
               />{" "}
               <Stack spacing={2}>
                 <Pagination count={listTrans.totalPages} variant="outlined" shape="rounded" page={page} onChange={handleChange} />
@@ -108,7 +109,7 @@ function TransLogScreen() {
             <Loader />
           )}
         </div>
-      </Container>
+      </div>
 
     </>
   );

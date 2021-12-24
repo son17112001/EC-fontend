@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { Container } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader";
@@ -80,17 +79,17 @@ function PaymentGate() {
 
   return (
     <>
-      <Container
+      <div
         maxWidth="lg"
         style={{
-          marginTop: "100px",
           backgroundColor: "white",
           minHeight: "70vh",
         }}
       >
         <div style={{ height: 400, width: "100%" }}>
-          <h2 style={{ textAlign: "center" }}>Danh sách đơn</h2>
-          {data ? (
+        <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Danh sách các cổng giao dịch đã đăng ký</h2>
+          {data  ? (
+            
             <>
               <DataGrid
                 style={{ marginTop: "50px" }}
@@ -104,7 +103,7 @@ function PaymentGate() {
             <Loader />
           )}
         </div>
-      </Container>
+      </div>
     </>
   );
 }

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader";
 import { getAllCard, deactiveCardAction, activeCardAction } from "../actions/managermentAction"
-import { logout } from "../actions/userActions";
+
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "cardNumber", headerName: "Số tài khoản", width: 120 },
@@ -77,38 +77,38 @@ function CardManagerment() {
     }
   }, [deactiveCard, activeCard])
   useEffect(() => {
-    if (!userInfo) {
-      navigate('/login')
+    if (errorAllCard) {
+      setMessage(errorAllCard.message)
+      setOpen(true)
     }
-    else {
-      if (errorAllCard) {
-        dispatch(logout('logout'))
-      }
-      else if (allCard) {
-        let filted = allCard.map(card => {
-          let time = new Date(card.validDate)
-          let time1 = new Date(card.expiredDate)
-          let time2 = new Date(card.createdAt)
-          let arr = {
-            id: card._id,
-            cardNumber: card.cardNumber,
-            publisher: card.publisher,
-            isActive: card.isActive,
-            cardName: card.cardTypeId.cardName,
-            cardRank: card.cardTypeId.cardRank,
-            currentUsed: card.currentUsed,
-            debt: card.debt,
-            validDate: time,
-            expiredDate: time1,
-            createdAt: time2,
-          }
-          return arr
-        })
-        setData(filted)
-      }
+  }, [errorAllCard])
+  useEffect(() => {
+    if (allCard) {
+      let filted = allCard.map(card => {
+        let time = new Date(card.validDate)
+        let time1 = new Date(card.expiredDate)
+        let time2 = new Date(card.createdAt)
+        let arr = {
+          id: card._id,
+          cardNumber: card.cardNumber,
+          publisher: card.publisher,
+          isActive: card.isActive,
+          cardName: card.cardTypeId.cardName,
+          cardRank: card.cardTypeId.cardRank,
+          currentUsed: card.currentUsed,
+          debt: card.debt,
+          validDate: time,
+          expiredDate: time1,
+          createdAt: time2,
+
+        }
+        return arr
+      })
+      setData(filted)
     }
+  }
     // eslint-disable-next-line
-  }, [dispatch, allCard, userInfo, navigate])
+    , [dispatch, allCard, userInfo, navigate])
 
   const clickHandler = (params, event) => {
     setEdit(true)
@@ -130,9 +130,9 @@ function CardManagerment() {
   return (
     <>
       {allCard &&
-        <div style={{ margin: "100px 50px 10px 50px", backgroundColor: "white", minHeight: "70vh" }}>
+        <div maxWidth="lg" style={{ backgroundColor: "white", minHeight: "70vh" }}>
           <div style={{ height: 400, width: "100%" }}>
-            <h2 style={{ textAlign: "center" }}>Danh sách thẻ của người dùng</h2>
+            <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Danh sách các thẻ đã đăng ký</h2>
 
             <Dialog
               open={open}
