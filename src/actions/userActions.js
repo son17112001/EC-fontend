@@ -52,7 +52,7 @@ export const logout = (type) => async (dispatch, getState) => {
             type: USER_CONSTANTS.USER_LOGOUT,
             payload: data
         })
-        
+
     } catch (error) {
         dispatch({
             type: USER_CONSTANTS.USER_LOGOUT,
@@ -294,6 +294,12 @@ export const submitPayment = (paymentId, PayerID, token) => async (dispatch, get
             type: USER_CONSTANTS.USER_SUB_PAYMENT_SUCCESS,
             payload: data
         })
+        setTimeout(function () {
+            window.location.href = '/profile';
+            dispatch({
+                type: USER_CONSTANTS.USER_SUB_PAYMENT_RESET
+            })
+        }, 10000);
 
     } catch (error) {
         dispatch({
@@ -381,6 +387,12 @@ export const verify_DT_Service = (servicesToken, services, type) => async (dispa
             type: USER_CONSTANTS.USER_DT_SUCCESS,
             payload: data
         })
+        setTimeout(function () {
+            window.location.href = '/';
+            dispatch({
+                type: USER_CONSTANTS.USER_DT_RESET
+            })
+        }, 10000);
 
     } catch (error) {
         dispatch({

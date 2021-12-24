@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux"
@@ -16,7 +15,7 @@ function TransLogDetailScreen() {
 
   const [detail, setDetail] = useState()
   const trans = useSelector(state => state.detailTransaction)
-  const { detailTrans, errorDetailTrans } = trans
+  const { detailTrans, errorDetailTrans, loading } = trans
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -31,7 +30,7 @@ function TransLogDetailScreen() {
     // eslint-disable-next-line
   }, [dispatch, userInfo, navigate])
   useEffect(() => {
-    if (errorDetailTrans) {
+    if (errorDetailTrans && errorDetailTrans.message === 'Unauthorized token') {
       dispatch(logout('logout'))
     }
     else if (detailTrans) {
@@ -41,8 +40,8 @@ function TransLogDetailScreen() {
   }, [detailTrans, dispatch])
   return (
 
-    <Container style={{ marginTop: "50px", backgroundColor: "white", minHeight: "70vh" }}>
-      <h2 style={{ textAlign: "center", color: "black", marginBottom: "50px" }}>Chi tiết giao dịch</h2>
+    <div maxWidth="lg" style={{ marginTop: "-10px", backgroundColor: "white", minHeight: "80vh" }}>
+      <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Chi tiết giao dịch</h2>
 
 
 
@@ -241,9 +240,9 @@ function TransLogDetailScreen() {
 
 
       </>
-      ) : <Loader />}
-
-    </Container>
+      ) : <></>}
+      {loading && <Loader />}
+    </div>
 
   )
 }

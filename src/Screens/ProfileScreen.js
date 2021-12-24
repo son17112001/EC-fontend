@@ -86,7 +86,7 @@ const ProfileScreen = () => {
             if (Object.keys(user).length === 0) {
                 dispatch(getUserProfile())
             }
-            else if (error) {
+            else if (error && user.message === 'Unauthorized token') {
                 dispatch(logout('logout'))
             }
             else {

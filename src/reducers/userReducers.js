@@ -58,11 +58,12 @@ export const userGetPaymentReducer = (state = {}, action) => {
     }
 }
 
-export const userSubPaymentReducer = (state = {}, action) => {
+export const userSubPaymentReducer = (state = { res: {} }, action) => {
     switch (action.type) {
         case USER_CONSTANTS.USER_SUB_PAYMENT_REQUEST: return { loading: true }
-        case USER_CONSTANTS.USER_SUB_PAYMENT_SUCCESS: return { loading: false, successRes: action.payload }
-        case USER_CONSTANTS.USER_SUB_PAYMENT_FAIL: return { loading: false, errorRes: action.payload }
+        case USER_CONSTANTS.USER_SUB_PAYMENT_SUCCESS: return { loading: false, res: action.payload, errorRes: false }
+        case USER_CONSTANTS.USER_SUB_PAYMENT_FAIL: return { loading: false, res: action.payload, errorRes: true }
+        case USER_CONSTANTS.USER_SUB_PAYMENT_RESET: return { res: {} }
         default: return state
     }
 }
