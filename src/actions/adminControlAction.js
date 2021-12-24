@@ -94,7 +94,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 }
 
 
-export const getUserTransactionLog = (id,page) => async (dispatch, getState) => {
+export const getUserTransactionLog = (id) => async (dispatch, getState) => {
     try {
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_TRANS_REQUEST
@@ -109,7 +109,7 @@ export const getUserTransactionLog = (id,page) => async (dispatch, getState) => 
             }
         }
 
-        const { data } = await axios.get(`${feEnv.HOST}/v2/users/user/transaction-logs?_id=${id}&page=${page}`, config)
+        const { data } = await axios.get(`${feEnv.HOST}/v2/users/user/transaction-log?logId=${id}`, config)
 
         dispatch({
             type: ADMIN_CONSTANTS.ADMIN_TRANS_SUCCESS,

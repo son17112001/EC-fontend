@@ -73,8 +73,9 @@ function PaymentGate() {
         }}
       >
         <div style={{ height: 400, width: "100%" }}>
-          <h2 style={{ textAlign: "center" }}>Danh sách đơn</h2>
-          {data ? (
+          <h2 style={{ textAlign: "center" }}>Các cổng giao dịch đã mở</h2>
+          {data  ? (
+            
             <>
               <DataGrid
                 style={{ marginTop: "50px" }}

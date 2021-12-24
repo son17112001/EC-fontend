@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col, Modal, Container } from 'react-bootstrap'
 import Header from "../components/Header";
 import { Link, useNavigate } from "react-router-dom";
-import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { Slider } from "@mui/material";
-import feEnv from "../config/envfile"
 function MyVerticallyCenteredModal(props) {
 
   const [amount, SetAmount] = useState(0)
@@ -85,13 +83,7 @@ function HomeScreen() {
         <Row className="mt-4">  <Col><h2>Dịch vụ thẻ </h2> </Col>
 
           <Col > <button onClick={() => setModalShow(true)} type="button" className="btn btn-primary fa-pull-right">Tìm thẻ phù hợp</button></Col>
-        </Row>
-        <div>
-              <MessengerCustomerChat
-          pageId={`${feEnv.PAGE_ID}`}
-          appId={`${feEnv.APP_ID}`}
-        />
-        </div>
+        </Row> 
         <Row>
           <div className="container card-info">
 

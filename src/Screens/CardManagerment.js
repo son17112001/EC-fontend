@@ -52,7 +52,7 @@ function CardManagerment() {
   const [message, setMessage] = useState();
   const [open, setOpen] = React.useState(false);
 
-  const {allCard} = useSelector(state=>state.getAllCard)
+  const {allCard,errorAllCard} = useSelector(state=>state.getAllCard)
   const {deactiveCard} = useSelector(state=>state.deactiveCard)
   const {activeCard} = useSelector(state=>state.activeCard)
 
@@ -71,6 +71,12 @@ function CardManagerment() {
         setOpen(true)
     }
  },[deactiveCard,activeCard])
+ useEffect(()=>{
+  if(errorAllCard){
+      setMessage(errorAllCard.message)
+      setOpen(true)
+  }
+},[errorAllCard])
   useEffect(()=>{
     if(allCard){
         let filted= allCard.map(card=>{
