@@ -4,6 +4,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader";
+import { logout } from "../actions/userActions";
 import { getAllCard, deactiveCardAction, activeCardAction } from "../actions/managermentAction"
 
 const columns = [
@@ -56,7 +57,7 @@ function CardManagerment() {
   const [message, setMessage] = useState();
   const [open, setOpen] = React.useState(false);
 
-  const { allCard, errorAllCard } = useSelector(state => state.getAllCard)
+  const { allCard, errorAllCard, loading } = useSelector(state => state.getAllCard)
   const { deactiveCard } = useSelector(state => state.deactiveCard)
   const { activeCard } = useSelector(state => state.activeCard)
 
@@ -64,8 +65,13 @@ function CardManagerment() {
   const { userInfo } = userLogin
 
   useEffect(() => {
-    dispatch(getAllCard());
-  }, [dispatch]);
+    if (!userInfo) {
+      navigate('/login')
+    }
+    else {
+      dispatch(getAllCard());
+    }
+  }, [dispatch, navigate, userInfo]);
   useEffect(() => {
     if (deactiveCard) {
       setMessage(deactiveCard.message)
@@ -78,10 +84,15 @@ function CardManagerment() {
   }, [deactiveCard, activeCard])
   useEffect(() => {
     if (errorAllCard) {
-      setMessage(errorAllCard.message)
-      setOpen(true)
+      if (errorAllCard.message === 'Unauthorized token') {
+        dispatch(logout('logout'))
+      }
+      else {
+        setMessage(errorAllCard.message)
+        setOpen(true)
+      }
     }
-  }, [errorAllCard])
+  }, [errorAllCard, dispatch])
   useEffect(() => {
     if (allCard) {
       let filted = allCard.map(card => {
@@ -170,8 +181,9 @@ function CardManagerment() {
 
               </>
             ) : (
-              <Loader />
+              <></>
             )}
+            {loading && <Loader />}
             {
               edit && (<>
                 {

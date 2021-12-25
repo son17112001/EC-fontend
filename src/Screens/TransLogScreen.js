@@ -37,7 +37,7 @@ function TransLogScreen() {
 
   const [data, setData] = useState();
 
-  const { listTrans, errorTrans } = useSelector(state => state.listTransaction)
+  const { listTrans, errorTrans, loading } = useSelector(state => state.listTransaction)
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -51,7 +51,7 @@ function TransLogScreen() {
       navigate('/login')
     }
     else {
-      if (errorTrans) {
+      if (errorTrans && errorTrans.message === 'Unauthorized token') {
         dispatch(logout('logout'))
       }
       else if (listTrans) {
@@ -106,8 +106,9 @@ function TransLogScreen() {
               </Stack>{" "}
             </>
           ) : (
-            <Loader />
+            <></>
           )}
+          {loading && <Loader />}
         </div>
       </div>
 

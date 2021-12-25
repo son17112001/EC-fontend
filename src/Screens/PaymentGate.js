@@ -29,7 +29,7 @@ function PaymentGate() {
 
   const [data, setData] = useState();
 
-  const { allPaymentgate, errorAllPaymentgate } = useSelector((state) => state.getAllPaymentgate);
+  const { allPaymentgate, errorAllPaymentgate, loading } = useSelector((state) => state.getAllPaymentgate);
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -44,7 +44,7 @@ function PaymentGate() {
   }, [dispatch, navigate, userInfo]);
 
   useEffect(() => {
-    if (errorAllPaymentgate) {
+    if (errorAllPaymentgate && errorAllPaymentgate.message === 'Unauthorized token') {
       dispatch(logout('logout'))
     }
     else if (allPaymentgate) {
@@ -87,9 +87,9 @@ function PaymentGate() {
         }}
       >
         <div style={{ height: 400, width: "100%" }}>
-        <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Danh sách các cổng giao dịch đã đăng ký</h2>
-          {data  ? (
-            
+          <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Danh sách các cổng giao dịch đã đăng ký</h2>
+          {data ? (
+
             <>
               <DataGrid
                 style={{ marginTop: "50px" }}
@@ -100,8 +100,9 @@ function PaymentGate() {
               />
             </>
           ) : (
-            <Loader />
+            <></>
           )}
+          {loading && < Loader />}
         </div>
       </div>
     </>

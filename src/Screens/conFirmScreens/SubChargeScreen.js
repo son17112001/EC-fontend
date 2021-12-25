@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Container, Row, Col, Alert } from 'react-bootstrap'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Loader from '../../components/Loader'
-import { submitPayment } from '../../actions/userActions'
+import { submitPayment, logout } from '../../actions/userActions'
 import { ArrowBarRight } from 'react-bootstrap-icons'
 
 const SubChargeScreen = () => {
@@ -20,18 +20,18 @@ const SubChargeScreen = () => {
     const PayerID = new URLSearchParams(curURL).get('PayerID');
 
     const userSubPayment = useSelector(state => state.userSubPayment)
-    const { loading, errorRes, successRes } = userSubPayment
+    const { loading, errorRes, res } = userSubPayment
 
     useEffect(() => {
         if (!userInfo || !paymentId || !token || !PayerID) {
             navigate('/login')
         }
         else {
-            dispatch(submitPayment(paymentId, PayerID, token))
-            if (!loading) {
-                setTimeout(function () {
-                    window.location.href = '/profile';
-                }, 10000);
+            if (Object.keys(res).length === 0) {
+                dispatch(submitPayment(paymentId, PayerID, token))
+            }
+            else if (errorRes && res.message === 'Unauthorized token') {
+                dispatch(logout('logout'))
             }
         }
         // eslint-disable-next-line
@@ -41,10 +41,10 @@ const SubChargeScreen = () => {
         <Container style={{ marginTop: 110 }}>
             <Row className='justify-content-center pt-5'>
                 <Col xs={12} md={8} lg={6}>
-                    {successRes && (<Alert className='justify-content-center' variant='success'>{successRes.message}&#160;&#160;&#160;
+                    {!errorRes && (<Alert className='justify-content-center' variant='success'>{res.message}&#160;&#160;&#160;
                         <Alert.Link href="/">Trở lại trang cá nhân trong 10 giây </Alert.Link></Alert>
                     )}
-                    {errorRes && <Alert className='justify-content-center' variant='danger'>{errorRes.message}&#160;&#160;&#160;
+                    {errorRes && <Alert className='justify-content-center' variant='danger'>{res.message}&#160;&#160;&#160;
                         <Alert.Link href="/">Trở về trang chủ <ArrowBarRight /></Alert.Link></Alert>}
                     {loading && <Loader />}
                 </Col>

@@ -38,7 +38,7 @@ const SupportScreen = () => {
             if (Object.keys(user).length === 0) {
                 dispatch(getUserProfile())
             }
-            else if (error) {
+            else if (error && error.message === 'Unauthorized token') {
                 dispatch(logout('logout'))
             }
             else {
