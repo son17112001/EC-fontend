@@ -266,7 +266,7 @@ function AdminCardCreate() {
 
                 <TextField
                   id="standard-read-only-input"
-                  label="Phí làm lại thẻ"
+                  label="Phí phát hành"
                   onChange={(e) => {
                     setCard({
                       ...card,
@@ -301,7 +301,7 @@ function AdminCardCreate() {
                 {type === "intDebits" && (
                   <TextField
                     id="standard-read-only-input"
-                    label="Số tiền chuyển được tối đa"
+                    label="Số tiền dùng tối đa trong ngày"
                     onChange={(e) => {
                       setCard({
                         ...card,

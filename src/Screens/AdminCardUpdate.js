@@ -365,7 +365,7 @@ function AdminCardUpdate() {
 
                 <TextField
                   id="standard-read-only-input"
-                  label="Phí làm lại thẻ"
+                  label="Phí phát hành"
                   value={card.issueFee}
                   onChange={(e) => {
                     setCard({
@@ -407,7 +407,7 @@ function AdminCardUpdate() {
                   <TextField
                     id="standard-read-only-input"
                     value={card.maxPay}
-                    label="Số tiền chuyển được tối đa"
+                    label="Số tiền dùng tối đa trong ngày"
                     onChange={(e) => {
                       setCard({
                         ...card,

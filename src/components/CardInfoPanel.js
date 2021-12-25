@@ -10,7 +10,7 @@ export const CreditInfoPanel = (props) => {
                     <Form.Control disabled value={`Lương tháng từ ${props.condition} VNĐ`} placeholder="condition" />
                 </Col>
                 <Col>
-                    <Form.Label>Hạng mức tín dụng</Form.Label>
+                    <Form.Label>Hạn mức tín dụng</Form.Label>
                     <Form.Control disabled value={`${props.creditLine} VNĐ`} placeholder="creditLine" />
                 </Col>
             </Row>

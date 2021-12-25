@@ -46,7 +46,7 @@ export const CompareCreditPanel = (props) => {
             <Form.Label>Điều kiện mở thẻ</Form.Label>
             <Form.Control disabled value={`Lương tháng từ ${props.condition} VNĐ`} placeholder="condition" />
 
-            <Form.Label>Hạng mức tín dụng</Form.Label>
+            <Form.Label>Hạn mức tín dụng</Form.Label>
             <Form.Control disabled value={`${props.creditLine} VNĐ`} placeholder="creditLine" />
 
             <Form.Label>Ngày sao kê thẻ</Form.Label>
@@ -66,7 +66,6 @@ export const CompareCreditPanel = (props) => {
                 <Link to={`/card/intCredits&${props.cardUrl}`}> <Button className='my-3 button-64'
                     style={{ width: '50%' }}>Đăng kí ngay</Button></Link>
             </Form.Group>
-
         </div>
     )
 }

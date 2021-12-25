@@ -140,11 +140,10 @@ function CardManagerment() {
 
   return (
     <>
-      {allCard &&
-        <div maxWidth="lg" style={{ backgroundColor: "white", minHeight: "70vh" }}>
-          <div style={{ height: 400, width: "100%" }}>
-            <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Danh sách các thẻ đã đăng ký</h2>
-
+      <div maxWidth="lg" style={{ backgroundColor: "white", minHeight: "70vh" }}>
+        <div style={{ height: 400, width: "100%" }}>
+          <h2 style={{ textAlign: "center", margin: "10px", paddingTop: "30px", color: 'black' }}>Danh sách các thẻ đã đăng ký</h2>
+          {allCard && <>
             <Dialog
               open={open}
               onClose={handleClose}
@@ -184,26 +183,21 @@ function CardManagerment() {
               <></>
             )}
             {loading && <Loader />}
-            {
-              edit && (<>
-                {
-                  status === false && (<Button variant="contained" style={{ margin: "15px 0 0 5px" }} color="success" onClick={activeHandler}>
-                    Mở thẻ
-                  </Button>)
+            {edit && (<>
+              {
+                status === false && (<Button variant="contained" style={{ margin: "15px 0 0 5px" }} color="success" onClick={activeHandler}>
+                  Mở thẻ
+                </Button>)
 
-                }
-                {
-                  status === true && (<Button variant="contained" style={{ margin: "15px 0 0 5px", float: "right" }} color="error" onClick={deactiveHandler}>
-                    Khóa thẻ
-                  </Button>)
-                }
-
-
-              </>)
-            }
-          </div>
+              }
+              {
+                status === true && (<Button variant="contained" style={{ margin: "15px 0 0 5px", float: "right" }} color="error" onClick={deactiveHandler}>
+                  Khóa thẻ
+                </Button>)
+              }</>)}
+          </>}
         </div>
-      }
+      </div>
     </>
   );
 }

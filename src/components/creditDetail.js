@@ -94,7 +94,7 @@ function CreditDetail() {
                                             <td>{card.interestRate} VND</td>
                                         </tr>
                                         <tr>
-                                            <td>Phí làm lại thẻ</td>
+                                            <td>Phí phát hành</td>
                                             <td>{card.issueFee}</td>
                                         </tr>
                                         <tr>

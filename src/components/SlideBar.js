@@ -29,7 +29,7 @@ function SlideBar() {
             </NavLink>
             
             <NavLink exact to="/admin/control/user" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Quả lý tài khoản</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">Quản lý tài khoản</CDBSidebarMenuItem>
             </NavLink>  
             <NavLink exact to="/admin/control/order" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Quản lý yêu cầu</CDBSidebarMenuItem>
