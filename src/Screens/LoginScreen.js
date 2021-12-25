@@ -53,7 +53,7 @@ const LoginScreen = () => {
 
                 <Row className="py-4">
                     <Link to="/login/forgot" style={{ textDecoration: 'none' }}>
-                        <p style={{ color: "red", fontSize: "15px" }}>quên mật khẩu</p>
+                        <p style={{ color: "red", fontSize: "15px" }}>Quên mật khẩu</p>
                     </Link>
                     <Col>
                         <Button type='submit' >Đăng nhập</Button>

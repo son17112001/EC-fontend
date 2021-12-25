@@ -17,7 +17,7 @@ function SlideBar() {
             className="text-decoration-none"
             style={{ color: 'inherit' }}
           >
-            Sidebar
+            Quản lý
           </a>
         </CDBSidebarHeader>
 

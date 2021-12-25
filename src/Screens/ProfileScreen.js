@@ -25,13 +25,13 @@ function MyVerticallyCenteredModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <Tabs defaultActiveKey="Charge" id="uncontrolled-tab-example" className="mb-3">
-                    <Tab eventKey="Charge" title="Charge">
+                    <Tab eventKey="Charge" title="Nạp tiền">
                         <ChargeTab />
                     </Tab>
-                    <Tab eventKey="WithDraw" title="WithDraw">
+                    <Tab eventKey="WithDraw" title="Rút tiền">
                         <DrawTab />
                     </Tab>
-                    <Tab eventKey="Tranfer" title="Tranfer">
+                    <Tab eventKey="Tranfer" title="Chuyển tiền">
                         <TransferTab />
                     </Tab>
                 </Tabs>
