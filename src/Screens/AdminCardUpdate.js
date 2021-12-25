@@ -22,15 +22,12 @@ import {   searchCard,updateCard} from "../actions/adminControlAction";
 import { useNavigate,useParams } from "react-router-dom";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
+
 function AdminCardUpdate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params= useParams();
   
-
-
-  const [open, setOpen] = React.useState(false);
-  const [type, setType] = useState("intCredits");
   const [card, setCard] = useState({
     _id:null,
     cardName: null,
@@ -52,7 +49,12 @@ function AdminCardUpdate() {
     updatedAt:null
   });
 
+  const [open, setOpen] = React.useState(false);
+  const [type, setType] = useState("intCredits");
+  const [message,setMessage]=useState("")
   const { adminCardSearch } = useSelector((state) => state.adminCardSearch);
+  const { adminCardUpdate,errorCardUpdate } = useSelector((state) => state.adminCardUpdate);
+
   const adminLogin = useSelector((state) => state.adminLogin);
 
   const { adminInfo } = adminLogin;
@@ -63,17 +65,34 @@ function AdminCardUpdate() {
         navigate("/admin");
       }
     }
-  }, [adminInfo, navigate]);
+    console.log("1")
+  }, [adminInfo]);
   useEffect(()=>{
+   
     dispatch(searchCard(params.type,params.cardurl))
     setType(params.type);
-  },[dispatch,setType,params])
+  
+  },[dispatch,params.type,params.cardurl])
   useEffect(()=>{
+   
+   if(adminCardUpdate){
     
+      setMessage("Thay đổi thẻ thành công")
+      setOpen(true)
+   }
+   if(errorCardUpdate){
+    setMessage("Thay đổi thẻ không thành công")
+    setOpen(true)
+ }
+
+  
+  },[adminCardUpdate,errorCardUpdate])
+  useEffect(()=>{
     if(adminCardSearch){
       switch(type){
         case "intCredits":
           setCard({
+            ...card,
             _id:adminCardSearch,
             cardName: adminCardSearch.cardName,
             image: adminCardSearch.image,
@@ -95,6 +114,7 @@ function AdminCardUpdate() {
         break
         case "intDebits":
           setCard({
+            ...card,
             _id:adminCardSearch,
             cardName: adminCardSearch.cardName,
             image: adminCardSearch.image,
@@ -112,6 +132,7 @@ function AdminCardUpdate() {
         break
         case "domDebits":
           setCard({
+            ...card,
             _id:adminCardSearch,
             cardName: adminCardSearch.cardName,
             image: adminCardSearch.image,
@@ -121,7 +142,6 @@ function AdminCardUpdate() {
             description: adminCardSearch.description,
             issueFee: adminCardSearch.issueFee,
             yearlyFee: adminCardSearch.yearlyFee,
-            maxPay: adminCardSearch.maxPay,
             createdAt:adminCardSearch.createdAt,
             updatedAt:adminCardSearch.updatedAt
           })
@@ -130,7 +150,7 @@ function AdminCardUpdate() {
       }
     }
     
-  },[adminCardSearch,card,type])
+  },[adminCardSearch,type])
 
   const handleClose = () => {
     setOpen(false);
@@ -197,7 +217,7 @@ function AdminCardUpdate() {
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                  Đã tạo thẻ thành công.
+                      {message}
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
@@ -408,7 +428,7 @@ function AdminCardUpdate() {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      defaultValue={card.cardRank}
+                      defaultValue={"Gold"}
                       onChange={(e) => {
                         setCard({
                           ...card,
