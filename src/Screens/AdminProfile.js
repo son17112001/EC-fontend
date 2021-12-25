@@ -42,20 +42,26 @@ function AdminProfile() {
   const adminLogin = useSelector((state) => state.adminLogin);
   const notification = useSelector((state) => state.notification);
   const notiPassword = useSelector((state)=>state.notiPass)
-  const {notiPass}=notiPassword
+  const {notiPass,errorPass}=notiPassword
   const {noti}=notification
   const [open, setOpen] = React.useState(false);
+  const [message, setMessage]=useState("")
 
   useEffect(() => {
     if (noti) {
       setOpen(true);
+      setMessage(noti.message)
 
     }
     if (notiPass) {
       setOpen(true);
-
+      setMessage(notiPass.message)
     }
-  }, [noti, notiPass])
+    if (errorPass) {
+      setOpen(true);
+      setMessage("Mật khẩu mới không hợp lệ nhập lại mật khẩu khác")
+    }
+  }, [noti, notiPass,errorPass])
 
   const handleClose = () => {
     setOpen(false);
@@ -63,7 +69,9 @@ function AdminProfile() {
   };
   function handlePassClose() {
     dispatch(logout())
+  
     navigate('/admin')
+    window.location.reload(false)
   }
   const { adminInfo } = adminLogin;
   useEffect(() => {
@@ -225,7 +233,7 @@ function AdminProfile() {
             </DialogTitle>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Thay đổi password thành công, xin mời đăng nhập lại.
+                {message}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
