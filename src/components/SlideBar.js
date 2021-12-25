@@ -24,22 +24,22 @@ function SlideBar() {
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink exact to="/admin/control/card/view" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="far fa-credit-card">Card</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="far fa-credit-card">Quản lý thẻ</CDBSidebarMenuItem>
 
             </NavLink>
             
             <NavLink exact to="/admin/control/user" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">User management</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">Quả lý tài khoản</CDBSidebarMenuItem>
             </NavLink>  
             <NavLink exact to="/admin/control/order" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Order</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="table">Quản lý yêu cầu</CDBSidebarMenuItem>
               
             </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
+            {/* <NavLink exact to="/analytics" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">
                 Analytics
               </CDBSidebarMenuItem>
-            </NavLink>
+            </NavLink> */}
           </CDBSidebarMenu>
         </CDBSidebarContent>
       </CDBSidebar>
