@@ -18,23 +18,23 @@ import { Checkbox, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useDispatch, useSelector } from "react-redux";
-import {   searchCard,updateCard} from "../actions/adminControlAction";
-import { useNavigate,useParams } from "react-router-dom";
+import { searchCard, updateCard } from "../actions/adminControlAction";
+import { useNavigate, useParams } from "react-router-dom";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 
 function AdminCardUpdate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const params= useParams();
-  
+  const params = useParams();
+
   const [card, setCard] = useState({
-    _id:null,
+    _id: null,
     cardName: null,
     image: null,
     isIssuing: true,
     cardRank: null,
-    publisher:null,
+    publisher: null,
     description: null,
     creditLine: null,
     condition: null,
@@ -45,15 +45,15 @@ function AdminCardUpdate() {
     yearlyFee: null,
     exCurrency: null,
     maxPay: null,
-    createdAt:null,
-    updatedAt:null
+    createdAt: null,
+    updatedAt: null
   });
 
   const [open, setOpen] = React.useState(false);
   const [type, setType] = useState("intCredits");
-  const [message,setMessage]=useState("")
+  const [message, setMessage] = useState("")
   const { adminCardSearch } = useSelector((state) => state.adminCardSearch);
-  const { adminCardUpdate,errorCardUpdate } = useSelector((state) => state.adminCardUpdate);
+  const { adminCardUpdate, errorCardUpdate } = useSelector((state) => state.adminCardUpdate);
 
   const adminLogin = useSelector((state) => state.adminLogin);
 
@@ -65,40 +65,39 @@ function AdminCardUpdate() {
         navigate("/admin");
       }
     }
-    console.log("1")
+    // eslint-disable-next-line
   }, [adminInfo]);
-  useEffect(()=>{
-   
-    dispatch(searchCard(params.type,params.cardurl))
+  useEffect(() => {
+
+    dispatch(searchCard(params.type, params.cardurl))
     setType(params.type);
-  
-  },[dispatch,params.type,params.cardurl])
-  useEffect(()=>{
-   
-   if(adminCardUpdate){
-    
+
+  }, [dispatch, params.type, params.cardurl])
+  useEffect(() => {
+
+    if (adminCardUpdate) {
+
       setMessage("Thay đổi thẻ thành công")
       setOpen(true)
-   }
-   if(errorCardUpdate){
-    setMessage("Thay đổi thẻ không thành công")
-    setOpen(true)
- }
+    }
+    if (errorCardUpdate) {
+      setMessage("Thay đổi thẻ không thành công")
+      setOpen(true)
+    }
 
-  
-  },[adminCardUpdate,errorCardUpdate])
-  useEffect(()=>{
-    if(adminCardSearch){
-      switch(type){
+  }, [adminCardUpdate, errorCardUpdate])
+  useEffect(() => {
+    if (adminCardSearch) {
+      switch (type) {
         case "intCredits":
           setCard({
             ...card,
-            _id:adminCardSearch,
+            _id: adminCardSearch,
             cardName: adminCardSearch.cardName,
             image: adminCardSearch.image,
             isIssuing: adminCardSearch.isIssuing,
             cardRank: adminCardSearch.cardRank,
-            publisher:adminCardSearch.publisher,
+            publisher: adminCardSearch.publisher,
             description: adminCardSearch.description,
             creditLine: adminCardSearch.creditLine,
             condition: adminCardSearch.condition,
@@ -108,49 +107,49 @@ function AdminCardUpdate() {
             issueFee: adminCardSearch.issueFee,
             yearlyFee: adminCardSearch.yearlyFee,
             exCurrency: adminCardSearch.exCurrency,
-            createdAt:adminCardSearch.createdAt,
-            updatedAt:adminCardSearch.updatedAt
+            createdAt: adminCardSearch.createdAt,
+            updatedAt: adminCardSearch.updatedAt
           })
-        break
+          break
         case "intDebits":
           setCard({
             ...card,
-            _id:adminCardSearch,
+            _id: adminCardSearch,
             cardName: adminCardSearch.cardName,
             image: adminCardSearch.image,
             isIssuing: adminCardSearch.isIssuing,
             cardRank: adminCardSearch.cardRank,
-            publisher:adminCardSearch.publisher,
+            publisher: adminCardSearch.publisher,
             description: adminCardSearch.description,
             issueFee: adminCardSearch.issueFee,
             yearlyFee: adminCardSearch.yearlyFee,
             exCurrency: adminCardSearch.exCurrency,
             maxPay: adminCardSearch.maxPay,
-            createdAt:adminCardSearch.createdAt,
-            updatedAt:adminCardSearch.updatedAt
+            createdAt: adminCardSearch.createdAt,
+            updatedAt: adminCardSearch.updatedAt
           })
-        break
+          break
         case "domDebits":
           setCard({
             ...card,
-            _id:adminCardSearch,
+            _id: adminCardSearch,
             cardName: adminCardSearch.cardName,
             image: adminCardSearch.image,
             isIssuing: adminCardSearch.isIssuing,
             cardRank: adminCardSearch.cardRank,
-            publisher:adminCardSearch.publisher,
+            publisher: adminCardSearch.publisher,
             description: adminCardSearch.description,
             issueFee: adminCardSearch.issueFee,
             yearlyFee: adminCardSearch.yearlyFee,
-            createdAt:adminCardSearch.createdAt,
-            updatedAt:adminCardSearch.updatedAt
+            createdAt: adminCardSearch.createdAt,
+            updatedAt: adminCardSearch.updatedAt
           })
-        break
-        default: return 
+          break
+        default: return
       }
     }
-    
-  },[adminCardSearch,type])
+    // eslint-disable-next-line
+  }, [adminCardSearch, type])
 
   const handleClose = () => {
     setOpen(false);
@@ -217,7 +216,7 @@ function AdminCardUpdate() {
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                      {message}
+                  {message}
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
@@ -253,7 +252,7 @@ function AdminCardUpdate() {
                 <TextField
                   id="standard-read-only-input"
                   label="Link hình thẻ"
-                  
+
                   variant="standard"
                   value={card.image}
                   onChange={(e) => {
@@ -390,7 +389,7 @@ function AdminCardUpdate() {
                   variant="standard"
                   focused
                 />
-                {type!=="domDebits"&& ( <TextField
+                {type !== "domDebits" && (<TextField
                   id="standard-read-only-input"
                   label="Phí đổi ngoại tệ"
                   value={card.exCurrency}
@@ -403,7 +402,7 @@ function AdminCardUpdate() {
                   variant="standard"
                   focused
                 />)}
-               
+
                 {type === "intDebits" && (
                   <TextField
                     id="standard-read-only-input"
@@ -435,7 +434,7 @@ function AdminCardUpdate() {
                           cardRank: e.target.value,
                         });
                       }}
-                      
+
                     >
                       <MenuItem value="Gold">Vàng</MenuItem>
                       <MenuItem value="Standard">Thường</MenuItem>

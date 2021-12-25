@@ -299,7 +299,7 @@ export const submitPayment = (paymentId, PayerID, token) => async (dispatch, get
             dispatch({
                 type: USER_CONSTANTS.USER_SUB_PAYMENT_RESET
             })
-        }, 10000);
+        }, 15000);
 
     } catch (error) {
         dispatch({

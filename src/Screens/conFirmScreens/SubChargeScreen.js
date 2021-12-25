@@ -41,11 +41,12 @@ const SubChargeScreen = () => {
         <Container style={{ marginTop: 110 }}>
             <Row className='justify-content-center pt-5'>
                 <Col xs={12} md={8} lg={6}>
-                    {!errorRes && (<Alert className='justify-content-center' variant='success'>{res.message}&#160;&#160;&#160;
-                        <Alert.Link href="/">Trở lại trang cá nhân trong 10 giây </Alert.Link></Alert>
-                    )}
-                    {errorRes && <Alert className='justify-content-center' variant='danger'>{res.message}&#160;&#160;&#160;
-                        <Alert.Link href="/">Trở về trang chủ <ArrowBarRight /></Alert.Link></Alert>}
+                    {res && res.message &&
+                        <>{!errorRes ? < Alert className='justify-content-center' variant='success'>{res.message}&#160;&#160;&#160;
+                            <Alert.Link href="/">Trở lại trang cá nhân trong 10 giây </Alert.Link></Alert>
+                            : errorRes ? <Alert className='justify-content-center' variant='danger'>{res.message}&#160;&#160;&#160;
+                                <Alert.Link href="/">Trở về trang chủ <ArrowBarRight /></Alert.Link></Alert> : <></>}
+                        </>}
                     {loading && <Loader />}
                 </Col>
             </Row>
